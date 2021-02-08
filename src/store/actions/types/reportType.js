@@ -1,0 +1,4 @@
+export const reportType = {
+  GET_REPORTS_DETAIL: "GET_REPORTS_DETAIL",
+  REMOVE_REPORT: "REMOVE_REPORT",
+};
