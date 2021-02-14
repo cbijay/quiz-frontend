@@ -5,10 +5,14 @@ import {
   Typography,
   Button,
   withStyles,
+  Avatar,
+  Grid,
 } from "@material-ui/core";
+import logo from "../../images/quiz_logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../store/actions/authAction";
+import DropDownMenu from "../menus/DropDownMenu";
 
 const styles = () => ({
   appBar: {
@@ -24,8 +28,11 @@ const styles = () => ({
   menuButtonHidden: {
     display: "none",
   },
+
   title: {
     flexGrow: 1,
+    textDecoration: "none",
+    color: "#777",
   },
   buttonIcon: {
     marginRight: 5,
@@ -35,7 +42,7 @@ const styles = () => ({
   },
 });
 
-function SiteHeader({ open, handleDrawerOpen, handleDrawerClose, classes }) {
+function SiteHeader({ classes }) {
   const { user } = useSelector((state) => state.auth);
   const { user: { role } = {} } = useSelector((state) => state.auth);
   const admin = role === "A" ? true : false;
@@ -47,61 +54,92 @@ function SiteHeader({ open, handleDrawerOpen, handleDrawerClose, classes }) {
     history.push("/login");
   };
 
+  const schoolSubMenu = [
+    { name: "Team", link: "/school/team" },
+    { name: "Register", link: "/register" },
+    { name: "Syllabus", link: "/school/syllabus" },
+  ];
+
+  const quizSubMenu = [
+    { name: "Application Form", link: "/quiz/application-form" },
+    { name: "Syllabus", link: "/quiz/syllabus" },
+    { name: "Rules", link: "/quiz/rules" },
+    { name: "Team", link: "/quiz/team" },
+  ];
+
   return (
     <>
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Nepalese
-          </Typography>
-          <Button color="inherit" onClick={handleLogout}>
-            About Us
-          </Button>
-          <Button color="inherit" onClick={handleLogout}>
-            How it works
-          </Button>
-          <Button color="inherit" onClick={handleLogout}>
-            Contact Us
-          </Button>
-          {admin && (
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.primary}
-              component={Link}
-              to="/admin"
-            >
-              Dashboard
-            </Button>
-          )}
-          {user && (
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button>
-          )}
+          <Grid container spacing={1} justify="space-between">
+            <Grid item>
+              <Grid container spacing={1}>
+                <Grid item>
+                  <Link to="/">
+                    <Avatar alt="Nepalese Society of Texas School" src={logo} />
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to="/" className={classes.title}>
+                    <Typography
+                      component="h1"
+                      variant="h6"
+                      color="inherit"
+                      noWrap
+                    >
+                      Nepalese
+                    </Typography>
+                  </Link>
+                </Grid>
+              </Grid>
+            </Grid>
 
-          {!user && (
-            <>
-              <Button
-                variant="contained"
-                color="primary"
-                component={Link}
-                className={classes.primary}
-                to="/login"
-              >
-                Login
+            <Grid item>
+              <Typography component="span" variant="body1" color="inherit">
+                {user ? user.name : ""}
+              </Typography>
+              <Button color="inherit" component={Link} to="/about">
+                About
               </Button>
-              <Button color="inherit" component={Link} to="/register">
-                Register
-              </Button>
-            </>
-          )}
+              <DropDownMenu menu="School" subMenu={schoolSubMenu} />
+              <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
+              <Button color="inherit">Gallery</Button>
+              <Button color="inherit">Contact Us</Button>
+              {admin && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.primary}
+                  component={Link}
+                  to="/admin"
+                >
+                  Dashboard
+                </Button>
+              )}
+              {user && (
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              )}
+
+              {!user && (
+                <>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    className={classes.primary}
+                    to="/login"
+                  >
+                    Login
+                  </Button>
+                  <Button color="inherit" component={Link} to="/register">
+                    Register
+                  </Button>
+                </>
+              )}
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     </>

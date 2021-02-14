@@ -7,12 +7,12 @@ import {
   withStyles,
 } from "@material-ui/core";
 import AppHeader from "../components/header/AppHeader";
-import Copyright from "../components/footer/Copyright";
 import AppSidebar from "../components/sidebar/AppSidebar";
 import DismissableAlert from "../components/alert/DismissableAlert";
 import useAlertStatus from "../hooks/useAlertStatus";
 import { useSelector } from "react-redux";
 import theme from "../styles/theme";
+import Footer from "../components/footer/Footer";
 
 const styles = () => ({
   root: {
@@ -69,7 +69,7 @@ function AppLayout({ children, classes }) {
           </Grid>
           {children}
           <Box pt={4}>
-            <Copyright />
+            <Footer />
           </Box>
         </Container>
       </main>

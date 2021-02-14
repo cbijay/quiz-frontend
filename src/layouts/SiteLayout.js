@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   CssBaseline,
   Container,
@@ -6,11 +6,11 @@ import {
   withStyles,
   Grid,
 } from "@material-ui/core";
-import Copyright from "../components/footer/Copyright";
 import theme from "../styles/theme";
 import SiteHeader from "../components/header/SiteHeader";
 import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
+import Footer from "../components/footer/Footer";
 
 const styles = () => ({
   root: {
@@ -31,26 +31,13 @@ const styles = () => ({
   },
 });
 
-function AppLayout({ children, classes }) {
-  const [open, setOpen] = useState(true);
+function SiteLayout({ children, classes }) {
   const { type, message } = useSelector((state) => state.alert);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <SiteHeader
-        open={open}
-        handleDrawerOpen={handleDrawerOpen}
-        handleDrawerClose={handleDrawerClose}
-      />
+      <SiteHeader />
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -66,7 +53,7 @@ function AppLayout({ children, classes }) {
           </Grid>
           {children}
           <Box pt={4}>
-            <Copyright />
+            <Footer />
           </Box>
         </Container>
       </main>
@@ -74,4 +61,4 @@ function AppLayout({ children, classes }) {
   );
 }
 
-export default withStyles(styles)(AppLayout);
+export default withStyles(styles)(SiteLayout);

@@ -163,7 +163,7 @@ function ViewQuestions({ match }) {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={6}>No record found!!</TableCell>
+                  <TableCell colSpan={8}>No record found!!</TableCell>
                 </TableRow>
               )}
             </TableBody>

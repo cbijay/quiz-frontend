@@ -101,9 +101,7 @@ function StudentForm({ student, mode }) {
         name="mobile"
         label="Mobile No."
         defaultValue={getValues("mobile") ? getValues("mobile") : ""}
-        inputRef={register({ required: "Mobile is required" })}
-        error={!!errors.mobile}
-        helperText={!!errors.mobile ? errors.mobile.message : ""}
+        inputRef={register}
       />
       {mode !== "edit" ? (
         <TextField
@@ -127,9 +125,7 @@ function StudentForm({ student, mode }) {
         name="city"
         label="City"
         defaultValue={getValues("city") ? getValues("city") : ""}
-        inputRef={register({ required: "City is required" })}
-        error={!!errors.city}
-        helperText={!!errors.city ? errors.city.message : ""}
+        inputRef={register}
       />
       <TextField
         multiline
@@ -140,9 +136,7 @@ function StudentForm({ student, mode }) {
         label="Address"
         rows={4}
         defaultValue={getValues("address") ? getValues("address") : ""}
-        inputRef={register({ required: "Address is required" })}
-        error={!!errors.address}
-        helperText={!!errors.address ? errors.address.message : ""}
+        inputRef={register}
       />
       <Input type="hidden" name="role" value="S" inputRef={register} />
       <label htmlFor="user_img">

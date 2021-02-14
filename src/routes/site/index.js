@@ -1,0 +1,73 @@
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Home from "../../pages/site/Home";
+import Login from "../../pages/auth/Login";
+import Register from "../../pages/auth/Register";
+import About from "../../pages/site/About";
+import schoolRoutes from "./school";
+import quizRoutes from "./quiz";
+import ApplicationForm from "../../pages/site/quiz/ApplicationForm";
+import SchoolTeam from "../../pages/site/school/SchoolTeam";
+
+function SiteRoutes() {
+  const combinePaths = (parent, child) =>
+    `${parent.replace(/\/$/, "")}/${child.replace(/^\//, "")}`;
+
+  const buildPaths = (navigation, parentPath = "") =>
+    navigation.map((route) => {
+      const path = combinePaths(parentPath, route.path);
+
+      return {
+        ...route,
+        path,
+        ...(route.routes && { routes: buildPaths(route.routes, path) }),
+      };
+    });
+
+  const routes = [
+    {
+      exact: true,
+      path: "/",
+      component: Home,
+    },
+    {
+      path: "/login",
+      component: Login,
+    },
+    {
+      path: "/register",
+      component: Register,
+    },
+    {
+      path: "/about",
+      component: About,
+    },
+    {
+      path: "/school",
+      component: SchoolTeam,
+      routes: schoolRoutes,
+    },
+    {
+      path: "/quiz",
+      component: ApplicationForm,
+      routes: quizRoutes,
+    },
+  ];
+
+  const flattenRoutes = (routes) =>
+    routes
+      .map((route) => [route.routes ? flattenRoutes(route.routes) : [], route])
+      .flat(Infinity);
+
+  return (
+    <Switch>
+      {flattenRoutes(buildPaths(routes)).map(
+        ({ exact, path, component }, index) => (
+          <Route key={index} exact={exact} path={path} component={component} />
+        )
+      )}
+    </Switch>
+  );
+}
+
+export default SiteRoutes;

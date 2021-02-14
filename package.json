@@ -10,6 +10,8 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "axios": "^0.21.1",
+    "laravel-echo": "^1.10.0",
+    "pusher-js": "^7.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.14.2",
@@ -22,6 +24,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "live": "PUBLIC_URL=http://nstschool.org/ GENERATE_SOURCEMAP=false react-scripts build && scp -r ./build/* root@134.209.156.253:/var/www/html/nstschool",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -5,7 +5,7 @@ import { clear } from "./store/actions/alertAction";
 import theme from "./styles/theme";
 import { BrowserRouter } from "react-router-dom";
 import AdminRoutes from "./routes/admin/index";
-import SiteRoutes from "./routes/site";
+import SiteRoutes from "./routes/site/index";
 
 function App() {
   const dispatch = useDispatch();

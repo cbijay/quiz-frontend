@@ -41,14 +41,17 @@ function AdminRoutes() {
   return (
     <>
       <Switch>
-        {flattenRoutes(buildPaths(routes)).map(({ path, component }, index) => (
-          <PrivateRoute
-            key={index}
-            path={path}
-            role={role}
-            component={component}
-          />
-        ))}
+        {flattenRoutes(buildPaths(routes)).map(
+          ({ exact, path, component }, index) => (
+            <PrivateRoute
+              key={index}
+              exact={exact}
+              path={path}
+              role={role}
+              component={component}
+            />
+          )
+        )}
       </Switch>
     </>
   );

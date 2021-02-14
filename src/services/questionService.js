@@ -3,37 +3,37 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const getQuestionTopics = async () => {
-  const res = await axios.get(`${apiUrl}/admin/questions/topics`);
+  const res = await axios.get(`${apiUrl}/v1/admin/questions/topics`);
   return res;
 };
 
 const getAllQuestions = async () => {
-  const res = await axios.get(`${apiUrl}/admin/questions`);
+  const res = await axios.get(`${apiUrl}/v1/admin/questions`);
 
   return res;
 };
 
 const getQuestions = async (topicId) => {
-  const res = await axios.get(`${apiUrl}/admin/questions/topics/${topicId}`);
+  const res = await axios.get(`${apiUrl}/v1/admin/questions/topics/${topicId}`);
 
   return res;
 };
 
 const getActiveQuestion = async () => {
-  const res = await axios.get(`${apiUrl}/questions/active`);
+  const res = await axios.get(`${apiUrl}/v1/questions/active`);
 
   return res;
 };
 
 const getQuestion = async (questionId) => {
-  const res = await axios.get(`${apiUrl}/admin/questions/${questionId}`);
+  const res = await axios.get(`${apiUrl}/v1/admin/questions/${questionId}`);
 
   return res;
 };
 
 const createQuestion = async (topicId, request) => {
   const res = await axios.post(
-    `${apiUrl}/admin/questions/topics/${topicId}`,
+    `${apiUrl}/v1/admin/questions/topics/${topicId}`,
     request
   );
 
@@ -42,7 +42,7 @@ const createQuestion = async (topicId, request) => {
 
 const importQuestion = async (topicId, request) => {
   const res = await axios.post(
-    `${apiUrl}/admin/questions/import/${topicId}`,
+    `${apiUrl}/v1/admin/questions/import/${topicId}`,
     request
   );
 
@@ -51,7 +51,7 @@ const importQuestion = async (topicId, request) => {
 
 const updateQuestion = async (questionId, request) => {
   const res = await axios.put(
-    `${apiUrl}/admin/questions/${questionId}`,
+    `${apiUrl}/v1/admin/questions/${questionId}`,
     request
   );
 
@@ -60,14 +60,14 @@ const updateQuestion = async (questionId, request) => {
 
 const updateQuestionStatus = async (questionId) => {
   const res = await axios.put(
-    `${apiUrl}/admin/questions/${questionId}/updateStatus`
+    `${apiUrl}/v1/admin/questions/${questionId}/updateStatus`
   );
 
   return res;
 };
 
 const deleteQuestion = async (questionId) => {
-  const res = await axios.delete(`${apiUrl}/admin/questions/${questionId}`);
+  const res = await axios.delete(`${apiUrl}/v1/admin/questions/${questionId}`);
   return res;
 };
 
