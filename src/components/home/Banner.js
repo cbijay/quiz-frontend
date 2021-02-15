@@ -12,7 +12,9 @@ const useStyles = makeStyles({
         // width: '100vw',
     },
     carouselImage: {
-        height: 400,
+        height: 600,
+        width: '100%',
+        objectFit: 'contain',
         'img &': {
             objectFit: 'contain'
         }
@@ -23,18 +25,18 @@ const Banner = (props) => {
     const classes = useStyles()
     var items = [
         {
-            name: "Random Name #1",
-            description: "Probably the most random thing you have ever seen!",
+            name: "Image 1 Baby Girls greeting",
+            description: "Hello Everyone Namaste!, Welcome to our community...",
             image: `${Banner1}`
         },
         {
-            name: "Random Name #2",
-            description: "Hello World!",
+            name: "Blood Donation group photos of some great personality",
+            description: "Donate blood, save lives!",
             image: `${Banner2}`
         },
         {
-            name: "Random Name #2",
-            description: "Hello World!",
+            name: "Yoga Event Banner",
+            description: "Join our Yoga community and stay healthy with every aspect of life...",
             image: `${Banner3}`
         }
     ]

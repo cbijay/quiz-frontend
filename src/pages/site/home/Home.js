@@ -1,4 +1,4 @@
-import { Grid, Typography, withStyles } from "@material-ui/core";
+import { Grid, withStyles } from "@material-ui/core";
 import SiteLayout from "../../../layouts/SiteLayout";
 import { useSelector } from "react-redux";
 import PrincipalMessage from "../../../components/home/PrincipalMessage";
@@ -29,39 +29,6 @@ function Home({ classes }) {
           <Banner />
           {/* </Grid> */}
           <Grid container justify="center">
-            <Grid item xs={12} lg={8}>
-              <Typography
-                component="h3"
-                variant="h3"
-                color="inherit"
-                align="center"
-                className={classes.title}
-                gutterBottom
-              >
-                Nepalese Society of Texas School
-              </Typography>
-
-              <Typography
-                component="h4"
-                variant="h4"
-                color="textSecondary"
-                align="center"
-                display="block"
-              >
-                NST - 1998
-              </Typography>
-              <Typography
-                component="h6"
-                variant="h6"
-                color="textSecondary"
-                align="center"
-                display="block"
-                gutterBottom
-              >
-                QUIZ CONTEST PROGRAM
-              </Typography>
-            </Grid>
-
             <PrincipalMessage classes={classes} />
           </Grid>
         </>
