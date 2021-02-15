@@ -61,8 +61,7 @@ export const registerUser = (request) => async (dispatch) => {
     }, 1500);
   } catch (error) {
     if (error.hasOwnProperty("response")) {
-      console.log(error.response);
-      /* dispatch({
+      dispatch({
         type: authType.REGISTER_FAILURE,
         error: error.response.data.message,
       });
@@ -70,7 +69,7 @@ export const registerUser = (request) => async (dispatch) => {
       dispatch({
         type: alertType.ERROR,
         message: error.response.data.message,
-      }); */
+      });
     }
   }
 };

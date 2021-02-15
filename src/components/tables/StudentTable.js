@@ -5,6 +5,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Grid,
   Button,
 } from "@material-ui/core";
 import {
@@ -60,40 +61,48 @@ function StudentTable({ students, dashboard, columns }) {
               <TableCell> {status === 0 ? "Inactive" : "Active"} </TableCell>
               {!dashboard && (
                 <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    className={clsx(classes.editButton, classes.button)}
-                    onClick={() => handleEdit(id)}
-                  >
-                    <CreateIcon className={classes.buttonIcon} />
-                    Edit
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    className={classes.button}
-                    onClick={() => handleDelete(id)}
-                  >
-                    <DeleteIcon className={classes.buttonIcon} />
-                    Delete
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    className={clsx(classes.greenButton, classes.button)}
-                    onClick={() => handleStatus(id, !status)}
-                  >
-                    {status === 0 ? (
-                      <CheckIcon className={classes.buttonIcon} />
-                    ) : (
-                      <CloseIcon className={classes.buttonIcon} />
-                    )}
-                    {status === 0 ? "Active" : "Inactive"}{" "}
-                  </Button>
+                  <Grid container spacing={1}>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        className={clsx(classes.editButton, classes.button)}
+                        onClick={() => handleEdit(id)}
+                      >
+                        <CreateIcon className={classes.buttonIcon} />
+                        Edit
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        className={classes.button}
+                        onClick={() => handleDelete(id)}
+                      >
+                        <DeleteIcon className={classes.buttonIcon} />
+                        Delete
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        className={clsx(classes.greenButton, classes.button)}
+                        onClick={() => handleStatus(id, !status)}
+                      >
+                        {status === 0 ? (
+                          <CheckIcon className={classes.buttonIcon} />
+                        ) : (
+                          <CloseIcon className={classes.buttonIcon} />
+                        )}
+                        {status === 0 ? "Active" : "Inactive"}{" "}
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </TableCell>
               )}
             </TableRow>

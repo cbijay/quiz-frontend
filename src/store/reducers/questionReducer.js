@@ -29,6 +29,11 @@ export const questionReducer = (state = initialState, action) => {
           (question) => question.id !== action.questions
         ),
       };
+    case questionType.UPDATE_QUESTION_STATUS:
+      return {
+        ...state,
+        questions: action.questions,
+      };
     default:
       return state;
   }

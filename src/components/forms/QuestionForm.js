@@ -62,6 +62,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
   };
 
   const onSubmit = (data) => {
+    console.log(data);
     const formData = new FormData();
 
     formData.append("question", data.question);
@@ -89,7 +90,6 @@ function QuestionForm({ topicId, formQuestion, mode }) {
     if (e.target.name === "question_img") {
       setQuestionImage(e.target.files[0]);
     }
-    console.log(e.target.files[0]);
   };
 
   useEffect(() => {

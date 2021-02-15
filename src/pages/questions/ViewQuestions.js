@@ -17,51 +17,36 @@ import clsx from "clsx";
 import {
   Add as AddIcon,
   ImportExport as ImportExportIcon,
-  Create as CreateIcon,
-  Delete as DeleteIcon,
 } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getQuestions,
-  deleteQuestion,
-} from "../../store/actions/questionAction";
-import { Link, useHistory } from "react-router-dom";
+import { getQuestions } from "../../store/actions/questionAction";
+import { Link } from "react-router-dom";
 import AppStyle from "../../styles/AppStyle";
 import { getTopic } from "../../store/actions/topicAction";
+import QuestionTableRow from "../../components/tables/QuestionTableRow";
 
 function ViewQuestions({ match }) {
   const classes = AppStyle();
   const { questions } = useSelector((state) => state.questions);
   const { topic: { title } = {} } = useSelector((state) => state.topics);
-  const history = useHistory();
   const dispatch = useDispatch();
   const topicId = match.params.topicId;
+
+  //Questions url
   const addQuestionLink = `/admin/questions/${topicId}/add`;
   const importQuestionLink = `/admin/questions/${topicId}/import`;
 
   const columns = [
-    { headingName: "#" },
-    { headingName: "Questions" },
-    { headingName: "A - Option" },
-    { headingName: "B - Option" },
-    { headingName: "C - Option" },
-    { headingName: "D - Option" },
-    { headingName: "Correct Answer" },
-    { headingName: "Actions" },
+    { headingName: "#", align: "left" },
+    { headingName: "Questions", align: "left" },
+    { headingName: "Status", align: "center" },
+    { headingName: "Actions", align: "left" },
   ];
 
   useEffect(() => {
     dispatch(getTopic(topicId));
     dispatch(getQuestions(topicId));
   }, [dispatch, topicId]);
-
-  const handleEdit = (id) => {
-    history.push(`/admin/questions/${topicId}/edit/${id}`);
-  };
-
-  const handleDelete = (id) => {
-    dispatch(deleteQuestion(id));
-  };
 
   return (
     <AppLayout>
@@ -115,51 +100,21 @@ function ViewQuestions({ match }) {
           <Table size="small">
             <TableHead>
               <TableRow>
-                {columns.map((column, index) => (
-                  <TableCell key={index}>{column.headingName}</TableCell>
+                {columns.map(({ headingName, align }, index) => (
+                  <TableCell key={index} align={align}>
+                    {headingName}
+                  </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {questions.length > 0 ? (
-                questions.map(({ id, question, a, b, c, d, answer }, index) => (
-                  <TableRow key={id}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell> {question} </TableCell>
-                    <TableCell> {a} </TableCell>
-                    <TableCell> {b} </TableCell>
-                    <TableCell> {c} </TableCell>
-                    <TableCell> {d} </TableCell>
-                    <TableCell> {answer} </TableCell>
-                    <TableCell>
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            size="small"
-                            className={clsx(classes.editButton, classes.button)}
-                            onClick={() => handleEdit(id)}
-                          >
-                            <CreateIcon className={classes.buttonIcon} />
-                            Edit
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            className={classes.button}
-                            onClick={() => handleDelete(id)}
-                          >
-                            <DeleteIcon className={classes.buttonIcon} />
-                            Delete
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
+                questions.map((question, index) => (
+                  <QuestionTableRow
+                    key={index}
+                    topicId={topicId}
+                    row={question}
+                  />
                 ))
               ) : (
                 <TableRow>

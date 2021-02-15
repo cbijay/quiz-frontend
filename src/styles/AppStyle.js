@@ -19,8 +19,6 @@ const AppStyle = makeStyles((theme) => ({
   button: {
     minWidth: "2em",
     height: "2em",
-    margin: 0,
-    marginRight: 6,
   },
   divider: {
     marginTop: 15,
@@ -32,7 +30,6 @@ const AppStyle = makeStyles((theme) => ({
   },
   circularButton: {
     borderRadius: `50% !important`,
-    marginRight: 0,
     height: `3em`,
   },
   editButton: {
@@ -46,7 +43,6 @@ const AppStyle = makeStyles((theme) => ({
     "&:hover": {
       background: "#357a38",
     },
-    marginRight: 0,
   },
   buttonIcon: {
     fontSize: 16,
