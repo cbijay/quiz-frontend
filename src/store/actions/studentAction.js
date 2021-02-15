@@ -137,7 +137,6 @@ export const participantAnswer = (request) => async (dispatch) => {
       });
     }
   } catch (error) {
-    //console.log(error.response.data.message);
     dispatch({
       type: alertType.ERROR,
       message: error.response.data.message,

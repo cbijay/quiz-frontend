@@ -58,9 +58,17 @@ const updateQuestion = async (questionId, request) => {
   return res;
 };
 
-const updateQuestionStatus = async (questionId) => {
-  const res = await axios.put(
-    `${apiUrl}/v1/admin/questions/${questionId}/updateStatus`
+const openQuestion = async (questionId) => {
+  const res = await axios.post(
+    `${apiUrl}/v1/admin/questions/${questionId}/openQuestion`
+  );
+
+  return res;
+};
+
+const updateStatus = async (questionId, status) => {
+  const res = await axios.post(
+    `${apiUrl}/v1/admin/questions/${questionId}/${status}/updateStatus`
   );
 
   return res;
@@ -80,6 +88,7 @@ export const questionService = {
   createQuestion,
   importQuestion,
   updateQuestion,
-  updateQuestionStatus,
+  openQuestion,
+  updateStatus,
   deleteQuestion,
 };

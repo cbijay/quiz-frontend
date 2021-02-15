@@ -1,6 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Home from "../../pages/site/Home";
+import Home from "../../pages/site/home/Home";
+import AdminHome from "../../pages/site/home/AdminHome";
+import UserHome from "../../pages/site/home/UserHome";
 import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import About from "../../pages/site/About";
@@ -8,8 +10,21 @@ import schoolRoutes from "./school";
 import quizRoutes from "./quiz";
 import ApplicationForm from "../../pages/site/quiz/ApplicationForm";
 import SchoolTeam from "../../pages/site/school/SchoolTeam";
+import { useSelector } from "react-redux";
 
 function SiteRoutes() {
+  const { user: { role } = {} } = useSelector((state) => state.auth);
+
+  const homeComponent = () => {
+    if (role === "A") {
+      return <AdminHome />;
+    } else if (role === "S") {
+      return <UserHome />;
+    } else {
+      return <Home />;
+    }
+  };
+
   const combinePaths = (parent, child) =>
     `${parent.replace(/\/$/, "")}/${child.replace(/^\//, "")}`;
 
@@ -28,7 +43,7 @@ function SiteRoutes() {
     {
       exact: true,
       path: "/",
-      component: Home,
+      component: homeComponent,
     },
     {
       path: "/login",

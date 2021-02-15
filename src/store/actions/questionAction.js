@@ -93,13 +93,34 @@ export const importQuestion = (topicId, request) => async (dispatch) => {
   }
 };
 
-export const updateQuestionStatus = (questionId) => async (dispatch) => {
+export const openQuestion = (questionId) => async (dispatch) => {
   try {
-    await questionService.updateQuestionStatus(questionId);
+    await questionService.openQuestion(questionId);
 
     dispatch({
       type: alertType.SUCCESS,
       message: "Question is active !!",
+    });
+  } catch (error) {
+    dispatch({
+      type: alertType.ERROR,
+      errror: error.response.data.message,
+    });
+  }
+};
+
+export const updateStatus = (questionId, status) => async (dispatch) => {
+  try {
+    const res = await questionService.updateStatus(questionId, status);
+
+    dispatch({
+      type: questionType.UPDATE_QUESTION_STATUS,
+      questions: res.data,
+    });
+
+    dispatch({
+      type: alertType.SUCCESS,
+      message: `Question updated successfully !!`,
     });
   } catch (error) {
     dispatch({
