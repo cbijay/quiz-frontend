@@ -2,6 +2,7 @@ import { Grid, Typography, withStyles } from "@material-ui/core";
 import SiteLayout from "../../../layouts/SiteLayout";
 import { useSelector } from "react-redux";
 import PrincipalMessage from "../../../components/home/PrincipalMessage";
+import Banner from "../../../components/home/Banner";
 
 const styles = {
   title: {
@@ -24,6 +25,9 @@ function Home({ classes }) {
     <SiteLayout>
       {!user && (
         <>
+          {/* <Grid xs={12} lg={12} style={{ border: '1px solid black' }}> */}
+          <Banner />
+          {/* </Grid> */}
           <Grid container justify="center">
             <Grid item xs={12} lg={8}>
               <Typography
