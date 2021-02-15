@@ -27,7 +27,7 @@ function Participants({ participants, classes }) {
                 <TableRow>
                   <TableCell>Name</TableCell>
                   <TableCell>Score</TableCell>
-                  <TableCell>User Answer</TableCell>
+                  <TableCell>Answer</TableCell>
                   <TableCell>Remarks</TableCell>
                 </TableRow>
               </TableHead>

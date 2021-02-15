@@ -67,7 +67,7 @@ function UserQuestion({ classes }) {
               answer: question.answer,
             };
 
-            dispatch(participantAnswer(answerData));
+            dispatch(participantAnswer(answerData, true));
           }
         } else {
           setMinutes(minutes - 1);
@@ -89,7 +89,7 @@ function UserQuestion({ classes }) {
       answer: question.answer,
     };
 
-    dispatch(participantAnswer(answerData));
+    dispatch(participantAnswer(answerData, false));
     setMinutes(0);
     setSeconds(0);
   };

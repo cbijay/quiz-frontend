@@ -62,7 +62,7 @@ function ActiveQuestion({ classes }) {
   };
 
   return (
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} lg={5}>
       <Card>
         <CardContent>
           <Grid container justify="space-between">

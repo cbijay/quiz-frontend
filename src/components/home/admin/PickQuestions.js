@@ -42,7 +42,7 @@ function PickQuestions() {
   };
 
   return (
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} lg={3}>
       <Card>
         <CardContent>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
