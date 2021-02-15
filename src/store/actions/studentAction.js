@@ -126,11 +126,11 @@ export const getParticipants = () => async (dispatch) => {
   }
 };
 
-export const participantAnswer = (request) => async (dispatch) => {
+export const participantAnswer = (request, timeUp) => async (dispatch) => {
   try {
     const res = await studentService.participantAnswer(request);
 
-    if (res) {
+    if (!timeUp && res) {
       dispatch({
         type: alertType.SUCCESS,
         message: "Answer submited successfully!!",

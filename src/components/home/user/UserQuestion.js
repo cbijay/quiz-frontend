@@ -22,14 +22,25 @@ function UserQuestion({ classes }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { question } = useSelector((state) => state.questions);
-
+  const [userAnswer, setUserAnswer] = useState();
   let initialSeconds = 0;
 
   useEffect(() => {
-    setMinutes(
-      question && question.hasOwnProperty("timer") ? Number(question.timer) : 0
-    );
-  }, [question]);
+    const answer = question
+      ? question.users.filter(({ answer }) => answer.user_id === user.id)
+      : {};
+    setUserAnswer(answer.length > 0 && answer[0].answer);
+  }, [question, user]);
+
+  useEffect(() => {
+    userAnswer
+      ? setMinutes(0)
+      : setMinutes(
+          question && question.hasOwnProperty("timer")
+            ? Number(question.timer)
+            : 0
+        );
+  }, [userAnswer, question]);
 
   let [minutes, setMinutes] = useState();
   let [seconds, setSeconds] = useState(initialSeconds);
@@ -46,6 +57,18 @@ function UserQuestion({ classes }) {
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(interval);
+
+          if (question !== "undefined" && !userAnswer) {
+            const answerData = {
+              topic_id: question.topic_id,
+              user_id: user.id,
+              question_id: question.id,
+              user_answer: 0,
+              answer: question.answer,
+            };
+
+            dispatch(participantAnswer(answerData, true));
+          }
         } else {
           setMinutes(minutes - 1);
           setSeconds(59);
@@ -55,7 +78,7 @@ function UserQuestion({ classes }) {
     return () => {
       clearInterval(interval);
     };
-  }, [minutes, seconds]);
+  }, [minutes, seconds, question, user, dispatch, userAnswer]);
 
   const handleAnswer = (answer) => {
     const answerData = {
@@ -66,7 +89,9 @@ function UserQuestion({ classes }) {
       answer: question.answer,
     };
 
-    dispatch(participantAnswer(answerData));
+    dispatch(participantAnswer(answerData, false));
+    setMinutes(0);
+    setSeconds(0);
   };
 
   return (
@@ -93,7 +118,67 @@ function UserQuestion({ classes }) {
               </Grid>
             </Grid>
 
-            {question.timer > 0 && minutes === 0 && seconds === 0 ? (
+            {userAnswer &&
+            Number(userAnswer.user_answer) === 0 &&
+            question.timer > 0 &&
+            minutes === 0 &&
+            seconds === 0 ? (
+              <Typography component="p">
+                Time up, please wait for another question
+              </Typography>
+            ) : userAnswer ? (
+              <Typography component="p">
+                Please wait for another question
+              </Typography>
+            ) : (
+              <>
+                <Box>{question.question}</Box>
+                <Grid container spacing={1} className={classes.container}>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleAnswer("A")}
+                    >
+                      {question.a}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleAnswer("B")}
+                    >
+                      {question.b}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleAnswer("C")}
+                    >
+                      {question.c}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleAnswer("D")}
+                    >
+                      {question.d}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </>
+            )}
+
+            {/* {question.timer > 0 && minutes === 0 && seconds === 0 ? (
               <Typography component="p">
                 Time up, please wait for another question
               </Typography>
@@ -143,7 +228,7 @@ function UserQuestion({ classes }) {
                   </Grid>
                 </Grid>
               </>
-            )}
+            )} */}
           </>
         ) : (
           <Typography component="p">Please wait for question</Typography>
