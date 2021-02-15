@@ -48,6 +48,8 @@ function Participants({ participants, classes }) {
                       {answers.length > 0 ? (
                         answers[0].answer === answers[0].user_answer ? (
                           <CheckIcon className={classes.rightAnswer} />
+                        ) : Number(answers[0].user_answer) === 0 ? (
+                          <Typography>Time up!!</Typography>
                         ) : (
                           <CloseIcon className={classes.wrongAnswer} />
                         )

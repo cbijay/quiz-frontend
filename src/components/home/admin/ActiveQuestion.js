@@ -84,75 +84,87 @@ function ActiveQuestion({ classes }) {
             </Grid>
           </Grid>
           {question ? (
-            <>
-              <Box>{question.question}</Box>
-              <Grid container justify="flex-end" spacing={1}>
-                <Grid item>
-                  <Button
-                    className={classes.success}
-                    variant="contained"
-                    onClick={() => handleQuestionStatus(question.id)}
-                    disabled={question.status === 1 ? true : false}
-                  >
-                    {question.status === 1 ? "Active" : "Start"}
-                  </Button>
+            minutes === 0 && seconds === 0 ? (
+              <Typography>Please pick another question</Typography>
+            ) : (
+              <>
+                <Box>{question.question}</Box>
+                <Grid container justify="flex-end" spacing={1}>
+                  <Grid item>
+                    <Button
+                      className={classes.success}
+                      variant="contained"
+                      onClick={() => handleQuestionStatus(question.id)}
+                      disabled={question.status === 1 ? true : false}
+                    >
+                      {question.status === 1 ? "Active" : "Start"}
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      className={classes.questionOption}
+                      variant="contained"
+                      onClick={handleQuestionOption}
+                    >
+                      Show Options
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Button
-                    className={classes.questionOption}
-                    variant="contained"
-                    onClick={handleQuestionOption}
-                  >
-                    Show Options
-                  </Button>
-                </Grid>
-              </Grid>
 
-              <Collapse in={questionOption} className={classes.container}>
-                <Grid container spacing={1}>
-                  <Grid item xs={12} lg={6}>
-                    <Button
-                      fullWidth
-                      color="primary"
-                      variant="contained"
-                      className={question.answer === "A" ? classes.success : ""}
-                    >
-                      {question.a}
-                    </Button>
+                <Collapse in={questionOption} className={classes.container}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={12} lg={6}>
+                      <Button
+                        fullWidth
+                        color="primary"
+                        variant="contained"
+                        className={
+                          question.answer === "A" ? classes.success : ""
+                        }
+                      >
+                        {question.a}
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                      <Button
+                        fullWidth
+                        color="primary"
+                        variant="contained"
+                        className={
+                          question.answer === "B" ? classes.success : ""
+                        }
+                      >
+                        {question.b}
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                      <Button
+                        fullWidth
+                        color="primary"
+                        variant="contained"
+                        className={
+                          question.answer === "C" ? classes.success : ""
+                        }
+                      >
+                        {question.c}
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                      <Button
+                        fullWidth
+                        color="primary"
+                        variant="contained"
+                        className={
+                          question.answer === "D" ? classes.success : ""
+                        }
+                      >
+                        {question.d}
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} lg={6}>
-                    <Button
-                      fullWidth
-                      color="primary"
-                      variant="contained"
-                      className={question.answer === "B" ? classes.success : ""}
-                    >
-                      {question.b}
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} lg={6}>
-                    <Button
-                      fullWidth
-                      color="primary"
-                      variant="contained"
-                      className={question.answer === "C" ? classes.success : ""}
-                    >
-                      {question.c}
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} lg={6}>
-                    <Button
-                      fullWidth
-                      color="primary"
-                      variant="contained"
-                      className={question.answer === "D" ? classes.success : ""}
-                    >
-                      {question.d}
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Collapse>
-            </>
+                </Collapse>
+              </>
+            )
           ) : (
             <Typography>Please pick question to start quiz</Typography>
           )}
