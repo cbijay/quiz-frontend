@@ -79,7 +79,7 @@ function SiteHeader({ classes }) {
                     <Avatar alt="Nepalese Society of Texas School" src={logo} />
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item justify="space-evenly">
                   <Link to="/" className={classes.title}>
                     <Typography
                       component="h1"
@@ -96,7 +96,7 @@ function SiteHeader({ classes }) {
 
             <Grid item>
               <Typography component="span" variant="body1" color="inherit">
-                {user ? user.name : ""}
+                {user?.name}
               </Typography>
               <Button color="inherit" component={Link} to="/about">
                 About
@@ -105,6 +105,9 @@ function SiteHeader({ classes }) {
               <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
               <Button color="inherit">Gallery</Button>
               <Button color="inherit">Contact Us</Button>
+            </Grid>
+
+            <Grid alignItems="center">
               {admin && (
                 <Button
                   variant="contained"
@@ -132,10 +135,10 @@ function SiteHeader({ classes }) {
                     to="/login"
                   >
                     Login
-                  </Button>
+                    </Button>
                   <Button color="inherit" component={Link} to="/register">
                     Register
-                  </Button>
+                    </Button>
                 </>
               )}
             </Grid>
