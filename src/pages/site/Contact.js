@@ -12,7 +12,9 @@ import { useForm } from "react-hook-form";
 
 
 const submitHandler = (data) => {
-    window.location.href = `mailto:mail@mail.com?subject=${data.subject}&body=Hi, I am ${data.name},${data.message}`;
+    const { subject, name, message } = data;
+    window.location.href =
+        `mailto:mail@mail.com?subject=${subject}&body=Hi, I am ${name},${message}`;
 }
 
 const Contact = () => {

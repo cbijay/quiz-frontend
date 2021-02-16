@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
         height: 300,
         width: 500,
         margin: 10,
-        borderRadius: 5
+        borderRadius: 5,
     },
     headline: {
         color: 'gray',
@@ -54,11 +54,13 @@ const useStyles = makeStyles(theme => ({
     scrollBtn: {
         display: 'flex',
         justifyContent: 'space-between',
-        width: '100%',
         position: 'absolute',
+        marginLeft: 0,
+        marginRight: 0,
         top: 30.,
+        left: 0,
         right: 0,
-        padding: 20
+        padding: (0, 20),
     }
 }));
 
@@ -68,6 +70,7 @@ const Gallery = () => {
     const scroll = (scrollOffset) => {
         ref.current.scrollLeft += scrollOffset
     }
+
     var items = [
         { image: `${Banner1}` },
         { image: `${Banner3}` },

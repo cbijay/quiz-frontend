@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, makeStyles, Typography } from "@material-ui/core";
 
-import Banner2 from "./images/banner2.jpg";
+import Banner2 from "./images/banner.jpg";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         display: 'flex',
@@ -13,31 +13,42 @@ const useStyles = makeStyles({
         marginTop: 20
     },
     bannerImage: {
-        height: 400,
-        minWidth: 500,
-        width: 1170,
+        objectFit: 'cover',
+        width: '87vw',
+        height: '35vw',
         boxShadow: 'inset 100px 0px 100px black',
-        '&:after': {
-            content: '',
-            background: 'radialGradient(transparent, black)'
+        [theme.breakpoints.down('sm')]: {
+            objectFit: 'cover',
+            width: '90vw',
+            height: '70vw',
         }
     },
     bannerContent: {
         position: 'absolute',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        right: 0,
+        left: 0,
         top: 0,
-        width: 1170,
+        width: '87vw',
         height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.3)',
+        backgroundColor: 'rgba(0,0,0,0.6)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+            width: '90vw',
+        }
     },
     bannerText: {
         color: '#fff',
         opacity: 1,
         position: 'absolute',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 20
+        }
     }
-});
+}));
 
 const Banner = (props) => {
     const classes = useStyles();
