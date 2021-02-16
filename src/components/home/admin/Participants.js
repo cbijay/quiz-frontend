@@ -38,8 +38,6 @@ function Participants({ participants, classes }) {
     setAnswerOption(!answerOption);
   };
 
-  //console.log(selectedId);
-
   return (
     <Grid item xs={12} lg={4}>
       <Card>
@@ -94,7 +92,7 @@ function Participants({ participants, classes }) {
                           <VisibilityIcon />
                         </Button>
                         <Collapse in={id === selectedId && answerOption}>
-                          {answers ? answers[0].user_answer : ""}
+                          {answers > 0 ? answers[0].user_answer : ""}
                         </Collapse>
                       </TableCell>
                       <TableCell>
