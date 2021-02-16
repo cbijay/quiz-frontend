@@ -79,7 +79,7 @@ function SiteHeader({ classes }) {
                     <Avatar alt="Nepalese Society of Texas School" src={logo} />
                   </Link>
                 </Grid>
-                <Grid item justify="space-evenly">
+                <Grid item>
                   <Link to="/" className={classes.title}>
                     <Typography
                       component="h1"
@@ -107,7 +107,7 @@ function SiteHeader({ classes }) {
               <Button color="inherit">Contact Us</Button>
             </Grid>
 
-            <Grid alignItems="center">
+            <Grid item>
               {admin && (
                 <Button
                   variant="contained"
@@ -135,10 +135,10 @@ function SiteHeader({ classes }) {
                     to="/login"
                   >
                     Login
-                    </Button>
+                  </Button>
                   <Button color="inherit" component={Link} to="/register">
                     Register
-                    </Button>
+                  </Button>
                 </>
               )}
             </Grid>
