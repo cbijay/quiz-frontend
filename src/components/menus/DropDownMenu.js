@@ -8,6 +8,9 @@ import {
   MenuList,
   MenuItem,
 } from "@material-ui/core";
+import {
+  ArrowDropDown as ArrowDropDownIcon
+} from '@material-ui/icons';
 import { Link } from "react-router-dom";
 
 function DropDownMenu({ menu, subMenu }) {
@@ -52,6 +55,7 @@ function DropDownMenu({ menu, subMenu }) {
         onClick={handleToggle}
       >
         {menu}
+        <ArrowDropDownIcon />
       </Button>
       <Popper
         open={open}
