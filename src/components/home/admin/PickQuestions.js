@@ -33,7 +33,7 @@ function PickQuestions() {
   }, [dispatch]);
 
   const handleTopicQuestion = (topicId) => {
-    setSelectedId(true);
+    setSelectedId(topicId);
     dispatch(getQuestions(topicId));
   };
 
@@ -42,7 +42,7 @@ function PickQuestions() {
   };
 
   return (
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} lg={3}>
       <Card>
         <CardContent>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
@@ -75,11 +75,11 @@ function PickQuestions() {
                     timeout="auto"
                     unmountOnExit
                   >
-                    <List component="div" disablePadding>
-                      {questions.length > 0 &&
-                        questions
-                          .filter((question) => question.status === 0)
-                          .map(({ id, question }, questionIndex) => (
+                    {questions.length > 0 ? (
+                      questions
+                        .filter((question) => question.status === 0)
+                        .map(({ id, question }, questionIndex) => (
+                          <List component="div" disablePadding>
                             <ListItem
                               key={questionIndex}
                               button
@@ -87,8 +87,11 @@ function PickQuestions() {
                             >
                               <ListItemText primary={question} />
                             </ListItem>
-                          ))}
-                    </List>
+                          </List>
+                        ))
+                    ) : (
+                      <Typography>No questions found!!</Typography>
+                    )}
                   </Collapse>
                 </>
               ))}
