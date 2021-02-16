@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Container, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
 import {
     DoubleArrow as DoubleArrowIcon,
     ArrowBack as ArrowBackIcon,
-    ArrowRightAlt as ArrowFrontIcon,
+    ArrowForward as ArrowFrontIcon,
 }
     from '@material-ui/icons';
 
 import Banner1 from "./images/banner.jpg";
-import Banner2 from "./images/banner2.jpg";
 import Banner3 from "./images/banner3.jpg";
 import Banner4 from "./images/gallery1.jpg";
 import Banner5 from "./images/gallery2.jpg";
@@ -23,14 +22,16 @@ import Banner10 from "./images/gallery7.jpg";
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: 20,
+        position: 'relative',
     },
     container: {
-        padding: 20,
         display: 'flex',
         overflowY: 'hidden',
         overflowX: 'scroll',
         backgroundColor: theme.palette.primary.main,
         borderRadius: 4,
+        paddingTop: 30,
+        scrollBehavior: 'smooth',
         '&::-webkit-scrollbar': {
             display: 'none',
         }
@@ -38,8 +39,7 @@ const useStyles = makeStyles(theme => ({
     bannerImage: {
         height: 300,
         width: 500,
-        // objectFit: "contain",
-        margin: 20,
+        margin: 10,
         borderRadius: 5
     },
     headline: {
@@ -51,19 +51,26 @@ const useStyles = makeStyles(theme => ({
         width: 80,
         margin: 'auto',
         padding: 20
+    },
+    scrollBtn: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        position: 'absolute',
+        top: 30.,
+        right: 0,
+        padding: 20
     }
 }));
 
-
-const swipeLeftHandler = () => {
-
-}
-
 const Gallery = () => {
     const classes = useStyles();
+    const ref = useRef(null);
+    const scroll = (scrollOffset) => {
+        ref.current.scrollLeft += scrollOffset
+    }
     var items = [
         { image: `${Banner1}` },
-        { image: `${Banner2}` },
         { image: `${Banner3}` },
         { image: `${Banner4}` },
         { image: `${Banner5}` },
@@ -81,15 +88,15 @@ const Gallery = () => {
                     Gallery
                     </Typography>
                 <div className={classes.bottomBorder}></div>
-                <Grid className={classes.container} >
-                    <div className={classes.scrollBtn}>
-                        <IconButton onClick={swipeLeftHandler}>
-                            <ArrowBackIcon />
-                        </IconButton>
-                        <IconButton onClick={swipeLeftHandler}>
-                            <ArrowFrontIcon />
-                        </IconButton>
-                    </div>
+                <div className={classes.scrollBtn}>
+                    <IconButton onClick={() => scroll(-100)}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                    <IconButton onClick={() => scroll(100)}>
+                        <ArrowFrontIcon />
+                    </IconButton>
+                </div>
+                <Grid className={classes.container} ref={ref}>
                     {items.map((item) => (
                         <img className={classes.bannerImage} src={item.image} alt="Image1" />
                     ))}
