@@ -98,7 +98,7 @@ function SiteHeader({ classes }) {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} sm={12} md container justify="space-evenly">
+            <Grid item xs={12} sm={12} md container justify="center">
               <Typography component="span" variant="body1" color="inherit">
                 {user?.name}
               </Typography>

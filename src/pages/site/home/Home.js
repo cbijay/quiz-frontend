@@ -3,6 +3,7 @@ import SiteLayout from "../../../layouts/SiteLayout";
 import { useSelector } from "react-redux";
 import PrincipalMessage from "../../../components/home/PrincipalMessage";
 import Banner from "../../../components/home/Banner";
+import Gallery from "../../../components/home/Gallery";
 
 const styles = {
   title: {
@@ -29,6 +30,7 @@ function Home({ classes }) {
           <Grid container justify="center">
             <PrincipalMessage classes={classes} />
           </Grid>
+          <Gallery />
         </>
       )}
     </SiteLayout>
