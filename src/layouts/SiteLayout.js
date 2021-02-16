@@ -11,7 +11,6 @@ import SiteHeader from "../components/header/SiteHeader";
 import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import Footer from "../components/footer/Footer";
-import Banner from "../components/home/Banner";
 
 const styles = () => ({
   root: {
@@ -42,21 +41,21 @@ function SiteLayout({ children, classes }) {
       {/* <Banner /> */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        {/* <Container maxWidth="lg" className={classes.container}> */}
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            {message && (
-              <Alert severity={type} className={classes.alertContainer}>
-                {message}
-              </Alert>
-            )}
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              {message && (
+                <Alert severity={type} className={classes.alertContainer}>
+                  {message}
+                </Alert>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-        {children}
-        <Box pt={4}>
-          <Footer />
-        </Box>
-        {/* </Container> */}
+          {children}
+          <Box pt={4}>
+            <Footer />
+          </Box>
+        </Container>
       </main>
     </div>
   );

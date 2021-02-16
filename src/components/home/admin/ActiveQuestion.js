@@ -84,12 +84,12 @@ function ActiveQuestion({ classes }) {
             </Grid>
           </Grid>
           {question ? (
-            minutes === 0 && seconds === 0 ? (
+            question.timer && minutes === 0 && seconds === 0 ? (
               <Typography>Please pick another question</Typography>
             ) : (
               <>
                 <Box>{question.question}</Box>
-                <Grid container justify="flex-end" spacing={1}>
+                <Grid container spacing={1} justify="flex-end">
                   <Grid item>
                     <Button
                       className={classes.success}
