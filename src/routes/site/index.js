@@ -6,6 +6,7 @@ import UserHome from "../../pages/site/home/UserHome";
 import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import About from "../../pages/site/About";
+import Contact from "../../pages/site/Contact";
 import schoolRoutes from "./school";
 import quizRoutes from "./quiz";
 import ApplicationForm from "../../pages/site/quiz/ApplicationForm";
@@ -56,6 +57,10 @@ function SiteRoutes() {
     {
       path: "/about",
       component: About,
+    },
+    {
+      path: "/contact",
+      component: Contact,
     },
     {
       path: "/school",

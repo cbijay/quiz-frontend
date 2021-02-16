@@ -72,6 +72,9 @@ const PrincipalMessage = () => {
               </Grid>
               <Grid item xs={6} md={6}>
                 <img className={classes.sideImage} src={CommunityImage} alt="Greeting  Namaskar" />
+                <Typography component="h5" variant="subtitle1" className={classes.actionButton}>
+                  Photo: Living Hindu Godess.
+              </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography paragraph style={{ display: `${showMore ? 'block' : 'none'}` }}>
@@ -86,6 +89,9 @@ const PrincipalMessage = () => {
               </Grid>
               <Grid item xs={12} md={6} style={{ display: `${showMore ? 'block' : 'none'}` }}>
                 <img className={classes.sideImage} src={CommunityImage2} alt="Greeting  Namaskar" />
+                <Typography component="h5" variant="subtitle1" className={classes.actionButton}>
+                  Photo: Participants in online cultural program.
+              </Typography>
               </Grid>
               <Grid item xs={12}>
                 <Typography paragraph style={{ display: `${showMore ? 'block' : 'none'}` }}>

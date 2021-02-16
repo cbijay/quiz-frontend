@@ -14,7 +14,7 @@ import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../store/actions/authAction";
 import DropDownMenu from "../menus/DropDownMenu";
 
-const styles = () => ({
+const styles = (theme) => ({
   appBar: {
     background: "#fff",
   },
@@ -40,6 +40,10 @@ const styles = () => ({
   primary: {
     margin: 0,
   },
+  logo: {
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+  }
 });
 
 function SiteHeader({ classes }) {
@@ -71,19 +75,19 @@ function SiteHeader({ classes }) {
     <>
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Grid container spacing={1} justify="space-between">
+          <Grid container spacing={1} alignItems="center">
             <Grid item>
-              <Grid container spacing={1}>
+              <Grid container spacing={1} alignItems="center">
                 <Grid item>
                   <Link to="/">
-                    <Avatar alt="Nepalese Society of Texas School" src={logo} />
+                    <Avatar alt="Nepalese Society of Texas School" src={logo} className={classes.logo} />
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/" className={classes.title}>
                     <Typography
                       component="h1"
-                      variant="h6"
+                      variant="h4"
                       color="inherit"
                       noWrap
                     >
@@ -94,7 +98,7 @@ function SiteHeader({ classes }) {
               </Grid>
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12} sm={12} md container justify="space-evenly">
               <Typography component="span" variant="body1" color="inherit">
                 {user?.name}
               </Typography>
@@ -104,7 +108,7 @@ function SiteHeader({ classes }) {
               <DropDownMenu menu="School" subMenu={schoolSubMenu} />
               <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
               <Button color="inherit">Gallery</Button>
-              <Button color="inherit">Contact Us</Button>
+              <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
             </Grid>
 
             <Grid item>
