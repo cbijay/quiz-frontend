@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Container, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
+import React, { useRef } from 'react';
+import { Button, Container, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
 import {
     DoubleArrow as DoubleArrowIcon,
     ArrowBack as ArrowBackIcon,
@@ -16,6 +16,7 @@ import Banner7 from "./images/gallery4.jpg";
 import Banner8 from "./images/gallery5.jpg";
 import Banner9 from "./images/gallery6.jpg";
 import Banner10 from "./images/gallery7.jpg";
+import { Link } from 'react-router-dom';
 
 
 
@@ -46,11 +47,9 @@ const useStyles = makeStyles(theme => ({
         color: 'gray',
         textAlign: 'center'
     },
-    nextBtn: {
-        height: 80,
-        width: 80,
-        margin: 'auto',
-        padding: 20
+    viewMoreBtn: {
+        width: 125,
+        padding: 10,
     },
     scrollBtn: {
         display: 'flex',
@@ -100,10 +99,12 @@ const Gallery = () => {
                     {items.map((item) => (
                         <img className={classes.bannerImage} src={item.image} alt="Image1" />
                     ))}
-                    <IconButton className={classes.nextBtn}>
-                        <DoubleArrowIcon />
-                        View More
-                    </IconButton>
+                    <Link to="/gallery" style={{ margin: 'auto' }}>
+                        <Button className={classes.viewMoreBtn} variant="contained" size="small">
+                            <DoubleArrowIcon />
+                            <Typography style={{ textDecoration: 'none', color: 'black' }}>View More</Typography>
+                        </Button>
+                    </Link>
                 </Grid>
             </Container>
         </>
