@@ -1,7 +1,6 @@
 import React from "react";
 import {
   CssBaseline,
-  Container,
   Box,
   withStyles,
   Grid,
@@ -19,7 +18,7 @@ const styles = () => ({
   content: {
     flexGrow: 1,
     height: "100vh",
-    overflow: "auto",
+    overflowX: "hidden",
   },
   appBarSpacer: theme.mixins.toolbar,
   container: {
@@ -38,24 +37,21 @@ function SiteLayout({ children, classes }) {
     <div className={classes.root}>
       <CssBaseline />
       <SiteHeader />
-      {/* <Banner /> */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              {message && (
-                <Alert severity={type} className={classes.alertContainer}>
-                  {message}
-                </Alert>
-              )}
-            </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {message && (
+              <Alert severity={type} className={classes.alertContainer}>
+                {message}
+              </Alert>
+            )}
           </Grid>
-          {children}
-          <Box pt={4}>
-            <Footer />
-          </Box>
-        </Container>
+        </Grid>
+        {children}
+        <Box pt={4}>
+          <Footer />
+        </Box>
       </main>
     </div>
   );

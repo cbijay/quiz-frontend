@@ -3,6 +3,7 @@ import SiteLayout from "../../../layouts/SiteLayout";
 import { useSelector } from "react-redux";
 import PrincipalMessage from "../../../components/home/PrincipalMessage";
 import Banner from "../../../components/home/Banner";
+import Gallery from "../../../components/home/Gallery";
 
 const styles = {
   title: {
@@ -25,12 +26,11 @@ function Home({ classes }) {
     <SiteLayout>
       {!user && (
         <>
-          {/* <Grid xs={12} lg={12} style={{ border: '1px solid black' }}> */}
           <Banner />
-          {/* </Grid> */}
           <Grid container justify="center">
             <PrincipalMessage classes={classes} />
           </Grid>
+          <Gallery />
         </>
       )}
     </SiteLayout>
