@@ -9,10 +9,37 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Avatar,
+  Button,
+  Collapse,
 } from "@material-ui/core";
-import { Check as CheckIcon, Close as CloseIcon } from "@material-ui/icons";
+import clsx from "clsx";
+import {
+  Check as CheckIcon,
+  Close as CloseIcon,
+  Visibility as VisibilityIcon,
+} from "@material-ui/icons";
+
+const imageBaseUrl = process.env.REACT_APP_BASE_IMAGE_URL;
 
 function Participants({ participants, classes }) {
+  const avatarColor = [
+    `${classes.success}`,
+    `${classes.primary}`,
+    `${classes.dark}`,
+    `${classes.secondary}`,
+  ];
+
+  const [selectedId, setSelectedId] = React.useState();
+  const [answerOption, setAnswerOption] = React.useState();
+
+  const handleClick = (id) => {
+    setSelectedId(id);
+    setAnswerOption(!answerOption);
+  };
+
+  //console.log(selectedId);
+
   return (
     <Grid item xs={12} lg={4}>
       <Card>
@@ -32,33 +59,60 @@ function Participants({ participants, classes }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {participants.map(({ name, per_q_mark, answers }, index) => (
-                  <TableRow key={index}>
-                    <TableCell> {name} </TableCell>
-
-                    <TableCell>
-                      {answers.filter(
-                        (answer) => answer.answer === answer.user_answer
-                      ).length * per_q_mark}
-                    </TableCell>
-                    <TableCell>
-                      {answers.length > 0 ? answers[0].user_answer : ""}
-                    </TableCell>
-                    <TableCell>
-                      {answers.length > 0 ? (
-                        answers[0].answer === answers[0].user_answer ? (
-                          <CheckIcon className={classes.rightAnswer} />
-                        ) : Number(answers[0].user_answer) === 0 ? (
-                          <Typography>Time up!!</Typography>
+                {participants.map(
+                  ({ id, name, per_q_mark, answers, image }, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        {image === "undefined" || image === "Null" ? (
+                          <Avatar
+                            className={clsx(
+                              classes.avatar,
+                              avatarColor[
+                                Math.floor(Math.random() * avatarColor.length)
+                              ]
+                            )}
+                          >
+                            {name.charAt(0)}
+                          </Avatar>
                         ) : (
-                          <CloseIcon className={classes.wrongAnswer} />
-                        )
-                      ) : (
-                        ""
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                          <Avatar
+                            className={classes.avatar}
+                            src={`${imageBaseUrl}/users/${image}`}
+                            alt={name}
+                          />
+                        )}
+                        {name}
+                      </TableCell>
+
+                      <TableCell>
+                        {answers.filter(
+                          (answer) => answer.answer === answer.user_answer
+                        ).length * per_q_mark}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Button color="primary" onClick={() => handleClick(id)}>
+                          <VisibilityIcon />
+                        </Button>
+                        <Collapse in={id === selectedId && answerOption}>
+                          {answers ? answers[0].user_answer : ""}
+                        </Collapse>
+                      </TableCell>
+                      <TableCell>
+                        {answers.length > 0 ? (
+                          answers[0].answer === answers[0].user_answer ? (
+                            <CheckIcon className={classes.rightAnswer} />
+                          ) : Number(answers[0].user_answer) === 0 ? (
+                            <Typography>Time up!!</Typography>
+                          ) : (
+                            <CloseIcon className={classes.wrongAnswer} />
+                          )
+                        ) : (
+                          ""
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
               </TableBody>
             </Table>
           ) : (

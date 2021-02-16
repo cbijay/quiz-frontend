@@ -12,8 +12,12 @@ import {
   ArrowDropDown as ArrowDropDownIcon
 } from '@material-ui/icons';
 import { Link } from "react-router-dom";
+import {
+  ArrowDropDown as ArrowDropDownIcon,
+  AccountCircle as AccountCircleIcon,
+} from "@material-ui/icons";
 
-function DropDownMenu({ menu, subMenu }) {
+function DropDownMenu({ menu, subMenu, userMenu }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -54,6 +58,7 @@ function DropDownMenu({ menu, subMenu }) {
         aria-haspopup="true"
         onClick={handleToggle}
       >
+        {userMenu && <AccountCircleIcon />}
         {menu}
         <ArrowDropDownIcon />
       </Button>
@@ -79,11 +84,21 @@ function DropDownMenu({ menu, subMenu }) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  {subMenu.map(({ name, link }, index) => (
-                    <MenuItem key={index} component={Link} to={link}>
-                      {name}
-                    </MenuItem>
-                  ))}
+                  {subMenu.map(({ name, link, handleClick }, index) =>
+                    userMenu ? (
+                      <MenuItem
+                        key={index}
+                        component={Button}
+                        onClick={handleClick}
+                      >
+                        {name}
+                      </MenuItem>
+                    ) : (
+                      <MenuItem key={index} component={Link} to={link}>
+                        {name}
+                      </MenuItem>
+                    )
+                  )}
                 </MenuList>
               </ClickAwayListener>
             </Paper>
