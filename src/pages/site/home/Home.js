@@ -25,9 +25,7 @@ function Home({ classes }) {
     <SiteLayout>
       {!user && (
         <>
-          {/* <Grid xs={12} lg={12} style={{ border: '1px solid black' }}> */}
           <Banner />
-          {/* </Grid> */}
           <Grid container justify="center">
             <PrincipalMessage classes={classes} />
           </Grid>

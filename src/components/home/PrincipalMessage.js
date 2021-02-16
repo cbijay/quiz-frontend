@@ -51,6 +51,9 @@ const PrincipalMessage = () => {
                     <Typography component="h5" variant="subtitle1" gutterBottom>
                       <a href="tel:+1-682-433-3947" className={classes.actionButton}>(+1) 682-433-3947</a>
                     </Typography>
+                    <Typography component="h5" variant="subtitle1" gutterBottom>
+                      <a href="mailto:bijay.nst@gmail.com" className={classes.actionButton}>bijay.nst@gmail.com</a> or <a href="mailto:school@ournst.org" className={classes.actionButton}>school@ournst.org</a>.
+                    </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <Typography paragraph>
@@ -95,7 +98,7 @@ const PrincipalMessage = () => {
                   Our goal is to make NST school an ideal community school to learn our language, culture, customs, and country on top of providing an enhanced education. This will only be possible if we work together. I would like to thank you for taking up this mission with me to help and encourage your child and their experience at the Nepalese Society of Texas Community School.
                     </Typography>
                 <Typography paragraph style={{ display: `${showMore ? 'block' : 'none'}` }}>
-                  I encourage each parent to take part in the school activities and I wish you all a wonderful school year. If I can be of any assistance, please feel free to contact me. I can be reached at <a href="mailto:bijay.nst@gmail.com" className={classes.actionButton}>bijay.nst@gmail.com</a> or <a href="mailto:school@ournst.org" className={classes.actionButton}>school@ournst.org</a>.
+                  I encourage each parent to take part in the school activities and I wish you all a wonderful school year. If I can be of any assistance, please feel free to contact me.
                     </Typography>
                 <Button variant="outlined" onClick={() => setShowMore(!showMore)}>{!showMore ? 'Read more.' : 'Hide'}</Button>
               </Grid>
