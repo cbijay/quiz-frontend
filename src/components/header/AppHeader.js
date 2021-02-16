@@ -85,8 +85,7 @@ function AppHeader({ open, handleDrawerOpen, handleDrawerClose, classes }) {
             Nepalese
           </Typography>
           <Typography component="h6" variant="body1" color="inherit">
-            {/* Welcome {user ? user.name : ""} */}
-            Welcome {user?.name} {/* Modified */}
+            Welcome {user?.name}
           </Typography>
           <Button color="inherit" component={Link} to="/">
             <PublicIcon className={classes.buttonIcon} />
