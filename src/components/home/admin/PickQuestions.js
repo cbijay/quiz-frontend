@@ -50,52 +50,50 @@ function PickQuestions() {
           </Typography>
 
           {topics.length > 0 ? (
-            <List>
-              {topics.map(({ id, title }, topicIndex) => (
-                <>
-                  <ListItem
-                    key={topicIndex}
-                    button
-                    onClick={() => handleTopicQuestion(id)}
-                  >
-                    <ListItemIcon>
-                      <ChevronRightIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={title} />
-                    {id === selectedId ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )}
-                  </ListItem>
-                  <Collapse
-                    key={id}
-                    component="li"
-                    in={id === selectedId}
-                    timeout="auto"
-                    unmountOnExit
-                  >
-                    {questions.length > 0 ? (
-                      questions
-                        .filter((question) => question.status === 0)
-                        .map(({ id, question }, questionIndex) => (
-                          <List component="div" disablePadding>
+            topics.map(({ id, title }, topicIndex) => (
+              <List key={topicIndex}>
+                <ListItem
+                  key={title}
+                  button
+                  onClick={() => handleTopicQuestion(id)}
+                >
+                  <ListItemIcon>
+                    <ChevronRightIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={title} />
+                  {id === selectedId ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </ListItem>
+                <Collapse
+                  key={selectedId}
+                  component="li"
+                  in={id === selectedId}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  {questions.length > 0 ? (
+                    questions
+                      .filter((question) => question.status === 0)
+                      .map(
+                        ({ id, question, question_order }, questionIndex) => (
+                          <List key={question} component="div" disablePadding>
                             <ListItem
                               key={questionIndex}
                               button
                               onClick={() => handleQuestion(id)}
                             >
-                              <ListItemText primary={question} />
+                              <ListItemText
+                                primary={`Question No.${question_order}`}
+                              />
                             </ListItem>
                           </List>
-                        ))
-                    ) : (
-                      <Typography>No questions found!!</Typography>
-                    )}
-                  </Collapse>
-                </>
-              ))}
-            </List>
+                        )
+                      )
+                  ) : (
+                    <Typography>No questions found!!</Typography>
+                  )}
+                </Collapse>
+              </List>
+            ))
           ) : (
             <Typography>Please create topics!!</Typography>
           )}

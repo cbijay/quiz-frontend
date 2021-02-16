@@ -43,13 +43,14 @@ function StudentForm({ student, mode }) {
     formData.append("role", data.role);
     formData.append("user_img", userImage);
 
+    console.log(data);
+
     if (mode === "edit") {
       dispatch(updateStudent(id, formData));
     } else {
       dispatch(createStudent(formData));
+      reset();
     }
-
-    reset();
   };
 
   const handlePassword = (e) => {
