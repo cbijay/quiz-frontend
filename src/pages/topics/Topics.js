@@ -104,7 +104,6 @@ function Topics() {
                               variant="contained"
                               color="primary"
                               size="small"
-<<<<<<< HEAD
                               className={clsx(
                                 classes.editButton,
                                 classes.button
@@ -114,14 +113,6 @@ function Topics() {
                               <CreateIcon className={classes.buttonIcon} />
                               Edit
                             </Button>
-=======
-                              className={clsx(classes.editButton, classes.button)}
-                              onClick={() => handleEdit(id)}
-                            >
-                              <CreateIcon className={classes.buttonIcon} />
-                            Edit
-                          </Button>
->>>>>>> 0311141a9030d41f954d5dd93343c6c4d8ad6497
                           </Grid>
                           <Grid item>
                             <Button
@@ -132,13 +123,8 @@ function Topics() {
                               onClick={() => handleDelete(id)}
                             >
                               <DeleteIcon className={classes.buttonIcon} />
-<<<<<<< HEAD
                               Delete
                             </Button>
-=======
-                            Delete
-                          </Button>
->>>>>>> 0311141a9030d41f954d5dd93343c6c4d8ad6497
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -146,10 +132,10 @@ function Topics() {
                   )
                 )
               ) : (
-                  <TableRow>
-                    <TableCell colSpan={6}>No record found!!</TableCell>
-                  </TableRow>
-                )}
+                <TableRow>
+                  <TableCell colSpan={6}>No record found!!</TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
