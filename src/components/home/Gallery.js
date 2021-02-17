@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
 const Gallery = () => {
     const classes = useStyles();
     const ref = useRef(null);
+
     const scroll = (scrollOffset) => {
         ref.current.scrollLeft += scrollOffset
     }
@@ -101,7 +102,12 @@ const Gallery = () => {
                 <Grid className={classes.container} ref={ref}>
                     {
                         items.map((item, index) => (
-                            <img key={index} className={classes.bannerImage} src={item.image} alt="Image1" />
+                            <img
+                                key={index}
+                                className={classes.bannerImage}
+                                src={item.image}
+                                alt="Image1"
+                            />
                         ))
                     }
                     <Link to="/gallery" style={{ margin: 'auto', textDecoration: 'none' }}>

@@ -108,14 +108,17 @@ function SiteHeader({ classes }) {
                       color="inherit"
                       noWrap
                     >
-                      Nepalese
+                      NST SCHOOL
                     </Typography>
                   </Link>
                 </Grid>
               </Grid>
             </Grid>
 
-            <Grid item xs container justify='space-around'>
+            <Grid item xs container justify='center'>
+              <Button color="inherit" component={Link} to="/" className={classes.navBtn}>
+                Home
+              </Button>
               <Button color="inherit" component={Link} to="/about" className={classes.navBtn}>
                 About
               </Button>
