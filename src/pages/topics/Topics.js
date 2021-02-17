@@ -98,35 +98,41 @@ function Topics() {
                       <TableCell> {per_q_mark} </TableCell>
                       <TableCell> {`${timer} min`} </TableCell>
                       <TableCell>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          size="small"
-                          className={clsx(classes.editButton, classes.button)}
-                          onClick={() => handleEdit(id)}
-                        >
-                          <CreateIcon className={classes.buttonIcon} />
-                          Edit
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          size="small"
-                          className={classes.button}
-                          onClick={() => handleDelete(id)}
-                        >
-                          <DeleteIcon className={classes.buttonIcon} />
-                          Delete
-                        </Button>
+                        <Grid container spacing={1}>
+                          <Grid item>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="small"
+                              className={clsx(classes.editButton, classes.button)}
+                              onClick={() => handleEdit(id)}
+                            >
+                              <CreateIcon className={classes.buttonIcon} />
+                            Edit
+                          </Button>
+                          </Grid>
+                          <Grid item>
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              size="small"
+                              className={classes.button}
+                              onClick={() => handleDelete(id)}
+                            >
+                              <DeleteIcon className={classes.buttonIcon} />
+                            Delete
+                          </Button>
+                          </Grid>
+                        </Grid>
                       </TableCell>
                     </TableRow>
                   )
                 )
               ) : (
-                <TableRow>
-                  <TableCell colSpan={6}>No record found!!</TableCell>
-                </TableRow>
-              )}
+                  <TableRow>
+                    <TableCell colSpan={6}>No record found!!</TableCell>
+                  </TableRow>
+                )}
             </TableBody>
           </Table>
         </CardContent>

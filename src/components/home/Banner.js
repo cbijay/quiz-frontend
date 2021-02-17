@@ -1,43 +1,63 @@
 import React from "react";
-import { Container, makeStyles, Typography } from "@material-ui/core";
+import { Button, Container, makeStyles, Typography } from "@material-ui/core";
 
-import Banner2 from "./images/banner2.jpg";
+import Banner2 from "./images/banner.jpg";
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        marginTop: 20
     },
     bannerImage: {
-        height: 400,
-        minWidth: 500,
-        width: 1170,
+        objectFit: 'cover',
+        // width: '87vw',
+        width: '85vw',
+        height: '40vw',
         boxShadow: 'inset 100px 0px 100px black',
-        '&:after': {
-            content: '',
-            background: 'radialGradient(transparent, black)'
+        [theme.breakpoints.down('sm')]: {
+            objectFit: 'fill',
+            width: '85vw',
+            height: '70vw',
         }
     },
     bannerContent: {
         position: 'absolute',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        right: 0,
+        left: 0,
         top: 0,
-        width: 1170,
+        width: '85vw',
         height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.3)',
+        backgroundColor: 'rgba(0,0,0,0.6)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+            width: '85vw',
+            height: '100%'
+        }
     },
     bannerText: {
         color: '#fff',
         opacity: 1,
         position: 'absolute',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 20
+        }
+    },
+    bannerButton: {
+        position: 'relative',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 12
+        },
+        marginTop: 120
     }
-});
+}));
 
 const Banner = (props) => {
     const classes = useStyles();
@@ -51,6 +71,11 @@ const Banner = (props) => {
                         <Typography variant="h4" className={classes.bannerText} align="center">
                             Nepalese Society of Texas Community School.
                         </Typography>
+                        <Link to="/about" style={{ textDecoration: 'none' }}>
+                            <Button variant='contained' color='primary' className={classes.bannerButton}>
+                                LEARN MORE
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </Container>
