@@ -47,9 +47,8 @@ function StudentForm({ student, mode }) {
       dispatch(updateStudent(id, formData));
     } else {
       dispatch(createStudent(formData));
+      reset();
     }
-
-    reset();
   };
 
   const handlePassword = (e) => {

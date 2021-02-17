@@ -27,7 +27,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "live": "PUBLIC_URL=http://nstschool.org/ GENERATE_SOURCEMAP=false react-scripts build && scp -r ./build/ root@134.209.156.253:/var/www/html/nstschool",
+  "live": "PUBLIC_URL=http://nstschool.org/ GENERATE_SOURCEMAP=false react-scripts build && scp -r ./build/ root@134.209.156.253:/var/www/html/nstschool",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

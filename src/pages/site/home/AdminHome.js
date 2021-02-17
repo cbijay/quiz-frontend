@@ -17,11 +17,28 @@ const styles = () => ({
   container: {
     paddingTop: 10,
   },
+  avatar: {
+    width: 30,
+    height: 30,
+  },
   rightAnswer: {
     color: "#00a152",
   },
   wrongAnswer: {
     color: "#b2102f",
+  },
+  dark: {
+    background: "#777",
+    "&:hover": {
+      background: "#333",
+    },
+  },
+  primary: {
+    background: "#e64a19",
+    color: "#fff",
+    "&:hover": {
+      background: "#d84315",
+    },
   },
   success: {
     background: "#2e7d32",

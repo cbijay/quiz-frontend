@@ -54,6 +54,7 @@ function SiteHeader({ classes }) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
+    console.log("hello");
     dispatch(logout());
     history.push("/login");
   };
@@ -70,6 +71,8 @@ function SiteHeader({ classes }) {
     { name: "Rules", link: "/quiz/rules" },
     { name: "Team", link: "/quiz/team" },
   ];
+
+  const userSubMenu = [{ name: "Log out", handleClick: handleLogout }];
 
   return (
     <>
@@ -102,6 +105,8 @@ function SiteHeader({ classes }) {
               <Typography component="span" variant="body1" color="inherit">
                 {user?.name}
               </Typography>
+
+            <Grid item>
               <Button color="inherit" component={Link} to="/about">
                 About
               </Button>
@@ -124,9 +129,13 @@ function SiteHeader({ classes }) {
                 </Button>
               )}
               {user && (
-                <Button color="inherit" onClick={handleLogout}>
-                  Logout
-                </Button>
+                <>
+                  <DropDownMenu
+                    menu={user?.name}
+                    subMenu={userSubMenu}
+                    userMenu={true}
+                  />
+                </>
               )}
 
               {!user && (
