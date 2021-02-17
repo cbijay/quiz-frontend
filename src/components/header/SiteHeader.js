@@ -41,9 +41,9 @@ const styles = (theme) => ({
     margin: 0,
   },
   logo: {
-    width: theme.spacing(9),
-    height: theme.spacing(9),
-  }
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+  },
 });
 
 function SiteHeader({ classes }) {
@@ -78,12 +78,21 @@ function SiteHeader({ classes }) {
     <>
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Grid container spacing={1} alignItems="center">
+          <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            justify="space-between"
+          >
             <Grid item>
               <Grid container spacing={1} alignItems="center">
                 <Grid item>
                   <Link to="/">
-                    <Avatar alt="Nepalese Society of Texas School" src={logo} className={classes.logo} />
+                    <Avatar
+                      alt="Nepalese Society of Texas School"
+                      src={logo}
+                      className={classes.logo}
+                    />
                   </Link>
                 </Grid>
                 <Grid item>
@@ -101,6 +110,7 @@ function SiteHeader({ classes }) {
               </Grid>
             </Grid>
 
+<<<<<<< HEAD
             <Grid item xs={12} sm={12} md container justify="center">
               <Typography component="span" variant="body1" color="inherit">
                 {user?.name}
@@ -115,6 +125,18 @@ function SiteHeader({ classes }) {
                 <Button color="inherit" component={Link} to="/gallery">Gallery</Button>
                 <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
               </Grid>
+=======
+            <Grid item>
+              <Button color="inherit" component={Link} to="/about">
+                About
+              </Button>
+              <DropDownMenu menu="School" subMenu={schoolSubMenu} />
+              <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
+              <Button color="inherit">Gallery</Button>
+              <Button color="inherit" component={Link} to="/contact">
+                Contact Us
+              </Button>
+>>>>>>> e683c561ec988814ce23afa4b1b341975466f103
             </Grid>
 
             <Grid item>

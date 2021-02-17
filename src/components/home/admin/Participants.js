@@ -92,7 +92,9 @@ function Participants({ participants, classes }) {
                           <VisibilityIcon />
                         </Button>
                         <Collapse in={id === selectedId && answerOption}>
-                          {answers > 0 ? answers[0].user_answer : ""}
+                          {answers.length > 0
+                            ? answers[0].user_answer
+                            : "No Answer"}
                         </Collapse>
                       </TableCell>
                       <TableCell>
