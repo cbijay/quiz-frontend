@@ -106,14 +106,15 @@ function SiteHeader({ classes }) {
                 {user?.name}
               </Typography>
 
-            <Grid item>
-              <Button color="inherit" component={Link} to="/about">
-                About
+              <Grid item>
+                <Button color="inherit" component={Link} to="/about">
+                  About
               </Button>
-              <DropDownMenu menu="School" subMenu={schoolSubMenu} />
-              <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
-              <Button color="inherit" component={Link} to="/gallery">Gallery</Button>
-              <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
+                <DropDownMenu menu="School" subMenu={schoolSubMenu} />
+                <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
+                <Button color="inherit" component={Link} to="/gallery">Gallery</Button>
+                <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
+              </Grid>
             </Grid>
 
             <Grid item>

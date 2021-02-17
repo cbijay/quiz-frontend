@@ -8,9 +8,6 @@ import {
   MenuList,
   MenuItem,
 } from "@material-ui/core";
-import {
-  ArrowDropDown as ArrowDropDownIcon
-} from '@material-ui/icons';
 import { Link } from "react-router-dom";
 import {
   ArrowDropDown as ArrowDropDownIcon,
@@ -94,10 +91,10 @@ function DropDownMenu({ menu, subMenu, userMenu }) {
                         {name}
                       </MenuItem>
                     ) : (
-                      <MenuItem key={index} component={Link} to={link}>
-                        {name}
-                      </MenuItem>
-                    )
+                        <MenuItem key={index} component={Link} to={link}>
+                          {name}
+                        </MenuItem>
+                      )
                   )}
                 </MenuList>
               </ClickAwayListener>

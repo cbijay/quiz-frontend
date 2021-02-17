@@ -99,9 +99,11 @@ const Gallery = () => {
                     </IconButton>
                 </div>
                 <Grid className={classes.container} ref={ref}>
-                    {items.map((item) => (
-                        <img className={classes.bannerImage} src={item.image} alt="Image1" />
-                    ))}
+                    {
+                        items.map((item, index) => (
+                            <img key={index} className={classes.bannerImage} src={item.image} alt="Image1" />
+                        ))
+                    }
                     <Link to="/gallery" style={{ margin: 'auto' }}>
                         <Button className={classes.viewMoreBtn} variant="contained" size="small">
                             <DoubleArrowIcon />

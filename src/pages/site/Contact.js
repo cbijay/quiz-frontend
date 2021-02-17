@@ -2,8 +2,11 @@ import {
     Button,
     Card,
     CardContent,
+    Container,
     Grid,
-    TextField
+    makeStyles,
+    TextField,
+    Typography
 } from '@material-ui/core';
 import React from 'react';
 import CardHeading from '../../components/card/CardHeading';
@@ -17,20 +20,41 @@ const submitHandler = (data) => {
         `mailto:mail@mail.com?subject=${subject}&body=Hi, I am ${name},${message}`;
 }
 
+const styles = makeStyles({
+    rightCard: {
+        backgroundColor: '#d9d9d9',
+        width: 300,
+        height: 400,
+        borderRadius: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    },
+    rightCardHeadline: {
+        color: 'white',
+        textAlign: 'center',
+    }
+})
+
 const Contact = () => {
+    const classes = styles();
     const { register, handleSubmit, errors } = useForm();
     return (
         <SiteLayout>
-            <Grid container justify="center">
+            <Container maxWidth='lg'>
                 <Grid item xs={12}>
                     <Card>
-                        <CardHeading>Contact</CardHeading>
+                        <CardHeading>
+                            <Typography variant='h3' align="center">CONTACT US</Typography>
+                        </CardHeading>
                         <CardContent>
-                            <form noValidate onSubmit={handleSubmit(submitHandler)}>
-                                <Grid container item justify="center" spacing={2} xs={12} md={4}>
+                            <Grid container xs={12} spacing={2}>
+                                <Grid container spacing={2} item xs={12} md={6}>
                                     <Grid item xs={6}>
                                         <TextField
                                             id="standard-basic"
+                                            fullWidth
                                             label="Name"
                                             name="name"
                                             inputRef={register({ required: "Name is required" })}
@@ -75,11 +99,20 @@ const Contact = () => {
                                         <Button type="submit" fullWidth variant='contained' color="primary">Submit</Button>
                                     </Grid>
                                 </Grid>
-                            </form>
+                                <Grid item xs={12} md={6} container justify="center">
+                                    <Card elevation={1} className={classes.rightCard}>
+                                        <Typography variant="h3" className={classes.rightCardHeadline}>Register for Quiz</Typography>
+                                        <Typography variant="subtitle1" className={classes.rightCardHeadline}>NST will award the winning team members with brand new laptops, trophies and other items in the Nepali New Year program.</Typography>
+                                        <Button variant="outlined" color="primary">Register Now</Button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                            {/* <form noValidate onSubmit={handleSubmit(submitHandler)}>
+                            </form> */}
                         </CardContent>
                     </Card>
                 </Grid>
-            </Grid>
+            </Container>
         </SiteLayout>
     )
 }
