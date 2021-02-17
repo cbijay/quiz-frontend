@@ -110,33 +110,16 @@ function SiteHeader({ classes }) {
               </Grid>
             </Grid>
 
-<<<<<<< HEAD
-            <Grid item xs={12} sm={12} md container justify="center">
-              <Typography component="span" variant="body1" color="inherit">
-                {user?.name}
-              </Typography>
-
-              <Grid item>
-                <Button color="inherit" component={Link} to="/about">
-                  About
-              </Button>
-                <DropDownMenu menu="School" subMenu={schoolSubMenu} />
-                <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
-                <Button color="inherit" component={Link} to="/gallery">Gallery</Button>
-                <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
-              </Grid>
-=======
             <Grid item>
               <Button color="inherit" component={Link} to="/about">
                 About
               </Button>
               <DropDownMenu menu="School" subMenu={schoolSubMenu} />
               <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
-              <Button color="inherit">Gallery</Button>
+              <Button component={Link} to='/gallery' color="inherit">Gallery</Button>
               <Button color="inherit" component={Link} to="/contact">
                 Contact Us
               </Button>
->>>>>>> e683c561ec988814ce23afa4b1b341975466f103
             </Grid>
 
             <Grid item>

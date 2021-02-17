@@ -8,10 +8,6 @@ import {
   MenuList,
   MenuItem,
 } from "@material-ui/core";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-=======
->>>>>>> e683c561ec988814ce23afa4b1b341975466f103
 import {
   ArrowDropDown as ArrowDropDownIcon,
   AccountCircle as AccountCircleIcon,
