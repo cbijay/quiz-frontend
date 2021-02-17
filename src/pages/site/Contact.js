@@ -12,6 +12,7 @@ import React from 'react';
 import CardHeading from '../../components/card/CardHeading';
 import SiteLayout from '../../layouts/SiteLayout';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 
 const submitHandler = (data) => {
@@ -22,9 +23,9 @@ const submitHandler = (data) => {
 
 const styles = makeStyles({
     rightCard: {
-        backgroundColor: '#d9d9d9',
-        width: 300,
-        height: 400,
+        backgroundColor: '#ededeb',
+        width: 500,
+        height: 300,
         borderRadius: 0,
         display: 'flex',
         flexDirection: 'column',
@@ -32,8 +33,18 @@ const styles = makeStyles({
         alignItems: 'center'
     },
     rightCardHeadline: {
-        color: 'white',
         textAlign: 'center',
+    },
+    rightCardParagraph: {
+        color: 'grey',
+        textAlign: 'center',
+    },
+    formHeader: {
+        color: 'grey'
+    },
+    quizRegisterForm: {
+        color: '#000',
+        textDecoration: 'none',
     }
 })
 
@@ -51,6 +62,7 @@ const Contact = () => {
                         <CardContent>
                             <Grid container xs={12} spacing={2}>
                                 <Grid container spacing={2} item xs={12} md={6}>
+                                    <Typography variant='h4' className={classes.formHeader} align="center">Submit any queries</Typography>
                                     <Grid item xs={6}>
                                         <TextField
                                             id="standard-basic"
@@ -102,8 +114,12 @@ const Contact = () => {
                                 <Grid item xs={12} md={6} container justify="center">
                                     <Card elevation={1} className={classes.rightCard}>
                                         <Typography variant="h3" className={classes.rightCardHeadline}>Register for Quiz</Typography>
-                                        <Typography variant="subtitle1" className={classes.rightCardHeadline}>NST will award the winning team members with brand new laptops, trophies and other items in the Nepali New Year program.</Typography>
-                                        <Button variant="outlined" color="primary">Register Now</Button>
+                                        <Typography variant="subtitle1" className={classes.rightCardParagraph}>NST will award the winning team members with brand new laptops, trophies and other items in the Nepali New Year program.</Typography>
+                                        <Link to='/quiz/application-form' style={{ textDecoration: 'none' }}>
+                                            <Button className={classes.quizRegisterForm} variant="outlined" color="primary">
+                                                Register Now
+                                            </Button>
+                                        </Link>
                                     </Card>
                                 </Grid>
                             </Grid>
