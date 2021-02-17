@@ -22,9 +22,22 @@ function ActiveQuestion({ classes }) {
   let initialSeconds = 0;
 
   useEffect(() => {
-    setMinutes(
-      question && question.hasOwnProperty("timer") ? Number(question.timer) : 0
-    );
+    let oldMinutes = Number(localStorage.getItem("minutes"));
+    let oldSeconds = Number(localStorage.getItem("seconds"));
+
+    if (oldMinutes) {
+      setMinutes(oldMinutes);
+    } else {
+      setMinutes(
+        question && question.status === 1 && question.hasOwnProperty("timer")
+          ? Number(question.timer)
+          : 0
+      );
+    }
+
+    if (oldSeconds) {
+      setSeconds(oldSeconds);
+    }
   }, [question]);
 
   let [minutes, setMinutes] = useState();
@@ -42,23 +55,28 @@ function ActiveQuestion({ classes }) {
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(interval);
+          if (question && question.status === 1) {
+            dispatch(openQuestion(question.id, 2));
+          }
         } else {
           setMinutes(minutes - 1);
           setSeconds(59);
         }
       }
+      localStorage.setItem("minutes", minutes);
+      localStorage.setItem("seconds", seconds);
     }, 1000);
     return () => {
       clearInterval(interval);
     };
-  }, [minutes, seconds]);
+  }, [minutes, seconds, question, dispatch]);
 
   const handleQuestionOption = () => {
     setQuestionOption(!questionOption);
   };
 
-  const handleQuestionStatus = (questionId) => {
-    dispatch(openQuestion(questionId));
+  const handleQuestionStatus = (questionId, status) => {
+    dispatch(openQuestion(questionId, status));
   };
 
   return (
@@ -83,8 +101,12 @@ function ActiveQuestion({ classes }) {
               </Typography>
             </Grid>
           </Grid>
+
           {question ? (
-            question.timer && minutes === 0 && seconds === 0 ? (
+            question.status === 2 &&
+            question.timer &&
+            minutes === 0 &&
+            seconds === 0 ? (
               <Typography>Please pick another question</Typography>
             ) : (
               <>
@@ -94,7 +116,7 @@ function ActiveQuestion({ classes }) {
                     <Button
                       className={classes.success}
                       variant="contained"
-                      onClick={() => handleQuestionStatus(question.id)}
+                      onClick={() => handleQuestionStatus(question.id, 1)}
                       disabled={question.status === 1 ? true : false}
                     >
                       {question.status === 1 ? "Active" : "Start"}

@@ -45,6 +45,22 @@ export const getActiveQuestion = () => async (dispatch) => {
   }
 };
 
+export const getTimeOutQuestion = () => async (dispatch) => {
+  try {
+    const res = await questionService.getTimeOutQuestion();
+
+    dispatch({
+      type: questionType.GET_TIME_UP_QUESTION,
+      question: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: alertType.error,
+      error: error.toString(),
+    });
+  }
+};
+
 export const getQuestion = (questionId) => async (dispatch) => {
   try {
     const res = await questionService.getQuestion(questionId);
@@ -93,14 +109,16 @@ export const importQuestion = (topicId, request) => async (dispatch) => {
   }
 };
 
-export const openQuestion = (questionId) => async (dispatch) => {
+export const openQuestion = (questionId, status) => async (dispatch) => {
   try {
-    await questionService.openQuestion(questionId);
+    await questionService.openQuestion(questionId, status);
 
-    dispatch({
-      type: alertType.SUCCESS,
-      message: "Question is active !!",
-    });
+    if (status === 1) {
+      dispatch({
+        type: alertType.SUCCESS,
+        message: "Question is active !!",
+      });
+    }
   } catch (error) {
     dispatch({
       type: alertType.ERROR,

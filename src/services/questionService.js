@@ -19,6 +19,12 @@ const getQuestions = async (topicId) => {
   return res;
 };
 
+const getTimeOutQuestion = async () => {
+  const res = await axios.get(`${apiUrl}/v1/admin/questions/timeout`);
+
+  return res;
+};
+
 const getActiveQuestion = async () => {
   const res = await axios.get(`${apiUrl}/v1/questions/active`);
 
@@ -58,9 +64,9 @@ const updateQuestion = async (questionId, request) => {
   return res;
 };
 
-const openQuestion = async (questionId) => {
+const openQuestion = async (questionId, status) => {
   const res = await axios.post(
-    `${apiUrl}/v1/admin/questions/${questionId}/openQuestion`
+    `${apiUrl}/v1/admin/questions/${questionId}/open/${status}`
   );
 
   return res;
@@ -83,6 +89,7 @@ export const questionService = {
   getQuestionTopics,
   getQuestions,
   getAllQuestions,
+  getTimeOutQuestion,
   getActiveQuestion,
   getQuestion,
   createQuestion,
