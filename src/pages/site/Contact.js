@@ -34,10 +34,6 @@ const styles = makeStyles({
     },
     formHeader: {
         color: 'grey'
-    },
-    quizRegisterForm: {
-        color: '#000',
-        textDecoration: 'none',
     }
 })
 
@@ -57,12 +53,12 @@ const Contact = () => {
                 <Grid item xs={12}>
                     <Card>
                         <CardHeading>
-                            <Typography variant='h3' align="center">CONTACT US</Typography>
+                            CONTACT US
                         </CardHeading>
                         <CardContent>
-                            <Grid container xs={12} spacing={2}>
+                            <Grid container spacing={2}>
                                 <Grid item xs={12} md={6}>
-                                    <Typography variant='h4' className={classes.formHeader} align="center">
+                                    <Typography component='h4' variant='h4' className={classes.formHeader} align="center">
                                         Submit any queries
                                     </Typography>
                                     <form onSubmit={handleSubmit(submitHandler)}>
@@ -83,6 +79,7 @@ const Contact = () => {
                                                     id="standard-basic"
                                                     label="Email"
                                                     fullWidth
+                                                    type='email'
                                                     name="email"
                                                     inputRef={register({ required: "Email is required" })}
                                                     error={!!errors.email}
@@ -120,11 +117,11 @@ const Contact = () => {
                                 <Grid item xs={12} md={6} container justify="center">
                                     <Card elevation={1} className={classes.rightCard}>
                                         <Typography variant="h3" className={classes.rightCardHeadline}>Register for Quiz</Typography>
-                                        <Typography variant="subtitle1" className={classes.rightCardParagraph}>
+                                        <Typography variant="subtitle1" component="p" className={classes.rightCardParagraph}>
                                             NST will award the winning team members with brand new laptops, trophies and other items in the Nepali New Year program.
                                         </Typography>
                                         <Link to='/quiz/application-form' style={{ textDecoration: 'none' }}>
-                                            <Button className={classes.quizRegisterForm} variant="outlined" color="primary">
+                                            <Button variant="outlined" color="primary">
                                                 Register Now
                                             </Button>
                                         </Link>

@@ -104,7 +104,7 @@ const Gallery = () => {
                             <img key={index} className={classes.bannerImage} src={item.image} alt="Image1" />
                         ))
                     }
-                    <Link to="/gallery" style={{ margin: 'auto' }}>
+                    <Link to="/gallery" style={{ margin: 'auto', textDecoration: 'none' }}>
                         <Button className={classes.viewMoreBtn} variant="contained" size="small">
                             <DoubleArrowIcon />
                             <Typography style={{ textDecoration: 'none', color: 'black' }}>View More</Typography>

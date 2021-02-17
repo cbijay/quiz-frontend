@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, makeStyles, Typography } from "@material-ui/core";
+import { Button, Container, makeStyles, Typography } from "@material-ui/core";
 
 import Banner2 from "./images/banner.jpg";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -46,6 +47,13 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             fontSize: 20
         }
+    },
+    bannerButton: {
+        position: 'relative',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 12
+        },
+        marginTop: 120
     }
 }));
 
@@ -61,6 +69,11 @@ const Banner = (props) => {
                         <Typography variant="h4" className={classes.bannerText} align="center">
                             Nepalese Society of Texas Community School.
                         </Typography>
+                        <Link to="/about">
+                            <Button variant='contained' color='primary' className={classes.bannerButton}>
+                                LEARN MORE
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </Container>
