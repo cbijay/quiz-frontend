@@ -14,12 +14,13 @@ const useStyles = makeStyles(theme => ({
     },
     bannerImage: {
         objectFit: 'cover',
-        width: '87vw',
-        height: '35vw',
+        // width: '87vw',
+        width: '85vw',
+        height: '40vw',
         boxShadow: 'inset 100px 0px 100px black',
         [theme.breakpoints.down('sm')]: {
-            objectFit: 'cover',
-            width: '90vw',
+            objectFit: 'fill',
+            width: '85vw',
             height: '70vw',
         }
     },
@@ -30,14 +31,15 @@ const useStyles = makeStyles(theme => ({
         right: 0,
         left: 0,
         top: 0,
-        width: '87vw',
+        width: '85vw',
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0.6)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         [theme.breakpoints.down('xs')]: {
-            width: '90vw',
+            width: '85vw',
+            height: '100%'
         }
     },
     bannerText: {
@@ -69,7 +71,7 @@ const Banner = (props) => {
                         <Typography variant="h4" className={classes.bannerText} align="center">
                             Nepalese Society of Texas Community School.
                         </Typography>
-                        <Link to="/about">
+                        <Link to="/about" style={{ textDecoration: 'none' }}>
                             <Button variant='contained' color='primary' className={classes.bannerButton}>
                                 LEARN MORE
                             </Button>
