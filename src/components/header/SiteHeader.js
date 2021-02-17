@@ -44,6 +44,11 @@ const styles = (theme) => ({
     width: theme.spacing(8),
     height: theme.spacing(8),
   },
+  navBtn: {
+    fontSize: 18,
+    width: 150,
+    fontWeight: 700
+  }
 });
 
 function SiteHeader({ classes }) {
@@ -103,21 +108,24 @@ function SiteHeader({ classes }) {
                       color="inherit"
                       noWrap
                     >
-                      Nepalese
+                      NST SCHOOL
                     </Typography>
                   </Link>
                 </Grid>
               </Grid>
             </Grid>
 
-            <Grid item>
-              <Button color="inherit" component={Link} to="/about">
+            <Grid item xs container justify='center'>
+              <Button color="inherit" component={Link} to="/" className={classes.navBtn}>
+                Home
+              </Button>
+              <Button color="inherit" component={Link} to="/about" className={classes.navBtn}>
                 About
               </Button>
               <DropDownMenu menu="School" subMenu={schoolSubMenu} />
               <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
-              <Button color="inherit">Gallery</Button>
-              <Button color="inherit" component={Link} to="/contact">
+              <Button component={Link} to='/gallery' color="inherit" className={classes.navBtn}>Gallery</Button>
+              <Button color="inherit" component={Link} to="/contact" className={classes.navBtn}>
                 Contact Us
               </Button>
             </Grid>

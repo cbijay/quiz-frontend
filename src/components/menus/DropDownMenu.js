@@ -54,6 +54,7 @@ function DropDownMenu({ menu, subMenu, userMenu }) {
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
+        style={{ fontSize: 18, width: 150, fontWeight: 700 }}
       >
         {userMenu && <AccountCircleIcon />}
         {menu}
@@ -91,10 +92,10 @@ function DropDownMenu({ menu, subMenu, userMenu }) {
                         {name}
                       </MenuItem>
                     ) : (
-                      <MenuItem key={index} component={Link} to={link}>
-                        {name}
-                      </MenuItem>
-                    )
+                        <MenuItem key={index} component={Link} to={link}>
+                          {name}
+                        </MenuItem>
+                      )
                   )}
                 </MenuList>
               </ClickAwayListener>

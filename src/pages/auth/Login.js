@@ -6,6 +6,7 @@ import { Typography, Card, CardContent, withStyles } from "@material-ui/core";
 import LoginForm from "../../components/forms/LoginForm";
 import DismissableAlert from "../../components/alert/DismissableAlert";
 import useAlertStatus from "../../hooks/useAlertStatus";
+import SiteHeader from "../../components/header/SiteHeader";
 
 const styles = () => ({
   subTitle: {
@@ -35,6 +36,7 @@ function Login({ classes }) {
 
   return (
     <AuthLayout>
+      <SiteHeader />
       <Typography component="h3" variant="h5" className={classes.subTitle}>
         Login
       </Typography>

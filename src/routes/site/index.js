@@ -7,6 +7,7 @@ import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import About from "../../pages/site/About";
 import Contact from "../../pages/site/Contact";
+import Gallery from "../../pages/site/Gallery";
 import schoolRoutes from "./school";
 import quizRoutes from "./quiz";
 import ApplicationForm from "../../pages/site/quiz/ApplicationForm";
@@ -61,6 +62,10 @@ function SiteRoutes() {
     {
       path: "/contact",
       component: Contact,
+    },
+    {
+      path: "/gallery",
+      component: Gallery,
     },
     {
       path: "/school",

@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
         height: 300,
         width: 500,
         margin: 10,
-        borderRadius: 5
+        borderRadius: 5,
     },
     headline: {
         color: 'gray',
@@ -54,20 +54,24 @@ const useStyles = makeStyles(theme => ({
     scrollBtn: {
         display: 'flex',
         justifyContent: 'space-between',
-        width: '100%',
         position: 'absolute',
+        marginLeft: 0,
+        marginRight: 0,
         top: 30.,
+        left: 0,
         right: 0,
-        padding: 20
+        padding: (0, 20),
     }
 }));
 
 const Gallery = () => {
     const classes = useStyles();
     const ref = useRef(null);
+
     const scroll = (scrollOffset) => {
         ref.current.scrollLeft += scrollOffset
     }
+
     var items = [
         { image: `${Banner1}` },
         { image: `${Banner3}` },
@@ -96,10 +100,17 @@ const Gallery = () => {
                     </IconButton>
                 </div>
                 <Grid className={classes.container} ref={ref}>
-                    {items.map((item) => (
-                        <img className={classes.bannerImage} src={item.image} alt="Image1" />
-                    ))}
-                    <Link to="/gallery" style={{ margin: 'auto' }}>
+                    {
+                        items.map((item, index) => (
+                            <img
+                                key={index}
+                                className={classes.bannerImage}
+                                src={item.image}
+                                alt="Image1"
+                            />
+                        ))
+                    }
+                    <Link to="/gallery" style={{ margin: 'auto', textDecoration: 'none' }}>
                         <Button className={classes.viewMoreBtn} variant="contained" size="small">
                             <DoubleArrowIcon />
                             <Typography style={{ textDecoration: 'none', color: 'black' }}>View More</Typography>
