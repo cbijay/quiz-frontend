@@ -22,7 +22,7 @@ const Contact = () => {
     return (
         <SiteLayout>
             <Grid container justify="center">
-                <Grid item xs={12} lg={10}>
+                <Grid item xs={12}>
                     <Card>
                         <CardHeading>Contact</CardHeading>
                         <CardContent>

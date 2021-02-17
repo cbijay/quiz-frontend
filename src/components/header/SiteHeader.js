@@ -107,7 +107,7 @@ function SiteHeader({ classes }) {
               </Button>
               <DropDownMenu menu="School" subMenu={schoolSubMenu} />
               <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
-              <Button color="inherit">Gallery</Button>
+              <Button color="inherit" component={Link} to="/gallery">Gallery</Button>
               <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
             </Grid>
 
