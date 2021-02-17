@@ -29,9 +29,9 @@ export const getQuestions = (topicId) => async (dispatch) => {
   });
 };
 
-export const getActiveQuestion = (questionId) => async (dispatch) => {
+export const getActiveQuestion = () => async (dispatch) => {
   try {
-    const res = await questionService.getActiveQuestion(questionId);
+    const res = await questionService.getActiveQuestion();
 
     dispatch({
       type: questionType.GET_ACTIVE_QUESTION,

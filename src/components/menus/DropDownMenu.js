@@ -9,13 +9,10 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import {
-  ArrowDropDown as ArrowDropDownIcon
-} from '@material-ui/icons';
-import { Link } from "react-router-dom";
-import {
   ArrowDropDown as ArrowDropDownIcon,
   AccountCircle as AccountCircleIcon,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 function DropDownMenu({ menu, subMenu, userMenu }) {
   const [open, setOpen] = React.useState(false);
