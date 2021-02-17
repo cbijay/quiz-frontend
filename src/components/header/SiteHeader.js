@@ -41,9 +41,9 @@ const styles = (theme) => ({
     margin: 0,
   },
   logo: {
-    width: theme.spacing(9),
-    height: theme.spacing(9),
-  }
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+  },
 });
 
 function SiteHeader({ classes }) {
@@ -78,12 +78,21 @@ function SiteHeader({ classes }) {
     <>
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Grid container spacing={1} alignItems="center">
+          <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            justify="space-between"
+          >
             <Grid item>
               <Grid container spacing={1} alignItems="center">
                 <Grid item>
                   <Link to="/">
-                    <Avatar alt="Nepalese Society of Texas School" src={logo} className={classes.logo} />
+                    <Avatar
+                      alt="Nepalese Society of Texas School"
+                      src={logo}
+                      className={classes.logo}
+                    />
                   </Link>
                 </Grid>
                 <Grid item>
@@ -101,11 +110,6 @@ function SiteHeader({ classes }) {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} sm={12} md container justify="center">
-              <Typography component="span" variant="body1" color="inherit">
-                {user?.name}
-              </Typography>
-
             <Grid item>
               <Button color="inherit" component={Link} to="/about">
                 About
@@ -113,7 +117,9 @@ function SiteHeader({ classes }) {
               <DropDownMenu menu="School" subMenu={schoolSubMenu} />
               <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
               <Button color="inherit">Gallery</Button>
-              <Button color="inherit" component={Link} to="/contact">Contact Us</Button>
+              <Button color="inherit" component={Link} to="/contact">
+                Contact Us
+              </Button>
             </Grid>
 
             <Grid item>

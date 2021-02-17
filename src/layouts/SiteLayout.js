@@ -4,6 +4,7 @@ import {
   Box,
   withStyles,
   Grid,
+  Container,
 } from "@material-ui/core";
 import theme from "../styles/theme";
 import SiteHeader from "../components/header/SiteHeader";
@@ -39,19 +40,21 @@ function SiteLayout({ children, classes }) {
       <SiteHeader />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            {message && (
-              <Alert severity={type} className={classes.alertContainer}>
-                {message}
-              </Alert>
-            )}
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              {message && (
+                <Alert severity={type} className={classes.alertContainer}>
+                  {message}
+                </Alert>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-        {children}
-        <Box pt={4}>
-          <Footer />
-        </Box>
+          {children}
+          <Box pt={4}>
+            <Footer />
+          </Box>
+        </Container>
       </main>
     </div>
   );
