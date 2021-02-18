@@ -16,7 +16,7 @@ import DropDownMenu from "../menus/DropDownMenu";
 
 const styles = (theme) => ({
   appBar: {
-    background: "#fff",
+    background: 'linear-gradient(to right, red, yellow)',
   },
   toolbar: {
     paddingRight: 24,
@@ -32,7 +32,7 @@ const styles = (theme) => ({
   title: {
     flexGrow: 1,
     textDecoration: "none",
-    color: "#777",
+    color: "#000",
   },
   buttonIcon: {
     marginRight: 5,
