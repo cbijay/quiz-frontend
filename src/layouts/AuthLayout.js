@@ -18,7 +18,7 @@ const styles = () => ({
 
 function AuthLayout({ children, classes }) {
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" >
             <CssBaseline />
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5" color="inherit">
