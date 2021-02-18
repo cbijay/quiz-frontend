@@ -196,49 +196,6 @@ function RegisterForm() {
 
           <Grid item xs={12} md={6}></Grid>
 
-          <Grid container item xs={12} md={6} justify='space-evenly'>
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                component="label"
-                color="primary"
-              >
-                Upload Photo
-                <input
-                  type="file"
-                  hidden
-                  onChange={(e) => handleFileChange(e)}
-                />
-              </Button>
-
-              <Typography variant='h4' style={{ color: 'grey' }}>Total cost: ${price}.00</Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="acceptTerms"
-                    checked={acceptTerms}
-                    onChange={() => setAcceptTerms(!acceptTerms)}
-                  />
-                }
-                label="I accept terms and conditions"
-              />
-              <Button type="submit" fullWidth variant="contained" color="primary">
-                {isLoading && <CircularProgress color="secondary" />}
-                Register
-              </Button>
-              <Grid container justify="space-between">
-                <Grid item>
-                  <Button component={Link} to="login" color="inherit">
-                    {"Already have an account? Login"}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-
           <Grid item xs={12} md={6}>
             <FormControl component="fieldset" className={'formControl'}>
               <FormLabel component="legend">Choose Subject (USD 20.00 Each)</FormLabel>
@@ -282,6 +239,49 @@ function RegisterForm() {
               </FormGroup>
               <FormHelperText>Each Subject cost $20.00 except Quiz for $50.00</FormHelperText>
             </FormControl>
+          </Grid>
+
+          <Grid container item xs={12} md={6} justify='space-evenly'>
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                component="label"
+                color="primary"
+              >
+                Upload Photo
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => handleFileChange(e)}
+                />
+              </Button>
+
+              <Typography variant='h4' style={{ color: 'grey' }}>Total cost: ${price}.00</Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="acceptTerms"
+                    checked={acceptTerms}
+                    onChange={() => setAcceptTerms(!acceptTerms)}
+                  />
+                }
+                label="I accept terms and conditions"
+              />
+              <Button type="submit" fullWidth variant="contained" color="primary">
+                {isLoading && <CircularProgress color="secondary" />}
+                Register
+              </Button>
+              <Grid container justify="space-between">
+                <Grid item>
+                  <Button component={Link} to="login" color="inherit">
+                    {"Already have an account? Login"}
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
 
         </Grid>
