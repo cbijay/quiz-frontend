@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Button,
   Popper,
@@ -7,6 +7,7 @@ import {
   ClickAwayListener,
   MenuList,
   MenuItem,
+  withStyles,
 } from "@material-ui/core";
 import {
   ArrowDropDown as ArrowDropDownIcon,
@@ -14,7 +15,14 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-function DropDownMenu({ menu, subMenu, userMenu }) {
+const styles = {
+  button: {
+    fontSize: 18,
+    fontWeight: 700,
+  },
+};
+
+function DropDownMenu({ menu, subMenu, userMenu, classes }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -38,8 +46,9 @@ function DropDownMenu({ menu, subMenu, userMenu }) {
   };
 
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -54,6 +63,7 @@ function DropDownMenu({ menu, subMenu, userMenu }) {
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
+        className={classes.button}
       >
         {userMenu && <AccountCircleIcon />}
         {menu}
@@ -106,4 +116,4 @@ function DropDownMenu({ menu, subMenu, userMenu }) {
   );
 }
 
-export default DropDownMenu;
+export default withStyles(styles)(DropDownMenu);

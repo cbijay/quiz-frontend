@@ -38,13 +38,32 @@ function UserQuestion({ classes }) {
   }, [question, user]);
 
   useEffect(() => {
-    userAnswer
+    let oldMinutes = Number(localStorage.getItem("minutes"));
+    let oldSeconds = Number(localStorage.getItem("seconds"));
+
+    if (userAnswer) {
+      setMinutes(0);
+    } else if (oldMinutes) {
+      setMinutes(oldMinutes);
+    } else {
+      setMinutes(
+        question && question.status === 1 && question.hasOwnProperty("timer")
+          ? Number(question.timer)
+          : 0
+      );
+    }
+
+    if (oldSeconds) {
+      setSeconds(oldSeconds);
+    }
+
+    /* userAnswer
       ? setMinutes(0)
       : setMinutes(
           question && question.hasOwnProperty("timer")
             ? Number(question.timer)
             : 0
-        );
+        ); */
   }, [userAnswer, question]);
 
   let [minutes, setMinutes] = useState();
@@ -75,6 +94,8 @@ function UserQuestion({ classes }) {
           setSeconds(59);
         }
       }
+      localStorage.setItem("minutes", minutes);
+      localStorage.setItem("seconds", seconds);
     }, 1000);
     return () => {
       clearInterval(interval);

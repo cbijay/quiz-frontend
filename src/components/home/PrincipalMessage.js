@@ -10,8 +10,8 @@ const useStyles = makeStyles({
     marginTop: 20
   },
   presidentImage: {
-    height: 200,
-    width: 200,
+    heigth: '100%',
+    width: '100%',
     objectFit: 'contain',
     borderRadius: '10px',
   },
@@ -24,9 +24,9 @@ const useStyles = makeStyles({
     textDecoration: 'none'
   },
   sideImage: {
-    maxHeight: 500,
-    maxWidth: 500,
-    objectFit: 'contain'
+    objectFit: 'fill',
+    heigth: '100%',
+    width: '100%',
   }
 })
 
@@ -74,7 +74,7 @@ const PrincipalMessage = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={6} md={4} lg={6}>
+                <Grid item xs={12} md={4} lg={6}>
                   <img className={classes.sideImage} src={CommunityImage} alt="Greeting  Namaskar" />
                   <Typography component="h5" variant="subtitle1" className={classes.actionButton}>
                     Photo: Living Hindu Godess.

@@ -40,13 +40,13 @@ function LoginForm() {
       />
       <Button type="submit" fullWidth variant="contained" color="primary">
         {isLoading && <CircularProgress color="secondary" />}
-        Sign In
-      </Button>
+          Sign In
+        </Button>
       <Grid container>
         <Grid item xs>
           <Button href="#" color="inherit">
             Forgot password?
-          </Button>
+            </Button>
         </Grid>
         <Grid item>
           <Button
