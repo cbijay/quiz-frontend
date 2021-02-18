@@ -44,7 +44,7 @@ const Contact = () => {
     const submitHandler = (data) => {
         const { subject, name, message } = data;
         window.location.href =
-            `mailto:mail@mail.com?subject=${subject}&body=Hi, I am ${name},${message}`;
+            `mailto:school@ournst.org?subject=${subject}&body=Hi, I am ${name},${message}`;
     }
 
     return (
