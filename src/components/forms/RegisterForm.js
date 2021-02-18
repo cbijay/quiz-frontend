@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function RegisterForm() {
   const [acceptTerms, setAcceptTerms] = useState(true);
-  const [image, setImage] = useState();
   const { isLoading } = useSelector((state) => state.auth);
   const [price, setPrice] = useState(0)
   const methods = useForm();
@@ -31,7 +30,7 @@ function RegisterForm() {
 
   const handleFileChange = (e) => {
     if (e.target.name === "user_img") {
-      setImage(e.target.files[0]);
+      // setImage(e.target.files[0]);
     }
   };
 
