@@ -8,13 +8,11 @@ import Banner from '../../images/School Photo 4.jpg';
 const styles = makeStyles(theme => ({
   banner: {
     objectFit: 'fill',
-    maxWidth: 1000,
-    maxHeight: 500,
     borderRadius: '1%',
-    width: '85vw',
-    height: '40vw',
+    width: '100%',
+    height: '100%',
     [theme.breakpoints.down('sm')]: {
-      objectFit: 'fill',
+      objectFit: 'contain',
     }
   }
 }))
@@ -28,8 +26,7 @@ const About = () => {
             <CardHeading>About</CardHeading>
             <CardContent>
               <Grid justify='center' container spacing={1}>
-                <img src={Banner} className={classes.banner} alt="Banner of meeting" />
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <Typography paragraph>
                     Aiming to promote Nepalese culture and heritage, Nepalese
                     Society, Texas (NST) has been involved in different
@@ -39,7 +36,7 @@ const About = () => {
                     purpose of the school is to promote and preserve Nepali
                     language &amp; culture, help kids with their regular classes
                     and assist kids to build on their critical thinking.
-                  </Typography>
+                    </Typography>
                   <Typography paragraph>
                     Our course package includes moral science, Nepali language,
                     school math, science as well as SAT program. We teach all
@@ -57,6 +54,10 @@ const About = () => {
                     one of the most successful programs that NST has been
                     organizing for the past couple of years.
                   </Typography>
+                </Grid>
+                <Grid item xs={12} md={6}><img src={Banner} className={classes.banner} alt="Banner of meeting" /></Grid>
+                <Grid item xs={12}>
+
                   <Typography paragraph>
                     In 2010, the school added one more program that was quiz
                     contest. There were 50 participants in the first quiz

@@ -3,13 +3,17 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
 import { logout } from '../../store/actions/authAction';
-import DropDownMenu from '../menus/DropDownMenu'
+import DropDownMenu from '../menus/DropDownMenu';
+import clsx from "clsx";
 
 const styles = makeStyles(theme => ({
     navBtn: {
         fontSize: 18,
         fontWeight: 700,
         color: theme.palette.default.main,
+    },
+    register: {
+        color: '#fff'
     }
 }));
 
@@ -129,7 +133,7 @@ const NavButtons = () => {
                         </Grid>
                         <Grid>
                             <Button
-                                className={classes.primary}
+                                className={clsx(classes.primary, classes.register)}
                                 component={Link}
                                 to="/register"
                             >
