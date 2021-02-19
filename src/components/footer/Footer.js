@@ -147,17 +147,17 @@ const Footer = () => {
         </Grid>
 
 
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={3}>
           <Grid container direction='column'>
-            <Grid item>
-              <Typography variant="h4" color="initial" gutterBottom>Quick Links</Typography>
-              <Grid item>
+            <Typography variant="h4" color="initial" gutterBottom>Quick Links</Typography>
+            <Grid item container spacing={2}>
+              <Grid item xs={4} sm={4} md={12}>
                 <Typography className={classes.quickLink} component={Link} to='/about'>About us</Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={4} sm={4} md={12}>
                 <Typography className={classes.quickLink} component={Link} to='/register'>Regsiter</Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={4} sm={4} md={12}>
                 <Typography className={classes.quickLink} component={Link} to='/about'>About us</Typography>
               </Grid>
             </Grid>
