@@ -89,10 +89,10 @@ const NavButtons = () => {
                 >
                     Contact Us
             </Button>
-                {small && <Divider style={{ marginBottom: small && 50 }} />}
             </Grid>
+            {small && <Divider style={{ marginBottom: small && 50 }} />}
 
-            <Grid justify='center' item>
+            <Grid item>
                 {admin && (
                     <Button
                         variant="contained"
@@ -115,24 +115,28 @@ const NavButtons = () => {
                 )}
 
                 {!user && (
-                    <>
-                        <Button
-                            variant="contained"
-                            color="default"
-                            component={Link}
-                            className={classes.primary}
-                            to="/login"
-                        >
-                            Login
+                    <Grid container alignItems='center' direction={small ? 'column' : 'row'}>
+                        <Grid>
+                            <Button
+                                variant="contained"
+                                color="default"
+                                component={Link}
+                                className={classes.primary}
+                                to="/login"
+                            >
+                                Login
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <Button
+                                className={classes.primary}
+                                component={Link}
+                                to="/register"
+                            >
+                                Register
                         </Button>
-                        <Button
-                            className={classes.primary}
-                            component={Link}
-                            to="/register"
-                        >
-                            Register
-                  </Button>
-                    </>
+                        </Grid>
+                    </Grid>
                 )}
             </Grid>
         </>

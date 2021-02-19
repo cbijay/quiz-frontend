@@ -10,7 +10,6 @@ import {
   IconButton,
   Drawer,
   List,
-  Divider,
 } from "@material-ui/core";
 import logo from "../../images/quiz_logo.png";
 import { Link } from "react-router-dom";
