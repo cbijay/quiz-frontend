@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     margin: (5, 0),
     textDecoration: 'none',
     '&:hover': {
-      color: 'red'
+      color: theme.palette.primary.main
     }
   }
 }))
