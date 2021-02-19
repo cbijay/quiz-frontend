@@ -1,9 +1,25 @@
 import React from "react";
 import SiteLayout from "../../layouts/SiteLayout";
-import { Card, CardContent, Grid, Typography } from "@material-ui/core";
+import { Card, CardContent, Grid, makeStyles, Typography } from "@material-ui/core";
 import CardHeading from "../../components/card/CardHeading";
 
-function About() {
+import Banner from '../../images/School Photo 4.jpg';
+
+const styles = makeStyles(theme => ({
+  banner: {
+    objectFit: 'fill',
+    maxWidth: 1000,
+    maxHeight: 500,
+    borderRadius: '1%',
+    width: '85vw',
+    height: '40vw',
+    [theme.breakpoints.down('sm')]: {
+      objectFit: 'fill',
+    }
+  }
+}))
+const About = () => {
+  const classes = styles();
   return (
     <SiteLayout>
       <Grid container>
@@ -11,7 +27,8 @@ function About() {
           <Card>
             <CardHeading>About</CardHeading>
             <CardContent>
-              <Grid container spacing={1}>
+              <Grid justify='center' container spacing={1}>
+                <img src={Banner} className={classes.banner} alt="Banner of meeting" />
                 <Grid item xs={12}>
                   <Typography paragraph>
                     Aiming to promote Nepalese culture and heritage, Nepalese
