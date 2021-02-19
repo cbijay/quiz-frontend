@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
-import { TextField, Button, Grid, CircularProgress, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, FormHelperText, Typography } from "@material-ui/core";
+import { TextField, Button, Grid, CircularProgress, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, FormHelperText, Typography, useMediaQuery } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../store/actions/authAction";
 import { Link } from "react-router-dom";
 
 function RegisterForm() {
+  //Returns true if screen size is less than 1024px
+  const small = useMediaQuery('(max-width:1024px)');
   const [acceptTerms, setAcceptTerms] = useState(true);
   const { isLoading } = useSelector((state) => state.auth);
   const [price, setPrice] = useState(0)
@@ -256,7 +258,7 @@ function RegisterForm() {
                 />
               </Button>
 
-              <Typography variant='h4' style={{ color: 'grey' }}>Total cost: ${price}.00</Typography>
+              <Typography variant={small ? 'subtitle1' : 'h4'} style={{ color: 'grey' }}>Total cost: ${price}.00</Typography>
             </Grid>
 
             <Grid item xs={12}>

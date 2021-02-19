@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Avatar, Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
 import Copyright from "./Copyright";
 import SocialIcon from "./SocialIcon";
 import { Link } from "react-router-dom";
@@ -43,19 +43,23 @@ const useStyles = makeStyles(theme => ({
 
 const Footer = () => {
   const classes = useStyles();
+
+  //returns true if screen-width is smaller than 600px
+  const small = useMediaQuery('(max-width:600px)');
+
   return (
 
     <Grid className={classes.root}>
       <Grid
         container
         spacing={5}
-        direction="row"
+        direction={small ? "column" : "row"}
         justify="center"
-        wrap="nowrap"
+      // wrap="nowrap"
       >
 
 
-        <Grid item xs={4} >
+        <Grid item xs={12} md={4}>
           <Grid container justify='space-between'>
             <Typography gutterBottom variant="h4" color="initial">Vision</Typography>
             <Typography
@@ -83,7 +87,7 @@ const Footer = () => {
                 <Link to="/" className={classes.title}>
                   <Typography
                     component="h1"
-                    variant="h4"
+                    variant={small ? 'subtitle1' : 'h4'}
                     color="inherit"
                     noWrap
                   >
@@ -98,13 +102,13 @@ const Footer = () => {
         </Grid>
 
 
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Typography variant="h4" color="initial" gutterBottom>Contact info</Typography>
           <Grid container>
 
             <Grid spacing={5} container>
-              <Grid item xs={1}><EmailIcon /></Grid>
-              <Grid item xs={8}>
+              <Grid item xs={2} md={1}><EmailIcon /></Grid>
+              <Grid item xs={10} md={8}>
                 <Typography
                   key="Email"
                   component="a"
@@ -117,8 +121,8 @@ const Footer = () => {
             </Grid>
 
             <Grid spacing={5} container>
-              <Grid item xs={1}><PhoneIcon /></Grid>
-              <Grid item xs={8}>
+              <Grid item xs={2} md={1}><PhoneIcon /></Grid>
+              <Grid item xs={10} md={8}>
                 <Typography
                   key="Email"
                   component="a"
@@ -131,8 +135,8 @@ const Footer = () => {
             </Grid>
 
             <Grid spacing={5} container>
-              <Grid item xs={1}><HomeIcon /></Grid>
-              <Grid item xs={8}>
+              <Grid item xs={2} md={1}><HomeIcon /></Grid>
+              <Grid item xs={10} md={8}>
                 <Typography className={classes.actionButton} gutterBottom>2914 Huntington Grove Square Alexandria, VA 22306</Typography>
                 <Typography className={classes.actionButton} gutterBottom>912 Saratoga Way Coppell, TX 75019</Typography>
                 <Typography className={classes.actionButton} gutterBottom>Treasurer Address: 15911 SW 68Th LN Miami, FL 33193-3623</Typography>
@@ -143,7 +147,7 @@ const Footer = () => {
         </Grid>
 
 
-        <Grid item xs={2}>
+        <Grid item xs={12} md={2}>
           <Grid container direction='column'>
             <Grid item>
               <Typography variant="h4" color="initial" gutterBottom>Quick Links</Typography>
