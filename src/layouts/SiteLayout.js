@@ -4,7 +4,6 @@ import {
   Box,
   withStyles,
   Grid,
-  Container,
 } from "@material-ui/core";
 import theme from "../styles/theme";
 import SiteHeader from "../components/header/SiteHeader";

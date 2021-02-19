@@ -1,16 +1,52 @@
 import React from "react";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import { Button } from "@material-ui/core";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  YouTube
+} from "@material-ui/icons";
+import { Button, Grid } from "@material-ui/core";
 
 function SocialIcon() {
   return (
-    <Button
-      component="a"
-      href="https://www.facebook.com/Nepalese-Society-School-Texas-USA-104384784589240"
-      target="_blank"
-    >
-      <FacebookIcon />{" "}
-    </Button>
+    <Grid container spacing={3}>
+      <Grid item xs={3}>
+        <Button
+          component="a"
+          href="https://www.facebook.com/Nepalese-Society-School-Texas-USA-104384784589240"
+          target="_blank"
+        >
+          <Facebook color='primary' />{" "}
+        </Button>
+      </Grid>
+      <Grid item xs={3}>
+        <Button
+          component="a"
+          href="https://www.twitter.com"
+          target="_blank"
+        >
+          <Twitter color='primary' />{" "}
+        </Button>
+      </Grid>
+      <Grid item xs={3}>
+        <Button
+          component="a"
+          href="https://www.instagram.com"
+          target="_blank"
+        >
+          <Instagram color='primary' />{" "}
+        </Button>
+      </Grid>
+      <Grid item xs={3}>
+        <Button
+          component="a"
+          href="https://www.youtube.com"
+          target="_blank"
+        >
+          <YouTube color='primary' />{" "}
+        </Button>
+      </Grid>
+    </Grid >
   );
 }
 

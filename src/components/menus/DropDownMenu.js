@@ -15,12 +15,13 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-const styles = {
+const styles = theme => ({
   button: {
     fontSize: 18,
     fontWeight: 700,
+    color: theme.palette.default.main
   },
-};
+});
 
 function DropDownMenu({ menu, subMenu, userMenu, classes }) {
   const [open, setOpen] = React.useState(false);
@@ -101,10 +102,10 @@ function DropDownMenu({ menu, subMenu, userMenu, classes }) {
                         {name}
                       </MenuItem>
                     ) : (
-                      <MenuItem key={index} component={Link} to={link}>
-                        {name}
-                      </MenuItem>
-                    )
+                        <MenuItem key={index} component={Link} to={link}>
+                          {name}
+                        </MenuItem>
+                      )
                   )}
                 </MenuList>
               </ClickAwayListener>

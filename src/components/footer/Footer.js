@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Card, Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Avatar, Grid, makeStyles, Typography } from "@material-ui/core";
 import Copyright from "./Copyright";
 import SocialIcon from "./SocialIcon";
 import { Link } from "react-router-dom";
@@ -14,24 +14,25 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     padding: 30,
-    background: 'linear-gradient(to right, red, black)',
+    background: '#000062',
+    color: theme.palette.default.main
   },
   title: {
     flexGrow: 1,
     textDecoration: "none",
-    color: "#000",
+    color: theme.palette.default.main,
   },
   logo: {
     width: theme.spacing(8),
     height: theme.spacing(8),
   },
   actionButton: {
-    color: '#000',
+    color: theme.palette.default.main,
     textDecoration: 'none',
     marginTop: 5,
   },
   quickLink: {
-    color: 'black',
+    color: theme.palette.default.main,
     margin: (5, 0),
     textDecoration: 'none',
     '&:hover': {
@@ -54,7 +55,7 @@ const Footer = () => {
       >
 
 
-        <Grid item xs={5} alignItems='center'>
+        <Grid item xs={4} >
           <Grid container justify='space-between'>
             <Typography gutterBottom variant="h4" color="initial">Vision</Typography>
             <Typography
@@ -98,7 +99,7 @@ const Footer = () => {
         </Grid>
 
 
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Typography variant="h4" color="initial" gutterBottom>Contact info</Typography>
           <Grid container>
 
@@ -143,7 +144,7 @@ const Footer = () => {
         </Grid>
 
 
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <Grid container direction='column'>
             <Grid item>
               <Typography variant="h4" color="initial" gutterBottom>Quick Links</Typography>

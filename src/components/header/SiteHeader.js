@@ -16,7 +16,7 @@ import DropDownMenu from "../menus/DropDownMenu";
 
 const styles = (theme) => ({
   appBar: {
-    background: 'linear-gradient(to right, red, yellow)',
+    background: '#3394FF',
   },
   toolbar: {
     paddingRight: 24,
@@ -32,7 +32,7 @@ const styles = (theme) => ({
   title: {
     flexGrow: 1,
     textDecoration: "none",
-    color: "#000",
+    color: theme.palette.default.main,
   },
   buttonIcon: {
     marginRight: 5,
@@ -46,8 +46,8 @@ const styles = (theme) => ({
   },
   navBtn: {
     fontSize: 18,
-    //width: 150,
     fontWeight: 700,
+    color: theme.palette.default.main,
   },
 });
 
@@ -178,14 +178,18 @@ function SiteHeader({ classes }) {
                 <>
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="default"
                     component={Link}
                     className={classes.primary}
                     to="/login"
                   >
                     Login
                   </Button>
-                  <Button color="inherit" component={Link} to="/register">
+                  <Button
+                    className={classes.primary}
+                    component={Link}
+                    to="/register"
+                  >
                     Register
                   </Button>
                 </>
