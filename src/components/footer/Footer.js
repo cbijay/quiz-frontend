@@ -67,7 +67,6 @@ const Footer = () => {
             >
               Aiming to promote Nepalese culture and heritage, Nepalese Society, Texas (NST) has been involved in different community programs. One of them is the school, KG thru 12 grade.
               </Typography>
-            <hr />
 
             <Grid container alignItems='center' spacing={2}>
               <Grid item>
