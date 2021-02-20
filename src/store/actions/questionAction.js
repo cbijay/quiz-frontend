@@ -45,13 +45,29 @@ export const getActiveQuestion = () => async (dispatch) => {
   }
 };
 
-export const getTimeOutQuestion = () => async (dispatch) => {
+export const resetTimerStatus = (questionId, status) => async (dispatch) => {
   try {
-    const res = await questionService.getTimeOutQuestion();
+    const res = await questionService.resetTimerStatus(questionId, status);
 
     dispatch({
-      type: questionType.GET_TIME_UP_QUESTION,
+      type: questionType.RESET_TIMER_STATUS,
       question: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: alertType.error,
+      error: error.toString(),
+    });
+  }
+};
+
+export const getAskedQuestion = () => async (dispatch) => {
+  try {
+    const res = await questionService.getAskedQuestion();
+
+    dispatch({
+      type: questionType.GET_ASKED_QUESTIONS,
+      totalQuestions: res.data,
     });
   } catch (error) {
     dispatch({

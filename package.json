@@ -14,6 +14,7 @@
     "pusher-js": "^7.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-double-marquee": "^1.1.0",
     "react-hook-form": "^6.14.2",
     "react-redux": "^7.2.2",
     "react-responsive-carousel": "^3.2.12",
@@ -27,7 +28,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-  "live": "PUBLIC_URL=http://nstschool.org/ GENERATE_SOURCEMAP=false react-scripts build && scp -r ./build/ root@134.209.156.253:/var/www/html/nstschool",
+    "live": "PUBLIC_URL=http://nstschool.org/ GENERATE_SOURCEMAP=false react-scripts build && scp -r ./build/ root@134.209.156.253:/var/www/html/nstschool",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

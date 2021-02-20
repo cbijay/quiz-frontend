@@ -9,6 +9,7 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  TextField,
 } from "@material-ui/core";
 import {
   ChevronRight as ChevronRightIcon,
@@ -27,6 +28,7 @@ function PickQuestions() {
   const { topics } = useSelector((state) => state.topics);
   const { questions } = useSelector((state) => state.questions);
   const [selectedId, setSelectedId] = useState();
+  const [search, setSearch] = useState();
 
   useEffect(() => {
     dispatch(getTopics());
@@ -40,6 +42,13 @@ function PickQuestions() {
   const handleQuestion = (questionId) => {
     dispatch(getQuestion(questionId));
   };
+
+  const handleSearch = (e) => {
+    const keyword = Number(e.target.value);
+    setSearch(keyword);
+  };
+
+  //console.log(search);
 
   return (
     <Grid item xs={12} lg={3}>
@@ -70,14 +79,31 @@ function PickQuestions() {
                   timeout="auto"
                   unmountOnExit
                 >
+                  <TextField
+                    fullWidth
+                    type="number"
+                    name="search"
+                    placeholder="Search by question no."
+                    onKeyUp={handleSearch}
+                  />
+
                   {questions.length > 0 ? (
                     questions
-                      .filter((question) => question.status === 0)
+                      .filter((question) =>
+                        search
+                          ? question.question_order === search &&
+                            question.status === 0
+                          : question.status === 0
+                      )
                       .map(
                         ({ id, question, question_order }, questionIndex) => (
-                          <List key={question} component="div" disablePadding>
+                          <List
+                            key={questionIndex}
+                            component="div"
+                            disablePadding
+                          >
                             <ListItem
-                              key={questionIndex}
+                              key={question}
                               button
                               onClick={() => handleQuestion(id)}
                             >

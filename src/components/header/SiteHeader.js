@@ -59,8 +59,7 @@ function SiteHeader({ classes }) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log("hello");
-    dispatch(logout());
+    dispatch(logout(user));
     history.push("/login");
   };
 

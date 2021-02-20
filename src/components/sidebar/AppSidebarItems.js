@@ -6,6 +6,7 @@ import {
   Assignment as AssignmentIcon,
   Receipt as ReceiptIcon,
   ContactSupport as ContactSupportIcon,
+  Message as MessageIcon,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -35,16 +36,11 @@ const menuList = [
     icon: <ReceiptIcon />,
     url: "/admin/reports",
   },
-  /* {
-    name: "Settings",eb
-    icon: <SettingsIcon />,
-    url: "/settings",
-  },
   {
-    name: "Payment History",
-    icon: <PaymentIcon />,
-    url: "/settings",
-  }, */
+    name: "Messages",
+    icon: <MessageIcon />,
+    url: "/admin/messages",
+  },
 ];
 
 export const AppSidebarItems = (

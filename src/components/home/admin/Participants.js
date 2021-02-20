@@ -39,7 +39,7 @@ function Participants({ participants, classes }) {
   };
 
   return (
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} lg={5}>
       <Card>
         <CardContent>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
@@ -51,8 +51,8 @@ function Participants({ participants, classes }) {
               <TableHead>
                 <TableRow>
                   <TableCell>Name</TableCell>
-                  <TableCell>Score</TableCell>
-                  <TableCell>Answer</TableCell>
+                  <TableCell align="center">Score</TableCell>
+                  <TableCell align="center">Answer</TableCell>
                   <TableCell>Remarks</TableCell>
                 </TableRow>
               </TableHead>
@@ -61,28 +61,34 @@ function Participants({ participants, classes }) {
                   ({ id, name, per_q_mark, answers, image }, index) => (
                     <TableRow key={index}>
                       <TableCell>
-                        {image === "undefined" || image === "Null" ? (
-                          <Avatar
-                            className={clsx(
-                              classes.avatar,
-                              avatarColor[
-                                Math.floor(Math.random() * avatarColor.length)
-                              ]
+                        <Grid container spacing={1}>
+                          <Grid item>
+                            {image === "undefined" || image === "Null" ? (
+                              <Avatar
+                                className={clsx(
+                                  classes.avatar,
+                                  avatarColor[
+                                    Math.floor(
+                                      Math.random() * avatarColor.length
+                                    )
+                                  ]
+                                )}
+                              >
+                                {name.charAt(0)}
+                              </Avatar>
+                            ) : (
+                              <Avatar
+                                className={classes.avatar}
+                                src={`${imageBaseUrl}/users/${image}`}
+                                alt={name}
+                              />
                             )}
-                          >
-                            {name.charAt(0)}
-                          </Avatar>
-                        ) : (
-                          <Avatar
-                            className={classes.avatar}
-                            src={`${imageBaseUrl}/users/${image}`}
-                            alt={name}
-                          />
-                        )}
-                        {name}
+                          </Grid>
+                          <Grid item>{name}</Grid>
+                        </Grid>
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell align="center">
                         {answers.filter(
                           (answer) => answer.answer === answer.user_answer
                         ).length * per_q_mark}

@@ -13,63 +13,17 @@ import {
   getActiveQuestion,
   openQuestion,
 } from "../../../store/actions/questionAction";
+import useTimer from "../../../hooks/useTimer";
 
 function ActiveQuestion({ classes }) {
   const dispatch = useDispatch();
   const { question } = useSelector((state) => state.questions);
   const [questionOption, setQuestionOption] = useState(false);
-
-  let initialSeconds = 0;
-
-  useEffect(() => {
-    let oldMinutes = Number(localStorage.getItem("minutes"));
-    let oldSeconds = Number(localStorage.getItem("seconds"));
-
-    if (oldMinutes) {
-      setMinutes(oldMinutes);
-    } else {
-      setMinutes(
-        question && question.status === 1 && question.hasOwnProperty("timer")
-          ? Number(question.timer)
-          : 0
-      );
-    }
-
-    if (oldSeconds) {
-      setSeconds(oldSeconds);
-    }
-  }, [question]);
-
-  let [minutes, setMinutes] = useState();
-  let [seconds, setSeconds] = useState(initialSeconds);
+  const { minutes, seconds } = useTimer("");
 
   useEffect(() => {
     dispatch(getActiveQuestion());
   }, [dispatch]);
-
-  useEffect(() => {
-    let interval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(interval);
-          if (question && question.status === 1) {
-            dispatch(openQuestion(question.id, 2));
-          }
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
-      localStorage.setItem("minutes", minutes);
-      localStorage.setItem("seconds", seconds);
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [minutes, seconds, question, dispatch]);
 
   const handleQuestionOption = () => {
     setQuestionOption(!questionOption);
@@ -80,7 +34,7 @@ function ActiveQuestion({ classes }) {
   };
 
   return (
-    <Grid item xs={12} lg={5}>
+    <Grid item xs={12} lg={4}>
       <Card>
         <CardContent>
           <Grid container justify="space-between">
@@ -107,7 +61,7 @@ function ActiveQuestion({ classes }) {
             question.timer &&
             minutes === 0 &&
             seconds === 0 ? (
-              <Typography>Please pick another question</Typography>
+              <Typography>Time up!! Please pick another question</Typography>
             ) : (
               <>
                 <Box>{question.question}</Box>

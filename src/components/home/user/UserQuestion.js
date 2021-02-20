@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { participantAnswer } from "../../../store/actions/studentAction";
 import { getActiveQuestion } from "../../../store/actions/questionAction";
+import useTimer from "../../../hooks/useTimer";
 
 const styles = {
   container: {
@@ -23,7 +24,7 @@ function UserQuestion({ classes }) {
   const { user } = useSelector((state) => state.auth);
   const { question } = useSelector((state) => state.questions);
   const [userAnswer, setUserAnswer] = useState();
-  let initialSeconds = 0;
+  let { minutes, seconds } = useTimer(userAnswer);
 
   useEffect(() => {
     dispatch(getActiveQuestion());
@@ -37,71 +38,6 @@ function UserQuestion({ classes }) {
     setUserAnswer(answer.length > 0 && answer[0].answer);
   }, [question, user]);
 
-  useEffect(() => {
-    let oldMinutes = Number(localStorage.getItem("minutes"));
-    let oldSeconds = Number(localStorage.getItem("seconds"));
-
-    if (userAnswer) {
-      setMinutes(0);
-    } else if (oldMinutes) {
-      setMinutes(oldMinutes);
-    } else {
-      setMinutes(
-        question && question.status === 1 && question.hasOwnProperty("timer")
-          ? Number(question.timer)
-          : 0
-      );
-    }
-
-    if (oldSeconds) {
-      setSeconds(oldSeconds);
-    }
-
-    /* userAnswer
-      ? setMinutes(0)
-      : setMinutes(
-          question && question.hasOwnProperty("timer")
-            ? Number(question.timer)
-            : 0
-        ); */
-  }, [userAnswer, question]);
-
-  let [minutes, setMinutes] = useState();
-  let [seconds, setSeconds] = useState(initialSeconds);
-
-  useEffect(() => {
-    let interval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(interval);
-
-          if (question !== "undefined" && !userAnswer) {
-            const answerData = {
-              topic_id: question.topic_id,
-              user_id: user.id,
-              question_id: question.id,
-              user_answer: 0,
-              answer: question.answer,
-            };
-
-            dispatch(participantAnswer(answerData, true));
-          }
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
-      localStorage.setItem("minutes", minutes);
-      localStorage.setItem("seconds", seconds);
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [minutes, seconds, question, user, dispatch, userAnswer]);
-
   const handleAnswer = (answer) => {
     const answerData = {
       topic_id: question.topic_id,
@@ -112,8 +48,8 @@ function UserQuestion({ classes }) {
     };
 
     dispatch(participantAnswer(answerData, false));
-    setMinutes(0);
-    setSeconds(0);
+    minutes = 0;
+    seconds = 0;
   };
 
   return (
