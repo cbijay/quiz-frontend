@@ -4,7 +4,7 @@ import Link from "@material-ui/core/Link";
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography style={{ marginTop: 40 }} variant="body2" color="inherit" align="center">
             {"Copyright © "}
             <Link color="inherit">Nepalese Society of Texas School</Link>{" "}
             {new Date().getFullYear()}

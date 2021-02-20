@@ -1,26 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   withStyles,
   Avatar,
   Grid,
+  useMediaQuery,
+  IconButton,
+  Drawer,
+  List,
 } from "@material-ui/core";
 import logo from "../../images/quiz_logo.png";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { logout } from "../../store/actions/authAction";
-import DropDownMenu from "../menus/DropDownMenu";
+import { Link } from "react-router-dom";
+import {
+  MenuOpen,
+} from '@material-ui/icons';
+import NavButtons from "./NavButtons";
+
 
 const styles = (theme) => ({
   appBar: {
-    background: "#fff",
+    background: '#3394FF',
   },
   toolbar: {
     paddingRight: 24,
-    minHeight: 50 + "px",
+    minHeight: 50
   },
   menuButton: {
     marginRight: 10,
@@ -32,7 +37,7 @@ const styles = (theme) => ({
   title: {
     flexGrow: 1,
     textDecoration: "none",
-    color: "#777",
+    color: theme.palette.default.main,
   },
   buttonIcon: {
     marginRight: 5,
@@ -40,44 +45,47 @@ const styles = (theme) => ({
   primary: {
     margin: 0,
   },
-  logo: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+  list: {
+    width: 250,
+    background: '#3394FF',
+    height: '100vh'
   },
-  navBtn: {
-    fontSize: 18,
-    //width: 150,
-    fontWeight: 700,
+  fullList: {
+    width: 'auto',
   },
 });
 
 function SiteHeader({ classes }) {
-  const { user } = useSelector((state) => state.auth);
-  const { user: { role } = {} } = useSelector((state) => state.auth);
-  const admin = role === "A" ? true : false;
-  const history = useHistory();
-  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    console.log("hello");
-    dispatch(logout());
-    history.push("/login");
+  //returns true if screen-width is less than 600px
+  const small = useMediaQuery('(max-width:1024px)');
+  //returns true if screen-width is greater than 600px
+  const medium = useMediaQuery('(min-width:1024px)');
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setIsDrawerOpen(true);
   };
 
-  const schoolSubMenu = [
-    { name: "Team", link: "/school/team" },
-    { name: "Register", link: "/register" },
-    { name: "Syllabus", link: "/school/syllabus" },
-  ];
 
-  const quizSubMenu = [
-    { name: "Application Form", link: "/quiz/application-form" },
-    { name: "Syllabus", link: "/quiz/syllabus" },
-    { name: "Rules", link: "/quiz/rules" },
-    { name: "Team", link: "/quiz/team" },
-  ];
-
-  const userSubMenu = [{ name: "Log out", handleClick: handleLogout }];
+  const list = (anchor) => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <Grid container direction='column'>
+          <NavButtons />
+        </Grid>
+      </List>
+    </div>
+  );
 
   return (
     <>
@@ -94,6 +102,10 @@ function SiteHeader({ classes }) {
                 <Grid item>
                   <Link to="/">
                     <Avatar
+                      style={{
+                        width: 50,
+                        height: 50,
+                      }}
                       alt="Nepalese Society of Texas School"
                       src={logo}
                       className={classes.logo}
@@ -104,93 +116,35 @@ function SiteHeader({ classes }) {
                   <Link to="/" className={classes.title}>
                     <Typography
                       component="h1"
-                      variant="h4"
+                      variant={small ? 'h6' : 'h4'}
                       color="inherit"
                       noWrap
                     >
-                      NST SCHOOL
+                      NST SCHOOL QUIZ
                     </Typography>
                   </Link>
                 </Grid>
+                <Grid>
+                </Grid>
+                {
+                  //shows up when screen size is less than 1024px
+                  small && (
+                    <>
+                      <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} style={{ position: 'absolute', right: 0 }}>
+                        <MenuOpen />
+                      </IconButton>
+                      <Drawer anchor='right' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+                        {list('right')}
+                      </Drawer>
+                    </>
+                  )
+                }
               </Grid>
             </Grid>
-
-            <Grid item xs container justify="center">
-              <Button
-                color="inherit"
-                component={Link}
-                to="/"
-                className={classes.navBtn}
-              >
-                Home
-              </Button>
-              <Button
-                color="inherit"
-                component={Link}
-                to="/about"
-                className={classes.navBtn}
-              >
-                About
-              </Button>
-              <DropDownMenu menu="School" subMenu={schoolSubMenu} />
-              <DropDownMenu menu="Quiz" subMenu={quizSubMenu} />
-              <Button
-                component={Link}
-                to="/gallery"
-                color="inherit"
-                className={classes.navBtn}
-              >
-                Gallery
-              </Button>
-              <Button
-                color="inherit"
-                component={Link}
-                to="/contact"
-                className={classes.navBtn}
-              >
-                Contact Us
-              </Button>
-            </Grid>
-
-            <Grid item>
-              {admin && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.primary}
-                  component={Link}
-                  to="/admin"
-                >
-                  Dashboard
-                </Button>
-              )}
-              {user && (
-                <>
-                  <DropDownMenu
-                    menu={user?.name}
-                    subMenu={userSubMenu}
-                    userMenu={true}
-                  />
-                </>
-              )}
-
-              {!user && (
-                <>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    className={classes.primary}
-                    to="/login"
-                  >
-                    Login
-                  </Button>
-                  <Button color="inherit" component={Link} to="/register">
-                    Register
-                  </Button>
-                </>
-              )}
-            </Grid>
+            {
+              // Shows up in medium screen which is greater than 1024 px
+              medium && <NavButtons />
+            }
           </Grid>
         </Toolbar>
       </AppBar>
