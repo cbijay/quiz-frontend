@@ -6,6 +6,7 @@ import {
   Checkbox,
   FormControlLabel,
   Input,
+  withStyles,
 } from "@material-ui/core";
 import { Backup as BackupIcon } from "@material-ui/icons";
 import { useForm } from "react-hook-form";
@@ -16,7 +17,13 @@ import {
   updateStudent,
 } from "../../store/actions/studentAction";
 
-function StudentForm({ student, mode }) {
+const styles = {
+  formLabel: {
+    display: "block",
+  },
+};
+
+function StudentForm({ student, mode, classes }) {
   const {
     register,
     handleSubmit,
@@ -153,6 +160,7 @@ function StudentForm({ student, mode }) {
       </label>
       {mode === "edit" ? (
         <FormControlLabel
+          className={classes.formLabel}
           control={
             <Checkbox
               name="changePassword"
@@ -204,4 +212,4 @@ function StudentForm({ student, mode }) {
   );
 }
 
-export default StudentForm;
+export default withStyles(styles)(StudentForm);

@@ -13,19 +13,16 @@ import {
 } from "@material-ui/core";
 import logo from "../../images/quiz_logo.png";
 import { Link } from "react-router-dom";
-import {
-  MenuOpen,
-} from '@material-ui/icons';
+import { MenuOpen } from "@material-ui/icons";
 import NavButtons from "./NavButtons";
-
 
 const styles = (theme) => ({
   appBar: {
-    background: '#3394FF',
+    background: theme.palette.primary,
   },
   toolbar: {
     paddingRight: 24,
-    minHeight: 50
+    minHeight: 50,
   },
   menuButton: {
     marginRight: 10,
@@ -47,30 +44,31 @@ const styles = (theme) => ({
   },
   list: {
     width: 250,
-    background: '#3394FF',
-    height: '100vh'
+    background: "#3394FF",
+    height: "100vh",
   },
   fullList: {
-    width: 'auto',
+    width: "auto",
   },
 });
 
 function SiteHeader({ classes }) {
-
   //returns true if screen-width is less than 600px
-  const small = useMediaQuery('(max-width:1024px)');
+  const small = useMediaQuery("(max-width:1024px)");
   //returns true if screen-width is greater than 600px
-  const medium = useMediaQuery('(min-width:1024px)');
+  const medium = useMediaQuery("(min-width:1024px)");
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setIsDrawerOpen(true);
   };
-
 
   const list = (anchor) => (
     <div
@@ -80,7 +78,7 @@ function SiteHeader({ classes }) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <Grid container direction='column'>
+        <Grid container direction="column">
           <NavButtons />
         </Grid>
       </List>
@@ -89,7 +87,7 @@ function SiteHeader({ classes }) {
 
   return (
     <>
-      <AppBar position="fixed" color="default" className={classes.appBar}>
+      <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Grid
             container
@@ -116,7 +114,7 @@ function SiteHeader({ classes }) {
                   <Link to="/" className={classes.title}>
                     <Typography
                       component="h1"
-                      variant={small ? 'h6' : 'h4'}
+                      variant={small ? "h6" : "h4"}
                       color="inherit"
                       noWrap
                     >
@@ -124,17 +122,23 @@ function SiteHeader({ classes }) {
                     </Typography>
                   </Link>
                 </Grid>
-                <Grid>
-                </Grid>
+                <Grid></Grid>
                 {
                   //shows up when screen size is less than 1024px
                   small && (
                     <>
-                      <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} style={{ position: 'absolute', right: 0 }}>
+                      <IconButton
+                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+                        style={{ position: "absolute", right: 0 }}
+                      >
                         <MenuOpen />
                       </IconButton>
-                      <Drawer anchor='right' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-                        {list('right')}
+                      <Drawer
+                        anchor="right"
+                        open={isDrawerOpen}
+                        onClose={() => setIsDrawerOpen(false)}
+                      >
+                        {list("right")}
                       </Drawer>
                     </>
                   )

@@ -19,6 +19,9 @@ export const questionReducer = (state = initialState, action) => {
     case questionType.GET_QUESTION_DETAIL:
       return { ...state, question: action.question };
 
+    case questionType.GET_ASKED_QUESTIONS:
+      return { ...state, totalQuestions: action.totalQuestions };
+
     case questionType.GET_ACTIVE_QUESTION:
       return { ...state, question: action.question };
 

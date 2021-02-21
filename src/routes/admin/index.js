@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { Switch } from "react-router-dom";
 import { PrivateRoute } from "../../components/route/PrivateRoute";
 import AdminDashboard from "../../pages/dashboard/AdminDashboard";
-import questionRoutes from "./question";
-import reportRoutes from "./report";
 import studentRoutes from "./student";
 import topicRoutes from "./topic";
+import questionRoutes from "./question";
+import reportRoutes from "./report";
+import messageRoutes from "./message";
 
 function AdminRoutes() {
   const { user: { role } = {} } = useSelector((state) => state.auth);
@@ -29,7 +30,13 @@ function AdminRoutes() {
       exact: true,
       path: "/admin",
       component: AdminDashboard,
-      routes: [studentRoutes, topicRoutes, questionRoutes, reportRoutes],
+      routes: [
+        studentRoutes,
+        topicRoutes,
+        questionRoutes,
+        reportRoutes,
+        messageRoutes,
+      ],
     },
   ];
 
