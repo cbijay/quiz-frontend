@@ -50,7 +50,7 @@ function SocialIcon() {
           href="https://www.youtube.com"
           target="_blank"
         >
-          <YouTube color='primary' />{" "}
+          <YouTube color='primary' className={classes.icon} />{" "}
         </Button>
       </Grid>
     </Grid >
