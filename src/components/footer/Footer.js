@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     margin: (5, 0),
     textDecoration: 'none',
     '&:hover': {
-      color: theme.palette.secondary.main
+      color: theme.palette.default.dark
     }
   }
 }))
@@ -147,7 +147,7 @@ const Footer = () => {
         </Grid>
 
 
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Grid container direction='column'>
             <Typography variant="h4" color="initial" gutterBottom>Quick Links</Typography>
             <Grid item container spacing={2}>

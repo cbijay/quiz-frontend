@@ -5,9 +5,16 @@ import {
   Instagram,
   YouTube
 } from "@material-ui/icons";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, makeStyles } from "@material-ui/core";
+
+const styles = makeStyles(theme => ({
+  icon: {
+    color: theme.palette.primary.contrastText
+  }
+}))
 
 function SocialIcon() {
+  const classes = styles();
   return (
     <Grid container spacing={3}>
       <Grid item xs={3}>
@@ -16,7 +23,7 @@ function SocialIcon() {
           href="https://www.facebook.com/Nepalese-Society-School-Texas-USA-104384784589240"
           target="_blank"
         >
-          <Facebook color='secondary' />{" "}
+          <Facebook className={classes.icon} />{" "}
         </Button>
       </Grid>
       <Grid item xs={3}>
@@ -25,7 +32,7 @@ function SocialIcon() {
           href="https://www.twitter.com"
           target="_blank"
         >
-          <Twitter color='secondary' />{" "}
+          <Twitter className={classes.icon} />{" "}
         </Button>
       </Grid>
       <Grid item xs={3}>
@@ -34,7 +41,7 @@ function SocialIcon() {
           href="https://www.instagram.com"
           target="_blank"
         >
-          <Instagram color='secondary' />{" "}
+          <Instagram className={classes.icon} />{" "}
         </Button>
       </Grid>
       <Grid item xs={3}>
