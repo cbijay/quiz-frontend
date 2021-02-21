@@ -16,7 +16,7 @@ function SocialIcon() {
           href="https://www.facebook.com/Nepalese-Society-School-Texas-USA-104384784589240"
           target="_blank"
         >
-          <Facebook color='primary' />{" "}
+          <Facebook color='secondary' />{" "}
         </Button>
       </Grid>
       <Grid item xs={3}>
@@ -25,7 +25,7 @@ function SocialIcon() {
           href="https://www.twitter.com"
           target="_blank"
         >
-          <Twitter color='primary' />{" "}
+          <Twitter color='secondary' />{" "}
         </Button>
       </Grid>
       <Grid item xs={3}>
@@ -34,7 +34,7 @@ function SocialIcon() {
           href="https://www.instagram.com"
           target="_blank"
         >
-          <Instagram color='primary' />{" "}
+          <Instagram color='secondary' />{" "}
         </Button>
       </Grid>
       <Grid item xs={3}>

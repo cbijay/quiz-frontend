@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: 30,
     background: '#000062',
-    color: theme.palette.default.main
+    color: theme.palette.default.main,
   },
   title: {
     flexGrow: 1,
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     margin: (5, 0),
     textDecoration: 'none',
     '&:hover': {
-      color: theme.palette.primary.main
+      color: theme.palette.secondary.main
     }
   }
 }))
@@ -50,13 +50,12 @@ const Footer = () => {
 
   return (
 
-    <Grid className={classes.root}>
+    <Grid className={classes.root} >
       <Grid
         container
         spacing={5}
         direction={small ? "column" : "row"}
         justify="center"
-      // wrap="nowrap"
       >
 
 
@@ -169,7 +168,7 @@ const Footer = () => {
         </Grid>
       </Grid>
       <Copyright />
-    </Grid>
+    </Grid >
   );
 }
 
