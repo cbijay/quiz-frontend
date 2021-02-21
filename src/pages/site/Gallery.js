@@ -1,18 +1,8 @@
-import { Button, Card, CardContent, Grid, makeStyles, Modal, Typography } from '@material-ui/core'
+import { Card, CardContent, Grid, makeStyles, Modal, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import CardHeading from '../../components/card/CardHeading'
-import SiteLayout from '../../layouts/SiteLayout'
-
-import Banner1 from "../../components/home/images/banner.jpg";
-import Banner2 from "../../components/home/images/banner2.jpg";
-import Banner3 from "../../components/home/images/banner3.jpg";
-import Banner4 from "../../components/home/images/gallery1.jpg";
-import Banner5 from "../../components/home/images/gallery2.jpg";
-import Banner6 from "../../components/home/images/gallery3.jpg";
-import Banner7 from "../../components/home/images/gallery4.jpg";
-import Banner8 from "../../components/home/images/gallery5.jpg";
-import Banner9 from "../../components/home/images/gallery6.jpg";
-import Banner10 from "../../components/home/images/gallery7.jpg";
+import SiteLayout from '../../layouts/SiteLayout';
+import { images } from './Images'
 
 const styles = makeStyles(theme => ({
     image: {
@@ -23,8 +13,6 @@ const styles = makeStyles(theme => ({
         cursor: 'pointer',
         [theme.breakpoints.down('md')]: {
             objectFit: 'contain',
-            // height: 300,
-            // width: 300,
             height: '100%',
             width: '100%',
         },
@@ -60,30 +48,16 @@ const Gallery = () => {
     const classes = styles();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [image, setImage] = useState(null);
-    const [images, setImages] = useState([
-        { src: Banner1, description: 'This is Image Description' },
-        { src: Banner2, description: 'This is Image Description' },
-        { src: Banner3, description: 'This is Image Description' },
-        { src: Banner4, description: 'This is Image Description' },
-        { src: Banner5, description: 'This is Image Description' },
-        { src: Banner6, description: 'This is Image Description' },
-        { src: Banner7, description: 'This is Image Description' },
-        { src: Banner8, description: 'This is Image Description' },
-        { src: Banner9, description: 'This is Image Description' },
-        { src: Banner10, description: 'This is Image Description' },
-    ])
-    const showMore = () => {
-        setImages([...images, ...images])
-    }
+
 
     const modalCloseHandler = () => {
         setImage(null)
         setIsModalOpen(!isModalOpen)
     }
 
-    const modalHandler = (imgSrc) => {
+    const modalHandler = (imageIndex) => {
         setIsModalOpen(!isModalOpen)
-        setImage(imgSrc)
+        setImage(imageIndex)
     }
     return (
         <SiteLayout>
@@ -100,11 +74,12 @@ const Gallery = () => {
                             <div className={classes.paper}>
                                 <img
                                     className={classes.modalImage}
-                                    src={image}
+                                    src={images[image].src}
                                     alt="hello"
                                 />
                                 <Typography variant='subtitle1' style={{ color: 'gray' }}>
-                                    Photo Desription: {image.description}
+                                    {/* only show when valid description is added */}
+                                    {/* Photo Desription: {images[image].description} */}
                                 </Typography>
                             </div>
                         </Modal>
@@ -120,27 +95,20 @@ const Gallery = () => {
                                         <Grid item xs={6} sm={6} lg={4} key={index}>
                                             <Card elevation={6}>
                                                 <img
-                                                    onClick={() => modalHandler(image.src)}
+                                                    onClick={() => modalHandler(index)}
                                                     className={classes.image}
                                                     src={image.src}
                                                     alt="hello"
                                                 />
                                                 <Typography variant='subtitle1' style={{ color: 'gray' }}>
-                                                    Photo Desription: {image.description}
+                                                    {/* only show when valid description is added */}
+                                                    {/* Photo Desription: {image.description} */}
                                                 </Typography>
                                             </Card>
                                         </Grid>
                                     ))
                                 }
                             </Grid>
-                            <Button
-                                variant="contained"
-                                color='primary'
-                                style={{ marginTop: 30 }}
-                                onClick={showMore}
-                            >
-                                VIEW MORE
-                            </Button>
                         </CardContent>
                     </Card>
                 </Grid>
