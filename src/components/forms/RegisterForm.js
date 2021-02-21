@@ -16,7 +16,7 @@ function RegisterForm() {
   const dispatch = useDispatch();
   const password = useRef({});
   const subjects = [
-    { label: 'Quiz', price: 50 },
+    { label: 'Quiz ($50)', price: 50 },
     { label: 'Nepali & Moral Science (Basic)', price: 20 },
     { label: 'Nepali & Moral Science (Intermediate)', price: 20 },
     { label: 'Website Design & Development', price: 20 },
