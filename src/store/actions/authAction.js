@@ -74,8 +74,9 @@ export const registerUser = (request) => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch) => {
-  authService.logout();
+export const logout = (request) => async (dispatch) => {
+  authService.logout(request);
+
   dispatch({
     type: authType.LOGOUT,
   });

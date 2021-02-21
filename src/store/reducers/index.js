@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import { alertReducer } from "./alertReducer";
 import { authReducer } from "./auth/authReducer";
-import { questionReducer } from "./questionReducer";
-import { reportReducer } from "./reportReducer";
 import { studentReducer } from "./studentReducer";
 import { topicReducer } from "./topicReducer";
+import { questionReducer } from "./questionReducer";
+import { reportReducer } from "./reportReducer";
+import { messageReducer } from "./messageReducer";
 
 export const rootReducer = combineReducers({
   alert: alertReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   topics: topicReducer,
   questions: questionReducer,
   reports: reportReducer,
+  messages: messageReducer,
 });

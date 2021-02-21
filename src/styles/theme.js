@@ -3,9 +3,14 @@ import { createMuiTheme } from "@material-ui/core";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#FB8503",
+      main: "#000062",
+      //main: "#FB8503",
       dark: "#d84315",
       contrastText: "#fff",
+    },
+    secondary: {
+      main: "#3394fd",
+      dark: "#1971d0",
     },
     default: {
       main: "#fff",
@@ -33,7 +38,7 @@ theme.overrides = {
     },
     containedPrimary: {
       backgroundColor: theme.palette.primary.main,
-      margin: theme.spacing(0, 0, 1.5),
+      margin: theme.spacing(0, 0, 0),
     },
   },
   MuiAppBar: {

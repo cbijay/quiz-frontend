@@ -14,12 +14,14 @@ const login = async (request) => {
 
 const register = async (request) => {
   //Send user request from api
-  const res = await axios.post(`${apiUrl}/register`, request);
+  const res = await axios.post(`${apiUrl}/auth/register`, request);
 
   return res;
 };
 
-const logout = () => {
+const logout = async (request) => {
+  await axios.post(`${apiUrl}/auth/logout`, request);
+
   localStorage.removeItem("user");
 };
 
