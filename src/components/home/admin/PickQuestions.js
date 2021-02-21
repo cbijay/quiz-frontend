@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Grid,
   Card,
   CardContent,
   Typography,
@@ -10,6 +9,7 @@ import {
   ListItemText,
   Collapse,
   TextField,
+  withStyles,
 } from "@material-ui/core";
 import {
   ChevronRight as ChevronRightIcon,
@@ -23,7 +23,14 @@ import {
   getQuestions,
 } from "../../../store/actions/questionAction";
 
-function PickQuestions() {
+const styles = {
+  questionContainer: {
+    background: "#FB8503",
+    color: "#000062 !important",
+  },
+};
+
+function PickQuestions({ classes }) {
   const dispatch = useDispatch();
   const { topics } = useSelector((state) => state.topics);
   const { questions } = useSelector((state) => state.questions);
@@ -48,85 +55,75 @@ function PickQuestions() {
     setSearch(keyword);
   };
 
-  //console.log(search);
-
   return (
-    <Grid item xs={12} lg={3}>
-      <Card>
-        <CardContent>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Pick Questions
-          </Typography>
+    <Card className={classes.questionContainer}>
+      <CardContent>
+        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          Pick Questions
+        </Typography>
 
-          {topics.length > 0 ? (
-            topics.map(({ id, title }, topicIndex) => (
-              <List key={topicIndex}>
-                <ListItem
-                  key={title}
-                  button
-                  onClick={() => handleTopicQuestion(id)}
-                >
-                  <ListItemIcon>
-                    <ChevronRightIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={title} />
-                  {id === selectedId ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </ListItem>
-                <Collapse
-                  key={selectedId}
-                  component="li"
-                  in={id === selectedId}
-                  timeout="auto"
-                  unmountOnExit
-                >
-                  <TextField
-                    fullWidth
-                    type="number"
-                    name="search"
-                    placeholder="Search by question no."
-                    onKeyUp={handleSearch}
-                  />
+        {topics.length > 0 ? (
+          topics.map(({ id, title }, topicIndex) => (
+            <List key={topicIndex}>
+              <ListItem
+                key={title}
+                button
+                onClick={() => handleTopicQuestion(id)}
+              >
+                <ListItemIcon>
+                  <ChevronRightIcon />
+                </ListItemIcon>
+                <ListItemText primary={title} />
+                {id === selectedId ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </ListItem>
+              <Collapse
+                key={selectedId}
+                component="li"
+                in={id === selectedId}
+                timeout="auto"
+                unmountOnExit
+              >
+                <TextField
+                  fullWidth
+                  type="number"
+                  name="search"
+                  placeholder="Search by question no."
+                  onKeyUp={handleSearch}
+                />
 
-                  {questions.length > 0 ? (
-                    questions
-                      .filter((question) =>
-                        search
-                          ? question.question_order === search &&
-                            question.status === 0
-                          : question.status === 0
-                      )
-                      .map(
-                        ({ id, question, question_order }, questionIndex) => (
-                          <List
-                            key={questionIndex}
-                            component="div"
-                            disablePadding
-                          >
-                            <ListItem
-                              key={question}
-                              button
-                              onClick={() => handleQuestion(id)}
-                            >
-                              <ListItemText
-                                primary={`Question No.${question_order}`}
-                              />
-                            </ListItem>
-                          </List>
-                        )
-                      )
-                  ) : (
-                    <Typography>No questions found!!</Typography>
-                  )}
-                </Collapse>
-              </List>
-            ))
-          ) : (
-            <Typography>Please create topics!!</Typography>
-          )}
-        </CardContent>
-      </Card>
-    </Grid>
+                {questions.length > 0 ? (
+                  questions
+                    .filter(
+                      (question) =>
+                        search &&
+                        question.question_order === search &&
+                        question.status === 0
+                    )
+                    .map(({ id, question, question_order }, questionIndex) => (
+                      <List key={questionIndex} component="div" disablePadding>
+                        <ListItem
+                          key={question}
+                          button
+                          onClick={() => handleQuestion(id)}
+                        >
+                          <ListItemText
+                            primary={`Question No.${question_order}`}
+                          />
+                        </ListItem>
+                      </List>
+                    ))
+                ) : (
+                  <Typography>No questions found!!</Typography>
+                )}
+              </Collapse>
+            </List>
+          ))
+        ) : (
+          <Typography>Please create topics!!</Typography>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
-export default PickQuestions;
+export default withStyles(styles)(PickQuestions);

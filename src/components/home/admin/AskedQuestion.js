@@ -6,8 +6,13 @@ import {
   withStyles,
 } from "@material-ui/core";
 import React from "react";
+import theme from "../../../styles/theme";
 
 const styles = {
+  cardContainer: {
+    background: theme.palette.primary.main,
+    color: "#fff",
+  },
   cardBody: {
     paddingBottom: "16px !important",
   },
@@ -15,7 +20,7 @@ const styles = {
 
 function AskedQuestion({ questionCount, classes }) {
   return (
-    <Card>
+    <Card className={classes.cardContainer}>
       <CardContent className={classes.cardBody}>
         <Grid container spacing={1}>
           <Grid zeroMinWidth item>

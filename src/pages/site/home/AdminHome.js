@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
   withStyles,
+  Container,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getAskedQuestion } from "../../../store/actions/questionAction";
@@ -16,10 +17,21 @@ import PickQuestions from "../../../components/home/admin/PickQuestions";
 import AskedQuestion from "../../../components/home/admin/AskedQuestion";
 import { getMessages } from "../../../store/actions/messageAction";
 import AdminMessage from "../../../components/home/admin/AdminMessage";
+import theme from "../../../styles/theme";
 
 const styles = () => ({
   container: {
     paddingTop: 10,
+  },
+  participantContainer: {
+    background: theme.palette.primary.main,
+    color: "#fff !important",
+  },
+  cardContainer: {
+    marginTop: 15,
+  },
+  tableCell: {
+    color: "#fff",
   },
   avatar: {
     width: 30,
@@ -78,38 +90,44 @@ function AdminHome({ classes }) {
     <SiteLayout>
       {admin && (
         <>
-          <Grid container spacing={1} justify="space-between">
-            <Grid item xs={12} lg={9}>
-              <AdminMessage messages={messages} />
-            </Grid>
-            <Grid item xs={12} lg={3}>
-              <AskedQuestion questionCount={totalQuestions} />
-            </Grid>
-          </Grid>
-          {participants.length > 0 ? (
-            <Grid
-              container
-              justify="center"
-              spacing={1}
-              className={classes.container}
-            >
-              <Participants participants={participants} classes={classes} />
-              <ActiveQuestion classes={classes} />
-              <PickQuestions classes={classes} />
-            </Grid>
-          ) : (
-            <Grid container justify="center" spacing={1}>
-              <Grid item lg={6}>
-                <Card>
-                  <CardContent>
-                    <Typography component="p">
-                      Please add some participants to start quiz
-                    </Typography>
-                  </CardContent>
-                </Card>
+          <Container>
+            <Grid container spacing={1} justify="space-between">
+              <Grid item xs={12} lg={9}>
+                <AdminMessage messages={messages} />
+              </Grid>
+              <Grid item xs={12} lg={3}>
+                <AskedQuestion questionCount={totalQuestions} />
               </Grid>
             </Grid>
-          )}
+            {participants.length > 0 ? (
+              <Grid
+                container
+                justify="center"
+                spacing={1}
+                className={classes.container}
+              >
+                <Grid item xs={12} lg={3}>
+                  <PickQuestions />
+                </Grid>
+                <Grid item xs={12} lg={9}>
+                  <Participants participants={participants} classes={classes} />
+                  <ActiveQuestion classes={classes} />
+                </Grid>
+              </Grid>
+            ) : (
+              <Grid container justify="center" spacing={1}>
+                <Grid item lg={6}>
+                  <Card>
+                    <CardContent>
+                      <Typography component="p">
+                        Please add some participants to start quiz
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            )}
+          </Container>
         </>
       )}
     </SiteLayout>

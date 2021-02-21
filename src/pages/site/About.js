@@ -1,9 +1,23 @@
 import React from "react";
 import SiteLayout from "../../layouts/SiteLayout";
-import { Card, CardContent, Grid, Typography } from "@material-ui/core";
+import { Card, CardContent, Grid, makeStyles, Typography } from "@material-ui/core";
 import CardHeading from "../../components/card/CardHeading";
 
-function About() {
+import Banner from '../../images/School Photo 4.jpg';
+
+const styles = makeStyles(theme => ({
+  banner: {
+    objectFit: 'fill',
+    borderRadius: '1%',
+    width: '100%',
+    height: '100%',
+    [theme.breakpoints.down('sm')]: {
+      objectFit: 'contain',
+    }
+  }
+}))
+const About = () => {
+  const classes = styles();
   return (
     <SiteLayout>
       <Grid container>
@@ -11,8 +25,8 @@ function About() {
           <Card>
             <CardHeading>About</CardHeading>
             <CardContent>
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
+              <Grid justify='center' container spacing={1}>
+                <Grid item xs={12} md={6}>
                   <Typography paragraph>
                     Aiming to promote Nepalese culture and heritage, Nepalese
                     Society, Texas (NST) has been involved in different
@@ -22,7 +36,7 @@ function About() {
                     purpose of the school is to promote and preserve Nepali
                     language &amp; culture, help kids with their regular classes
                     and assist kids to build on their critical thinking.
-                  </Typography>
+                    </Typography>
                   <Typography paragraph>
                     Our course package includes moral science, Nepali language,
                     school math, science as well as SAT program. We teach all
@@ -40,6 +54,10 @@ function About() {
                     one of the most successful programs that NST has been
                     organizing for the past couple of years.
                   </Typography>
+                </Grid>
+                <Grid item xs={12} md={6}><img src={Banner} className={classes.banner} alt="Banner of meeting" /></Grid>
+                <Grid item xs={12}>
+
                   <Typography paragraph>
                     In 2010, the school added one more program that was quiz
                     contest. There were 50 participants in the first quiz
