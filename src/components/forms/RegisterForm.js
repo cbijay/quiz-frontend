@@ -214,8 +214,9 @@ function RegisterForm() {
               <FormLabel component="legend">Choose Subject (USD 20.00 Each)</FormLabel>
               <FormGroup>
                 {
-                  subjects.map(subject => (
+                  subjects.map((subject, index) => (
                     <FormControlLabel
+                      key={index}
                       control={<Checkbox onChange={(e) => calculatePrice(e, subject.price)} name='subjects[]' />}
                       label={subject.label} value={subject.price}
                     />
