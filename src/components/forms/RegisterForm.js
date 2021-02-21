@@ -15,6 +15,17 @@ function RegisterForm() {
   const { register, handleSubmit, errors, watch, reset } = methods;
   const dispatch = useDispatch();
   const password = useRef({});
+  const subjects = [
+    { name: 'quiz', label: 'Quiz', price: 50 },
+    { name: 'nepali_and_moral_basic', label: 'Nepali & Moral Science (Basic)', price: 20 },
+    { name: 'nepali_and_moral_intermediate', label: 'Nepali & Moral Science (Intermediate)', price: 20 },
+    { name: 'webDesign', label: 'Website Design & Development', price: 20 },
+    { name: 'publicSpeaking', label: 'Public Speaking & Leadership', price: 20 },
+    { name: 'extraCurriculum', label: 'Extra Curriculum Activities & Entertainment', price: 20 },
+    { name: 'yoga', label: 'Yoga for kids', price: 20 },
+    { name: 'spiritual', label: 'Spiritual Camp', price: 20 },
+
+  ]
   password.current = watch("password", "");
 
   const onSubmit = (data) => {
@@ -202,42 +213,14 @@ function RegisterForm() {
             <FormControl component="fieldset" className={'formControl'}>
               <FormLabel component="legend">Choose Subject (USD 20.00 Each)</FormLabel>
               <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 50)} name="quiz" />}
-                  label=" Quiz ($50.00)" value={50}
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="nepaliMoral_basic" />}
-                  label=" Nepali & Moral Science (Basic)"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="nepaliMoral_intermediate" />}
-                  label="Nepali & Moral Science (Intermediate)"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="webDesign" />}
-                  label="Website Design & Development"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="publicSpeaking" />}
-                  label="Public Speaking & Leadership"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="extraEntertainment" />}
-                  label="Extra Curriculum Activities & Entertainment"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="yoga" />}
-                  label="Yoga for Kids"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox onChange={(e) => calculatePrice(e, 20)}
-                      name="spiritual"
+                {
+                  subjects.map(subject => (
+                    <FormControlLabel
+                      control={<Checkbox onChange={(e) => calculatePrice(e, subject.price)} name={subject.name} />}
+                      label={subject.label} value={subject.price}
                     />
-                  }
-                  label="Spiritual Camp"
-                />
+                  ))
+                }
               </FormGroup>
               <FormHelperText>Each Subject cost $20.00 except Quiz for $50.00</FormHelperText>
             </FormControl>
