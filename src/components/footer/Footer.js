@@ -8,6 +8,7 @@ import {
   Email as EmailIcon,
   Phone as PhoneIcon,
   Home as HomeIcon,
+  Room as RoomIcon,
 }
   from '@material-ui/icons';
 
@@ -137,9 +138,9 @@ const Footer = () => {
             <Grid spacing={5} container>
               <Grid item xs={2} md={1}><HomeIcon /></Grid>
               <Grid item xs={10} md={8}>
-                <Typography className={classes.actionButton} gutterBottom>2914 Huntington Grove Square Alexandria, VA 22306</Typography>
-                <Typography className={classes.actionButton} gutterBottom>912 Saratoga Way Coppell, TX 75019</Typography>
-                <Typography className={classes.actionButton} gutterBottom>Treasurer Address: 15911 SW 68Th LN Miami, FL 33193-3623</Typography>
+                <Typography className={classes.actionButton} gutterBottom><RoomIcon />  2914 Huntington Grove Square Alexandria, VA 22306</Typography>
+                <Typography className={classes.actionButton} gutterBottom><RoomIcon /> 912 Saratoga Way Coppell, TX 75019</Typography>
+                <Typography className={classes.actionButton} gutterBottom> <RoomIcon /> Treasurer Address: 15911 SW 68Th LN Miami, FL 33193-3623</Typography>
               </Grid>
             </Grid>
 
