@@ -16,14 +16,14 @@ function RegisterForm() {
   const dispatch = useDispatch();
   const password = useRef({});
   const subjects = [
-    { name: 'quiz', label: 'Quiz', price: 50 },
-    { name: 'nepali_and_moral_basic', label: 'Nepali & Moral Science (Basic)', price: 20 },
-    { name: 'nepali_and_moral_intermediate', label: 'Nepali & Moral Science (Intermediate)', price: 20 },
-    { name: 'webDesign', label: 'Website Design & Development', price: 20 },
-    { name: 'publicSpeaking', label: 'Public Speaking & Leadership', price: 20 },
-    { name: 'extraCurriculum', label: 'Extra Curriculum Activities & Entertainment', price: 20 },
-    { name: 'yoga', label: 'Yoga for kids', price: 20 },
-    { name: 'spiritual', label: 'Spiritual Camp', price: 20 },
+    { label: 'Quiz', price: 50 },
+    { label: 'Nepali & Moral Science (Basic)', price: 20 },
+    { label: 'Nepali & Moral Science (Intermediate)', price: 20 },
+    { label: 'Website Design & Development', price: 20 },
+    { label: 'Public Speaking & Leadership', price: 20 },
+    { label: 'Extra Curriculum Activities & Entertainment', price: 20 },
+    { label: 'Yoga for kids', price: 20 },
+    { label: 'Spiritual Camp', price: 20 },
 
   ]
   password.current = watch("password", "");
@@ -216,7 +216,7 @@ function RegisterForm() {
                 {
                   subjects.map(subject => (
                     <FormControlLabel
-                      control={<Checkbox onChange={(e) => calculatePrice(e, subject.price)} name={subject.name} />}
+                      control={<Checkbox onChange={(e) => calculatePrice(e, subject.price)} name='subjects[]' />}
                       label={subject.label} value={subject.price}
                     />
                   ))
