@@ -30,7 +30,9 @@ const styles = (theme) => ({
   menuButtonHidden: {
     display: "none",
   },
-
+  MenuIcon: {
+    color: theme.palette.default.main
+  },
   title: {
     flexGrow: 1,
     textDecoration: "none",
@@ -131,7 +133,7 @@ function SiteHeader({ classes }) {
                         onClick={() => setIsDrawerOpen(!isDrawerOpen)}
                         style={{ position: "absolute", right: 0 }}
                       >
-                        <MenuOpen />
+                        <MenuOpen className={classes.MenuIcon} />
                       </IconButton>
                       <Drawer
                         anchor="right"
