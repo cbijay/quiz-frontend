@@ -21,6 +21,12 @@ const theme = createMuiTheme({
 });
 
 theme.overrides = {
+  MuiTypography: {
+    paragraph: {
+      marginBottom: 10,
+      lineHeight: 2,
+    },
+  },
   MuiListItemIcon: {
     root: {
       minWidth: 36,

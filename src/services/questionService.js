@@ -3,94 +3,67 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const getQuestionTopics = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/questions/topics`);
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/questions/topics`);
 };
 
 const getAllQuestions = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/questions`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/questions`);
 };
 
 const getQuestions = async (topicId) => {
-  const res = await axios.get(`${apiUrl}/v1/admin/questions/topics/${topicId}`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/questions/topics/${topicId}`);
 };
 
 const getAskedQuestion = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/questions/asked`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/questions/asked`);
 };
 
 const getQuestion = async (questionId) => {
-  const res = await axios.get(`${apiUrl}/v1/admin/questions/${questionId}`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/questions/${questionId}`);
 };
 
 const createQuestion = async (topicId, request) => {
-  const res = await axios.post(
+  return await axios.post(
     `${apiUrl}/v1/admin/questions/topics/${topicId}`,
     request
   );
-
-  return res;
 };
 
 const importQuestion = async (topicId, request) => {
-  const res = await axios.post(
+  return await axios.post(
     `${apiUrl}/v1/admin/questions/import/${topicId}`,
     request
   );
-
-  return res;
 };
 
 const updateQuestion = async (questionId, request) => {
-  const res = await axios.put(
-    `${apiUrl}/v1/admin/questions/${questionId}`,
-    request
-  );
-
-  return res;
+  return await axios.put(`${apiUrl}/v1/admin/questions/${questionId}`, request);
 };
 
 const openQuestion = async (questionId, status) => {
-  const res = await axios.post(
+  return await axios.post(
     `${apiUrl}/v1/admin/questions/${questionId}/open/${status}`
   );
-
-  return res;
 };
 
 const updateStatus = async (questionId, status) => {
-  const res = await axios.post(
+  return await axios.post(
     `${apiUrl}/v1/admin/questions/${questionId}/${status}/updateStatus`
   );
-
-  return res;
 };
 
 const deleteQuestion = async (questionId) => {
-  const res = await axios.delete(`${apiUrl}/v1/admin/questions/${questionId}`);
-  return res;
+  return await axios.delete(`${apiUrl}/v1/admin/questions/${questionId}`);
 };
 
 const getActiveQuestion = async () => {
-  const res = await axios.get(`${apiUrl}/v1/questions/active`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/questions/active`);
 };
 
 const resetTimerStatus = async (questionId, status) => {
-  const res = await axios.post(
+  return await axios.post(
     `${apiUrl}/v1/questions/${questionId}/timer/${status}`
   );
-
-  return res;
 };
 
 export const questionService = {

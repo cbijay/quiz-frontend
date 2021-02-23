@@ -21,6 +21,10 @@ const styles = {
   formLabel: {
     display: "block",
   },
+  uploadBtn: {
+    marginBottom: 10,
+    display: "block",
+  },
 };
 
 function StudentForm({ student, mode, classes }) {
@@ -32,7 +36,17 @@ function StudentForm({ student, mode, classes }) {
     getValues,
     reset,
   } = useForm();
-  const { id, name, email, mobile, city, address } = student || "";
+  const {
+    id,
+    name,
+    email,
+    grade,
+    age,
+    phone_number,
+    parents_name,
+    city,
+    address,
+  } = student || "";
   const [changePassword, setChangePassword] = useState(false);
   const [userImage, setUserImage] = useState();
   const { backToLocation } = usePreviousLocation();
@@ -43,7 +57,10 @@ function StudentForm({ student, mode, classes }) {
 
     formData.append("name", data.name);
     formData.append("email", data.email);
-    formData.append("mobile", data.mobile);
+    formData.append("grade", data.grade);
+    formData.append("age", data.age);
+    formData.append("phone_number", data.phone_number);
+    formData.append("parents_name", data.parents_name);
     formData.append("password", data.password);
     formData.append("city", data.city);
     formData.append("address", data.address);
@@ -71,81 +88,147 @@ function StudentForm({ student, mode, classes }) {
   useEffect(() => {
     setValue("name", name, { shouldDirty: true });
     setValue("email", email, { shouldDirty: true });
-    setValue("mobile", mobile, { shouldDirty: true });
+    setValue("grade", grade, { shouldDirty: true });
+    setValue("age", age, { shouldDirty: true });
+    setValue("phone_number", phone_number, { shouldDirty: true });
+    setValue("parents_name", parents_name, { shouldDirty: true });
     setValue("city", city, { shouldDirty: true });
     setValue("address", address, { shouldDirty: true });
-  }, [name, email, mobile, city, address, setValue]);
+  }, [
+    name,
+    email,
+    grade,
+    age,
+    phone_number,
+    parents_name,
+    city,
+    address,
+    setValue,
+  ]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        variant="standard"
-        margin="normal"
-        fullWidth
-        name="name"
-        label="Name"
-        defaultValue={getValues("name") ? getValues("name") : ""}
-        inputRef={register({ required: "Name is required" })}
-        error={!!errors.name}
-        helperText={!!errors.name ? errors.name.message : ""}
-      />
-      <TextField
-        variant="standard"
-        margin="normal"
-        fullWidth
-        name="email"
-        label="Email"
-        defaultValue={getValues("email") ? getValues("email") : ""}
-        inputRef={register({ required: "Email is required" })}
-        error={!!errors.email}
-        helperText={!!errors.email ? errors.email.message : ""}
-      />
-      <TextField
-        variant="standard"
-        margin="normal"
-        fullWidth
-        name="mobile"
-        label="Mobile No."
-        defaultValue={getValues("mobile") ? getValues("mobile") : ""}
-        inputRef={register}
-      />
-      {mode !== "edit" ? (
-        <TextField
-          variant="standard"
-          margin="normal"
-          fullWidth
-          type="password"
-          name="password"
-          label="Password"
-          inputRef={register({ required: "Password is required" })}
-          error={!!errors.password}
-          helperText={!!errors.password ? errors.password.message : ""}
-        />
-      ) : (
-        ""
-      )}
-      <TextField
-        variant="standard"
-        margin="normal"
-        fullWidth
-        name="city"
-        label="City"
-        defaultValue={getValues("city") ? getValues("city") : ""}
-        inputRef={register}
-      />
-      <TextField
-        multiline
-        variant="standard"
-        margin="normal"
-        fullWidth
-        name="address"
-        label="Address"
-        rows={4}
-        defaultValue={getValues("address") ? getValues("address") : ""}
-        inputRef={register}
-      />
+      <Grid container spacing={1}>
+        <Grid item xs={12} lg={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="name"
+            label="Name"
+            defaultValue={getValues("name") ? getValues("name") : ""}
+            inputRef={register({ required: "Name is required" })}
+            error={!!errors.name}
+            helperText={!!errors.name ? errors.name.message : ""}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="email"
+            label="Email"
+            defaultValue={getValues("email") ? getValues("email") : ""}
+            inputRef={register({ required: "Email is required" })}
+            error={!!errors.email}
+            helperText={!!errors.email ? errors.email.message : ""}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="grade"
+            label="Grade"
+            defaultValue={getValues("grade") ? getValues("grade") : ""}
+            inputRef={register}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            type="number"
+            name="age"
+            label="Age"
+            defaultValue={getValues("age") ? getValues("age") : ""}
+            inputRef={register}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="phone_number"
+            label="Phone Number"
+            defaultValue={
+              getValues("phone_number") ? getValues("phone_number") : ""
+            }
+            inputRef={register}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="parents_name"
+            label="Parents Name"
+            defaultValue={
+              getValues("parents_name") ? getValues("parents_name") : ""
+            }
+            inputRef={register}
+          />
+        </Grid>
+        {mode !== "edit" ? (
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="standard"
+              margin="normal"
+              fullWidth
+              type="password"
+              name="password"
+              label="Password"
+              inputRef={register({ required: "Password is required" })}
+              error={!!errors.password}
+              helperText={!!errors.password ? errors.password.message : ""}
+            />
+          </Grid>
+        ) : (
+          ""
+        )}
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="city"
+            label="City"
+            defaultValue={getValues("city") ? getValues("city") : ""}
+            inputRef={register}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            multiline
+            variant="standard"
+            margin="normal"
+            fullWidth
+            name="address"
+            label="Address"
+            rows={4}
+            defaultValue={getValues("address") ? getValues("address") : ""}
+            inputRef={register}
+          />
+        </Grid>
+      </Grid>
+
       <Input type="hidden" name="role" value="S" inputRef={register} />
-      <label htmlFor="user_img">
+      <label htmlFor="user_img" className={classes.uploadBtn}>
         <Input
           style={{ display: "none" }}
           id="user_img"

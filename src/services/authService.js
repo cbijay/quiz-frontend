@@ -14,9 +14,7 @@ const login = async (request) => {
 
 const register = async (request) => {
   //Send user request from api
-  const res = await axios.post(`${apiUrl}/auth/register`, request);
-
-  return res;
+  return await axios.post(`${apiUrl}/auth/register`, request);
 };
 
 const logout = async (request) => {

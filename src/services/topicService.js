@@ -3,32 +3,23 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const getTopics = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/topics`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/topics`);
 };
 
 const getTopic = async (topicId) => {
-  const res = await axios.get(`${apiUrl}/v1/admin/topics/${topicId}`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/topics/${topicId}`);
 };
 
 const createTopic = async (request) => {
-  const res = await axios.post(`${apiUrl}/v1/admin/topics`, request);
-
-  return res;
+  return await axios.post(`${apiUrl}/v1/admin/topics`, request);
 };
 
 const updateTopic = async (topicId, request) => {
-  const res = await axios.put(`${apiUrl}/v1/admin/topics/${topicId}`, request);
-
-  return res;
+  return await axios.put(`${apiUrl}/v1/admin/topics/${topicId}`, request);
 };
 
 const deleteTopic = async (topicId) => {
-  const res = await axios.delete(`${apiUrl}/v1/admin/topics/${topicId}`);
-  return res;
+  return await axios.delete(`${apiUrl}/v1/admin/topics/${topicId}`);
 };
 
 export const topicService = {

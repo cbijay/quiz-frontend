@@ -55,6 +55,13 @@ function PickQuestions({ classes }) {
     setSearch(keyword);
   };
 
+  const filteredQuestions =
+    questions &&
+    questions.filter(
+      (question) =>
+        search && question.question_order === search && question.status === 0
+    );
+
   return (
     <Card className={classes.questionContainer}>
       <CardContent>
@@ -86,35 +93,36 @@ function PickQuestions({ classes }) {
                 <TextField
                   fullWidth
                   type="number"
+                  min={1}
                   name="search"
                   placeholder="Search by question no."
                   onKeyUp={handleSearch}
                 />
 
-                {questions.length > 0 ? (
-                  questions
-                    .filter(
-                      (question) =>
-                        search &&
-                        question.question_order === search &&
-                        question.status === 0
-                    )
-                    .map(({ id, question, question_order }, questionIndex) => (
-                      <List key={questionIndex} component="div" disablePadding>
-                        <ListItem
-                          key={question}
-                          button
-                          onClick={() => handleQuestion(id)}
+                {search &&
+                  (filteredQuestions.length > 0 ? (
+                    filteredQuestions.map(
+                      ({ id, question, question_order }, questionIndex) => (
+                        <List
+                          key={questionIndex}
+                          component="div"
+                          disablePadding
                         >
-                          <ListItemText
-                            primary={`Question No.${question_order}`}
-                          />
-                        </ListItem>
-                      </List>
-                    ))
-                ) : (
-                  <Typography>No questions found!!</Typography>
-                )}
+                          <ListItem
+                            key={question}
+                            button
+                            onClick={() => handleQuestion(id)}
+                          >
+                            <ListItemText
+                              primary={`Question No.${question_order}`}
+                            />
+                          </ListItem>
+                        </List>
+                      )
+                    )
+                  ) : (
+                    <Typography>No questions exists!!</Typography>
+                  ))}
               </Collapse>
             </List>
           ))
