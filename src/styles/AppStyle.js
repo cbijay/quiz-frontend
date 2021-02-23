@@ -33,9 +33,11 @@ const AppStyle = makeStyles((theme) => ({
     height: `3em`,
   },
   editButton: {
-    background: "#1976d2",
+    background: theme.palette.primary.main,
+    //background: "#1976d2",
     "&:hover": {
-      background: "#115293",
+      background: theme.palette.primary.dark,
+      //background: "#115293",
     },
   },
   greenButton: {

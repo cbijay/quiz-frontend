@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Card,
@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
   Button,
+  Collapse,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,16 +18,16 @@ import useTimer from "../../../hooks/useTimer";
 function ActiveQuestion({ classes }) {
   const dispatch = useDispatch();
   const { question } = useSelector((state) => state.questions);
-  //const [questionOption, setQuestionOption] = useState(false);
+  const [questionOption, setQuestionOption] = useState(false);
   const { minutes, seconds } = useTimer("");
 
   useEffect(() => {
     dispatch(getActiveQuestion());
   }, [dispatch]);
 
-  /* const handleQuestionOption = () => {
+  const handleQuestionOption = () => {
     setQuestionOption(!questionOption);
-  }; */
+  };
 
   const handleQuestionStatus = (questionId, status) => {
     dispatch(openQuestion(questionId, status));
@@ -74,18 +75,18 @@ function ActiveQuestion({ classes }) {
                     {question.status === 1 ? "Active" : "Start"}
                   </Button>
                 </Grid>
-                {/*  <Grid item>
-                    <Button
-                      className={classes.questionOption}
-                      variant="contained"
-                      onClick={handleQuestionOption}
-                    >
-                      Show Options
-                    </Button>
-                  </Grid> */}
+                <Grid item>
+                  <Button
+                    className={classes.questionOption}
+                    variant="contained"
+                    onClick={handleQuestionOption}
+                  >
+                    Show Options
+                  </Button>
+                </Grid>
               </Grid>
 
-              <Grid container spacing={1}>
+              {/* <Grid container spacing={1}>
                 <Grid item xs={12} lg={6}>
                   <Button
                     fullWidth
@@ -126,60 +127,52 @@ function ActiveQuestion({ classes }) {
                     {question.d}
                   </Button>
                 </Grid>
-              </Grid>
+              </Grid> */}
 
-              {/* <Collapse in={questionOption} className={classes.container}>
-                  <Grid container spacing={1}>
-                    <Grid item xs={12} lg={6}>
-                      <Button
-                        fullWidth
-                        color="primary"
-                        variant="contained"
-                        className={
-                          question.answer === "A" ? classes.success : ""
-                        }
-                      >
-                        {question.a}
-                      </Button>
-                    </Grid>
-                    <Grid item xs={12} lg={6}>
-                      <Button
-                        fullWidth
-                        color="primary"
-                        variant="contained"
-                        className={
-                          question.answer === "B" ? classes.success : ""
-                        }
-                      >
-                        {question.b}
-                      </Button>
-                    </Grid>
-                    <Grid item xs={12} lg={6}>
-                      <Button
-                        fullWidth
-                        color="primary"
-                        variant="contained"
-                        className={
-                          question.answer === "C" ? classes.success : ""
-                        }
-                      >
-                        {question.c}
-                      </Button>
-                    </Grid>
-                    <Grid item xs={12} lg={6}>
-                      <Button
-                        fullWidth
-                        color="primary"
-                        variant="contained"
-                        className={
-                          question.answer === "D" ? classes.success : ""
-                        }
-                      >
-                        {question.d}
-                      </Button>
-                    </Grid>
+              <Collapse in={questionOption} className={classes.container}>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      className={question.answer === "A" ? classes.success : ""}
+                    >
+                      {question.a}
+                    </Button>
                   </Grid>
-                </Collapse> */}
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      className={question.answer === "B" ? classes.success : ""}
+                    >
+                      {question.b}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      className={question.answer === "C" ? classes.success : ""}
+                    >
+                      {question.c}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      className={question.answer === "D" ? classes.success : ""}
+                    >
+                      {question.d}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Collapse>
             </>
           )
         ) : (

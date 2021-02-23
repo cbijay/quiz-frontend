@@ -3,35 +3,23 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const getMessages = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/messages`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/messages`);
 };
 
 const getMessage = async (messageId) => {
-  const res = await axios.get(`${apiUrl}/v1/admin/messages/${messageId}`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/messages/${messageId}`);
 };
 
 const createMessage = async (request) => {
-  const res = await axios.post(`${apiUrl}/v1/admin/messages`, request);
-
-  return res;
+  return await axios.post(`${apiUrl}/v1/admin/messages`, request);
 };
 
 const updateMessage = async (messageId, request) => {
-  const res = await axios.put(
-    `${apiUrl}/v1/admin/messages/${messageId}`,
-    request
-  );
-
-  return res;
+  return await axios.put(`${apiUrl}/v1/admin/messages/${messageId}`, request);
 };
 
 const deleteMessage = async (messageId) => {
-  const res = await axios.delete(`${apiUrl}/v1/admin/messages/${messageId}`);
-  return res;
+  return await axios.delete(`${apiUrl}/v1/admin/messages/${messageId}`);
 };
 
 export const messageService = {

@@ -4,6 +4,7 @@ const initialState = {
   students: [],
   participants: [],
 };
+
 export const studentReducer = (state = initialState, action) => {
   switch (action.type) {
     case studentType.GET_STUDENTS_DETAIL:

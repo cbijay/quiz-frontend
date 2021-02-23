@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  CssBaseline,
-  Box,
-  withStyles,
-  Grid,
-} from "@material-ui/core";
+import { CssBaseline, Box, withStyles, Grid } from "@material-ui/core";
 import theme from "../styles/theme";
 import SiteHeader from "../components/header/SiteHeader";
 import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
-import Footer from "../components/footer/Footer";
+import SiteFooter from "../components/footer/SiteFooter";
 
 const styles = () => ({
   root: {
@@ -50,7 +45,7 @@ function SiteLayout({ children, classes }) {
         </Grid>
         {children}
         <Box pt={4}>
-          <Footer />
+          <SiteFooter />
         </Box>
       </main>
     </div>

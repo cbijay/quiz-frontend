@@ -31,7 +31,7 @@ function AdminMessage({ messages, classes }) {
             <Marquee direction="left" delay={500}>
               {messages.map(({ description }, index) => (
                 <Typography component="span" variant="body1" key={index}>
-                  {description}
+                  {description} &nbsp;
                 </Typography>
               ))}
             </Marquee>

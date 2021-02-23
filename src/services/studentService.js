@@ -3,61 +3,39 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const getStudents = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/students`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/students`);
 };
 
 const latestStudents = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/students/latest`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/students/latest`);
 };
 
 const getStudent = async (studentId) => {
-  const res = await axios.get(`${apiUrl}/v1/admin/students/${studentId}`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/students/${studentId}`);
 };
 
 const createStudent = async (request) => {
-  const res = await axios.post(`${apiUrl}/v1/admin/students`, request);
-
-  return res;
+  return await axios.post(`${apiUrl}/v1/admin/students`, request);
 };
 
 const updateStudent = async (studentId, request) => {
-  const res = await axios.put(
-    `${apiUrl}/v1/admin/students/${studentId}`,
-    request
-  );
-
-  return res;
+  return await axios.put(`${apiUrl}/v1/admin/students/${studentId}`, request);
 };
 
 const deleteStudent = async (studentId) => {
-  const res = await axios.delete(`${apiUrl}/v1/admin/students/${studentId}`);
-
-  return res;
+  return await axios.delete(`${apiUrl}/v1/admin/students/${studentId}`);
 };
 
 const updateStatus = async (studentId, status) => {
-  const res = await axios.post(
-    `${apiUrl}/v1/admin/students/${studentId}/${status}`
-  );
-  return res;
+  return await axios.post(`${apiUrl}/v1/admin/students/${studentId}/${status}`);
 };
 
 const participants = async () => {
-  const res = await axios.get(`${apiUrl}/v1/admin/students/participants`);
-
-  return res;
+  return await axios.get(`${apiUrl}/v1/admin/students/participants`);
 };
 
 const participantAnswer = async (request) => {
-  const res = await axios.post(`${apiUrl}/v1/participant/answer`, request);
-
-  return res;
+  return await axios.post(`${apiUrl}/v1/participant/answer`, request);
 };
 
 export const studentService = {

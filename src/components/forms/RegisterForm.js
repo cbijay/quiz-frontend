@@ -1,5 +1,18 @@
 import React, { useRef, useState } from "react";
-import { TextField, Button, Grid, CircularProgress, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, FormHelperText, Typography, useMediaQuery } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Grid,
+  CircularProgress,
+  FormControl,
+  FormLabel,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  FormHelperText,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../store/actions/authAction";
@@ -7,10 +20,10 @@ import { Link } from "react-router-dom";
 
 function RegisterForm() {
   //Returns true if screen size is less than 1024px
-  const small = useMediaQuery('(max-width:1024px)');
+  const small = useMediaQuery("(max-width:1024px)");
   const [acceptTerms, setAcceptTerms] = useState(true);
   const { isLoading } = useSelector((state) => state.auth);
-  const [price, setPrice] = useState(0)
+  const [price, setPrice] = useState(0);
   const methods = useForm();
   const { register, handleSubmit, errors, watch, reset } = methods;
   const dispatch = useDispatch();
@@ -20,15 +33,35 @@ function RegisterForm() {
   const onSubmit = (data) => {
     dispatch(registerUser(data));
     const {
-      ApplicantName, email, grade, age, parentName, address, MailAddress, phone, password, confirmPassword
-    } = data
-    console.log(ApplicantName, email, grade, age, parentName, address, MailAddress, phone, password, confirmPassword)
+      ApplicantName,
+      email,
+      grade,
+      age,
+      parentName,
+      address,
+      MailAddress,
+      phone,
+      password,
+      confirmPassword,
+    } = data;
+    console.log(
+      ApplicantName,
+      email,
+      grade,
+      age,
+      parentName,
+      address,
+      MailAddress,
+      phone,
+      password,
+      confirmPassword
+    );
     reset();
   };
 
   const calculatePrice = (e, perCost) => {
-    e.target.checked ? setPrice(price + perCost) : setPrice(price - perCost)
-  }
+    e.target.checked ? setPrice(price + perCost) : setPrice(price - perCost);
+  };
 
   const handleFileChange = (e) => {
     if (e.target.name === "user_img") {
@@ -40,7 +73,6 @@ function RegisterForm() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Grid container>
         <Grid container item xs={12} spacing={2}>
-
           <Grid item xs={12} md={3}>
             <TextField
               variant="standard"
@@ -50,7 +82,9 @@ function RegisterForm() {
               label="Applicant's Full Name"
               inputRef={register({ required: "Applicant name is required" })}
               error={!!errors.ApplicantName}
-              helperText={!!errors.ApplicantName ? errors.ApplicantName.message : ""}
+              helperText={
+                !!errors.ApplicantName ? errors.ApplicantName.message : ""
+              }
             />
           </Grid>
 
@@ -134,7 +168,9 @@ function RegisterForm() {
               type="text"
               inputRef={register({ required: "Mail address is required" })}
               error={!!errors.MailAddress}
-              helperText={!!errors.MailAddress ? errors.MailAddress.message : ""}
+              helperText={
+                !!errors.MailAddress ? errors.MailAddress.message : ""
+              }
             />
           </Grid>
 
@@ -199,57 +235,94 @@ function RegisterForm() {
           <Grid item xs={12} md={6}></Grid>
 
           <Grid item xs={12} md={6}>
-            <FormControl component="fieldset" className={'formControl'}>
-              <FormLabel component="legend">Choose Subject (USD 20.00 Each)</FormLabel>
+            <FormControl component="fieldset" className={"formControl"}>
+              <FormLabel component="legend">
+                Choose Subject (USD 20.00 Each)
+              </FormLabel>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 50)} name="quiz" />}
-                  label=" Quiz ($50.00)" value={50}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 50)}
+                      name="quiz"
+                    />
+                  }
+                  label=" Quiz ($50.00)"
+                  value={50}
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="nepaliMoral_basic" />}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
+                      name="nepaliMoral_basic"
+                    />
+                  }
                   label=" Nepali & Moral Science (Basic)"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="nepaliMoral_intermediate" />}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
+                      name="nepaliMoral_intermediate"
+                    />
+                  }
                   label="Nepali & Moral Science (Intermediate)"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="webDesign" />}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
+                      name="webDesign"
+                    />
+                  }
                   label="Website Design & Development"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="publicSpeaking" />}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
+                      name="publicSpeaking"
+                    />
+                  }
                   label="Public Speaking & Leadership"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="extraEntertainment" />}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
+                      name="extraEntertainment"
+                    />
+                  }
                   label="Extra Curriculum Activities & Entertainment"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={(e) => calculatePrice(e, 20)} name="yoga" />}
+                  control={
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
+                      name="yoga"
+                    />
+                  }
                   label="Yoga for Kids"
                 />
                 <FormControlLabel
                   control={
-                    <Checkbox onChange={(e) => calculatePrice(e, 20)}
+                    <Checkbox
+                      onChange={(e) => calculatePrice(e, 20)}
                       name="spiritual"
                     />
                   }
                   label="Spiritual Camp"
                 />
               </FormGroup>
-              <FormHelperText>Each Subject cost $20.00 except Quiz for $50.00</FormHelperText>
+              <FormHelperText>
+                Each Subject cost $20.00 except Quiz for $50.00
+              </FormHelperText>
             </FormControl>
           </Grid>
 
-          <Grid container item xs={12} md={6} justify='space-evenly'>
+          <Grid container item xs={12} md={6} justify="space-evenly">
             <Grid item xs={12}>
-              <Button
-                variant="contained"
-                component="label"
-                color="primary"
-              >
+              <Button variant="contained" component="label" color="primary">
                 Upload Photo
                 <input
                   type="file"
@@ -258,7 +331,12 @@ function RegisterForm() {
                 />
               </Button>
 
-              <Typography variant={small ? 'subtitle1' : 'h4'} style={{ color: 'grey' }}>Total cost: ${price}.00</Typography>
+              <Typography
+                variant={small ? "subtitle1" : "h4"}
+                style={{ color: "grey" }}
+              >
+                Total cost: ${price}.00
+              </Typography>
             </Grid>
 
             <Grid item xs={12}>
@@ -272,7 +350,12 @@ function RegisterForm() {
                 }
                 label="I accept terms and conditions"
               />
-              <Button type="submit" fullWidth variant="contained" color="primary">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
                 {isLoading && <CircularProgress color="secondary" />}
                 Register
               </Button>
@@ -285,10 +368,8 @@ function RegisterForm() {
               </Grid>
             </Grid>
           </Grid>
-
         </Grid>
       </Grid>
-
     </form>
   );
 }
