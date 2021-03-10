@@ -1,7 +1,9 @@
 import { authType } from "../../actions/types/authType";
 
 let user = JSON.parse(localStorage.getItem("user"));
-const initialState = user ? { loggedIn: true, user } : { isLoading: false };
+const initialState = user
+  ? { loggedIn: true, user }
+  : { isLoading: false, loggedIn: false };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,7 +32,6 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        user: action.user,
       };
     case authType.REGISTER_FAILURE:
       return {
@@ -39,7 +40,7 @@ export const authReducer = (state = initialState, action) => {
         error: action.error,
       };
     case authType.LOGOUT:
-      return {};
+      return { isLoading: false, loggedIn: false };
     default:
       return state;
   }

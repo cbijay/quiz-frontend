@@ -7,6 +7,7 @@ import {
   Receipt as ReceiptIcon,
   ContactSupport as ContactSupportIcon,
   Message as MessageIcon,
+  Event as EventIcon,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -40,6 +41,11 @@ const menuList = [
     name: "Messages",
     icon: <MessageIcon />,
     url: "/admin/messages",
+  },
+  {
+    name: "Events",
+    icon: <EventIcon />,
+    url: "/admin/events",
   },
 ];
 

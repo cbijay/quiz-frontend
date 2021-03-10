@@ -29,6 +29,9 @@ const styles = () => ({
   cardContainer: {
     marginTop: 15,
   },
+  title: {
+    fontWeight: 700,
+  },
   tableCell: {
     color: "#fff",
   },

@@ -61,6 +61,9 @@ const useStyles = makeStyles(theme => ({
         left: 0,
         right: 0,
         padding: (0, 20),
+    },
+    arrow: {
+        color: theme.palette.primary.contrastText
     }
 }));
 
@@ -93,10 +96,10 @@ const Gallery = () => {
                 <div className={classes.bottomBorder}></div>
                 <div className={classes.scrollBtn}>
                     <IconButton onClick={() => scroll(-100)}>
-                        <ArrowBackIcon />
+                        <ArrowBackIcon className={classes.arrow} />
                     </IconButton>
                     <IconButton onClick={() => scroll(100)}>
-                        <ArrowFrontIcon />
+                        <ArrowFrontIcon className={classes.arrow} />
                     </IconButton>
                 </div>
                 <Grid className={classes.container} ref={ref}>

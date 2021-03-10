@@ -11,19 +11,25 @@ export const getReports = (topicId) => async (dispatch) => {
   });
 };
 
-export const deleteReport = (reportId) => async (dispatch) => {
+export const deleteAnswer = (topicId, userId) => async (dispatch) => {
   try {
-    const res = await reportService.deleteReport(reportId);
+    const res = await reportService.deleteAnswer(topicId, userId);
 
     dispatch({
-      type: reportType.REMOVE_REPORT,
+      type: reportType.REMOVE_ANSWER,
       reports: Number(res.data),
     });
 
     dispatch({
       type: alertType.SUCCESS,
-      message: "Report deleted successfully!!",
+      message: "Report has been reset!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,

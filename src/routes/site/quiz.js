@@ -7,18 +7,22 @@ const quizRoutes = [
   {
     path: "/application-form",
     component: ApplicationForm,
+    scope: ["site"],
   },
   {
     path: "/syllabus",
     component: QuizSyllabus,
+    scope: ["site"],
   },
   {
     path: "/rules",
     component: QuizRules,
+    scope: ["site"],
   },
   {
     path: "/team",
     component: QuizTeam,
+    scope: ["site"],
   },
 ];
 

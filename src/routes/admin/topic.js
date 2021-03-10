@@ -5,14 +5,17 @@ import EditTopic from "../../pages/topics/EditTopic";
 const topicRoutes = {
   path: "/topics",
   component: Topics,
+  scope: ["admin"],
   routes: [
     {
       path: "/add",
       component: AddTopic,
+      scope: ["admin"],
     },
     {
       path: "/edit/:id",
       component: EditTopic,
+      scope: ["admin"],
     },
   ],
 };

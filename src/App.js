@@ -1,12 +1,11 @@
+import { useCallback, useEffect } from "react";
 import Echo from "laravel-echo";
 import { ThemeProvider } from "@material-ui/core";
-import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { clear } from "./store/actions/alertAction";
 import theme from "./styles/theme";
-import { BrowserRouter } from "react-router-dom";
-import AdminRoutes from "./routes/admin/index";
-import SiteRoutes from "./routes/site/index";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routes from "./routes";
 import {
   getActiveQuestion,
   getAllQuestions,
@@ -20,8 +19,8 @@ window.Pusher = require("pusher-js");
 window.Echo = new Echo({
   broadcaster: "pusher",
   key: "myKey",
-  wsHost: "127.0.0.1",
-  wsPort: 6001,
+  wsHost: process.env.REACT_APP_LARAVEL_ECHO_HOST,
+  wsPort: process.env.REACT_APP_LARAVEL_ECHO_PORT,
   forceTLS: false,
   disableStats: true,
 });
@@ -56,10 +55,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <AdminRoutes />
-        <SiteRoutes />
-      </BrowserRouter>
+      <Router>
+        <Routes />
+      </Router>
     </ThemeProvider>
   );
 }

@@ -6,6 +6,8 @@ import { topicReducer } from "./topicReducer";
 import { questionReducer } from "./questionReducer";
 import { reportReducer } from "./reportReducer";
 import { messageReducer } from "./messageReducer";
+import { subjectReducer } from "./subjectReducer";
+import { eventReducer } from "./eventReducer";
 
 export const rootReducer = combineReducers({
   alert: alertReducer,
@@ -15,4 +17,6 @@ export const rootReducer = combineReducers({
   questions: questionReducer,
   reports: reportReducer,
   messages: messageReducer,
+  subjects: subjectReducer,
+  events: eventReducer,
 });

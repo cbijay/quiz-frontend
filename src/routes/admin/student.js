@@ -6,18 +6,22 @@ import ViewStudent from "../../pages/students/ViewStudent";
 const studentRoutes = {
   path: "/students",
   component: Students,
+  scope: ["admin"],
   routes: [
     {
       path: "/add",
       component: AddStudent,
+      scope: ["admin"],
     },
     {
       path: "/edit/:id",
       component: EditStudent,
+      scope: ["admin"],
     },
     {
       path: "/:id",
       component: ViewStudent,
+      scope: ["admin"],
     },
   ],
 };

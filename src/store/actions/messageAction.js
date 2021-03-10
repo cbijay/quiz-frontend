@@ -35,6 +35,12 @@ export const createMessage = (request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Message created successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -51,6 +57,12 @@ export const updateMessage = (messageId, request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Message updated successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -72,6 +84,12 @@ export const deleteMessage = (messageId) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Message deleted successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,

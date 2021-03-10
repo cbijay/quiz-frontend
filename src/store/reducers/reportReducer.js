@@ -9,12 +9,10 @@ export const reportReducer = (state = initialState, action) => {
     case reportType.GET_REPORTS_DETAIL:
       return { ...state, reports: action.reports };
 
-    case reportType.REMOVE_REPORT:
+    case reportType.REMOVE_ANSWER:
       return {
         ...state,
-        questions: state.questions.filter(
-          (question) => question.id !== action.questions
-        ),
+        reports: state.reports.filter((report) => report.id !== action.reports),
       };
     default:
       return state;

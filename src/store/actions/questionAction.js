@@ -101,6 +101,12 @@ export const createQuestion = (topicId, request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Question created successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -117,6 +123,12 @@ export const importQuestion = (topicId, request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Question imported successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -134,6 +146,12 @@ export const openQuestion = (questionId, status) => async (dispatch) => {
         type: alertType.SUCCESS,
         message: "Question is active !!",
       });
+
+      setTimeout(() => {
+        dispatch({
+          type: alertType.CLEAR,
+        });
+      }, 1000);
     }
   } catch (error) {
     dispatch({
@@ -143,9 +161,11 @@ export const openQuestion = (questionId, status) => async (dispatch) => {
   }
 };
 
-export const updateStatus = (questionId, status) => async (dispatch) => {
+export const updateStatus = (topicId, questionId, status) => async (
+  dispatch
+) => {
   try {
-    const res = await questionService.updateStatus(questionId, status);
+    const res = await questionService.updateStatus(topicId, questionId, status);
 
     dispatch({
       type: questionType.UPDATE_QUESTION_STATUS,
@@ -156,6 +176,12 @@ export const updateStatus = (questionId, status) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: `Question updated successfully !!`,
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -172,6 +198,12 @@ export const updateQuestion = (questionId, request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Question updated successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -193,6 +225,12 @@ export const deleteQuestion = (questionId) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Question deleted successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,

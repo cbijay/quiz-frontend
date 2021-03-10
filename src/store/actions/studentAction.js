@@ -44,6 +44,12 @@ export const createStudent = (request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Student created successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -60,6 +66,12 @@ export const updateStudent = (studentId, request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Student updated successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -81,6 +93,12 @@ export const deleteStudent = (studentId) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Student deleted successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -102,6 +120,12 @@ export const updateStatus = (id, status) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Status updated successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -135,6 +159,12 @@ export const participantAnswer = (request, timeUp) => async (dispatch) => {
         type: alertType.SUCCESS,
         message: "Answer submited successfully!!",
       });
+
+      setTimeout(() => {
+        dispatch({
+          type: alertType.CLEAR,
+        });
+      }, 1000);
     }
   } catch (error) {
     dispatch({

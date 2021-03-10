@@ -17,10 +17,9 @@ const register = async (request) => {
   return await axios.post(`${apiUrl}/auth/register`, request);
 };
 
-const logout = async (request) => {
-  await axios.post(`${apiUrl}/auth/logout`, request);
-
-  localStorage.removeItem("user");
+const logout = async () => {
+  //await axios.post(`${apiUrl}/auth/logout`, request);
+  localStorage.clear();
 };
 
 export const authService = {

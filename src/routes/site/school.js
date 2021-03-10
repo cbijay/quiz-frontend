@@ -6,14 +6,17 @@ const schoolRoutes = [
   {
     path: "/team",
     component: SchoolTeam,
+    scope: ["site"],
   },
   {
     path: "/register",
     component: Register,
+    scope: ["site"],
   },
   {
     path: "/syllabus",
     component: SchoolSyllabus,
+    scope: ["site"],
   },
 ];
 

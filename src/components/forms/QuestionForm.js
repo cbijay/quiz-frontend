@@ -62,7 +62,6 @@ function QuestionForm({ topicId, formQuestion, mode }) {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     const formData = new FormData();
 
     formData.append("question", data.question);

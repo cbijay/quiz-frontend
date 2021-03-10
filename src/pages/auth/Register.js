@@ -14,6 +14,9 @@ const styles = () => ({
     fontSize: 1.25 + "rem",
     marginBottom: 20,
   },
+  formLabel: {
+    display: "block",
+  },
 });
 
 function Register({ classes }) {
@@ -50,7 +53,7 @@ function Register({ classes }) {
               closeAlert={closeAlert}
             />
           )}
-          <RegisterForm />
+          <RegisterForm classes={classes} />
         </CardContent>
       </Card>
     </AuthLayout>

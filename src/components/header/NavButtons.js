@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Divider,
@@ -5,7 +6,6 @@ import {
   makeStyles,
   useMediaQuery,
 } from "@material-ui/core";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../store/actions/authAction";
@@ -55,7 +55,6 @@ const NavButtons = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log("hello");
     dispatch(logout());
     history.push("/login");
   };
@@ -106,6 +105,14 @@ const NavButtons = () => {
           className={classes.navBtn}
         >
           Contact Us
+        </Button>
+        <Button
+          color="inherit"
+          component={Link}
+          to="/events"
+          className={classes.navBtn}
+        >
+          Events
         </Button>
       </Grid>
       {small && <Divider style={{ marginBottom: small && 50 }} />}

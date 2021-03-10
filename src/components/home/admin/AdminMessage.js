@@ -6,7 +6,6 @@ import {
   withStyles,
 } from "@material-ui/core";
 import React from "react";
-import Marquee from "react-double-marquee";
 import theme from "../../../styles/theme";
 
 const styles = {
@@ -17,26 +16,25 @@ const styles = {
   cardBody: {
     paddingBottom: "16px !important",
   },
+  newsTicker: {
+    backgroundColor: "transparent !important",
+  },
 };
 
 function AdminMessage({ messages, classes }) {
   return (
     <Card className={classes.cardContainer}>
       <CardContent className={classes.cardBody}>
-        <Grid container spacing={1}>
-          <Grid zeroMinWidth item>
-            <Typography>Messages:</Typography>
+        {messages.length > 0 ? (
+          <Grid container spacing={1}>
+            <Grid zeroMinWidth item>
+              <Typography>Messages:</Typography>
+            </Grid>
+            <Grid item>{messages.map(({ description }) => description)}</Grid>
           </Grid>
-          <Grid item>
-            <Marquee direction="left" delay={500}>
-              {messages.map(({ description }, index) => (
-                <Typography component="span" variant="body1" key={index}>
-                  {description} &nbsp;
-                </Typography>
-              ))}
-            </Marquee>
-          </Grid>
-        </Grid>
+        ) : (
+          <Typography>No message!!</Typography>
+        )}
       </CardContent>
     </Card>
   );

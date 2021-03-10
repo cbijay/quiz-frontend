@@ -43,6 +43,7 @@ function ActiveQuestion({ classes }) {
               variant="h6"
               color="primary"
               gutterBottom
+              className={classes.title}
             >
               User Question
             </Typography>

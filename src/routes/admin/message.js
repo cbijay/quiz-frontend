@@ -5,14 +5,17 @@ import EditMessage from "../../pages/messages/EditMessage";
 const messageRoutes = {
   path: "/messages",
   component: Messages,
+  scope: ["admin"],
   routes: [
     {
       path: "/add",
       component: AddMessage,
+      scope: ["admin"],
     },
     {
       path: "/edit/:id",
       component: EditMessage,
+      scope: ["admin"],
     },
   ],
 };

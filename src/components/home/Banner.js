@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
   },
   bannerImage: {
     objectFit: "cover",
-    // width: '87vw',
     width: "96.5vw",
     height: "40vw",
     boxShadow: "inset 100px 0px 100px black",
@@ -26,10 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   bannerContent: {
     position: "absolute",
-    marginLeft: "auto",
-    marginRight: "auto",
-    right: 0,
-    left: 0,
     top: 0,
     width: "96.5vw",
     height: "100%",
@@ -37,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "85vw",
       height: "100%",
     },

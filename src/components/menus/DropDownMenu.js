@@ -71,6 +71,7 @@ function DropDownMenu({ menu, subMenu, userMenu, classes }) {
         <ArrowDropDownIcon />
       </Button>
       <Popper
+        style={{ zIndex: 999 }}
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}

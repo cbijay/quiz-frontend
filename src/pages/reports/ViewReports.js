@@ -11,9 +11,11 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Button,
 } from "@material-ui/core";
+import { Delete as DeleteIcon } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { getReports } from "../../store/actions/reportAction";
+import { deleteAnswer, getReports } from "../../store/actions/reportAction";
 import AppStyle from "../../styles/AppStyle";
 import { getTopic } from "../../store/actions/topicAction";
 
@@ -33,12 +35,17 @@ function ViewReports({ match }) {
     { headingName: "Mobile" },
     { headingName: "Marks" },
     { headingName: "Total Marks" },
+    { headingName: "Actions" },
   ];
 
   useEffect(() => {
     dispatch(getTopic(topicId));
     dispatch(getReports(topicId));
   }, [dispatch, topicId]);
+
+  const handleDelete = (userId) => {
+    dispatch(deleteAnswer(topicId, userId));
+  };
 
   return (
     <AppLayout>
@@ -75,11 +82,24 @@ function ViewReports({ match }) {
                       <TableCell> {name} </TableCell>
                       <TableCell> {mobile} </TableCell>
                       <TableCell>
-                        {answers.filter(
-                          (answer) => answer.answer === answer.user_answer
-                        ).length * per_q_mark}
+                        {answers &&
+                          answers.filter(
+                            (answer) => answer.answer === answer.user_answer
+                          ).length * per_q_mark}
                       </TableCell>
                       <TableCell>{questions * per_q_mark}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="small"
+                          className={classes.button}
+                          onClick={() => handleDelete(id)}
+                        >
+                          <DeleteIcon className={classes.buttonIcon} />
+                          Reset Response
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   )
                 )

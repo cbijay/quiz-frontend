@@ -40,7 +40,6 @@ import AppStyle from "../../styles/AppStyle";
 function QuestionTableRow(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  //const classes = useRowStyles();
   const classes = AppStyle();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -58,7 +57,7 @@ function QuestionTableRow(props) {
 
     status === true ? (questionStatus = 1) : (questionStatus = 0);
 
-    dispatch(updateStatus(id, questionStatus));
+    dispatch(updateStatus(row.topic_id, id, questionStatus));
   };
 
   return (

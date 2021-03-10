@@ -35,6 +35,12 @@ export const createTopic = (request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Topic created successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -51,6 +57,12 @@ export const updateTopic = (topicId, request) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Topic updated successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,
@@ -72,6 +84,12 @@ export const deleteTopic = (topicId) => async (dispatch) => {
       type: alertType.SUCCESS,
       message: "Topic deleted successfully!!",
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: alertType.CLEAR,
+      });
+    }, 1000);
   } catch (error) {
     dispatch({
       type: alertType.ERROR,

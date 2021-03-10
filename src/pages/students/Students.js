@@ -25,7 +25,6 @@ function Students() {
     { headingName: "#" },
     { headingName: "Student Name" },
     { headingName: "Email" },
-    { headingName: "Phone No." },
     { headingName: "Status" },
     { headingName: "Actions" },
   ];

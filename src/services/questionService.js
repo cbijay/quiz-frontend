@@ -46,9 +46,9 @@ const openQuestion = async (questionId, status) => {
   );
 };
 
-const updateStatus = async (questionId, status) => {
+const updateStatus = async (topicId, questionId, status) => {
   return await axios.post(
-    `${apiUrl}/v1/admin/questions/${questionId}/${status}/updateStatus`
+    `${apiUrl}/v1/admin/${topicId}/questions/${questionId}/${status}/updateStatus`
   );
 };
 

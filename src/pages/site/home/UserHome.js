@@ -31,6 +31,7 @@ function UserHome({ classes }) {
 
   return (
     <SiteLayout>
+      UserHome
       <Container>
         <Grid container spacing={1} justify="space-between">
           <Grid item xs={12} lg={12}>
