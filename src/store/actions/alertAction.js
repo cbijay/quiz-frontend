@@ -1,21 +1,21 @@
-import { alertType } from "./types/alertType";
+import alertType from "./types/alertType";
 
 export const success = (message) => {
   return {
-    type: alertType.SUCCESS,
+    type: alertType?.SUCCESS,
     message,
   };
 };
 
 export const error = (message) => {
   return {
-    type: alertType.ERROR,
+    type: alertType?.ERROR,
     message,
   };
 };
 
 export const clear = (message) => {
   return {
-    type: alertType.CLEAR,
+    type: alertType?.CLEAR,
   };
 };

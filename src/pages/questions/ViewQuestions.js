@@ -39,6 +39,7 @@ function ViewQuestions({ match }) {
   const columns = [
     { headingName: "#", align: "left" },
     { headingName: "Questions", align: "left" },
+    { headingName: "Question Name", align: "center" },
     { headingName: "Status", align: "center" },
     { headingName: "Actions", align: "left" },
   ];

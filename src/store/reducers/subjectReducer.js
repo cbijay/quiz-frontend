@@ -1,4 +1,4 @@
-import { subjectType } from "../actions/types/subjectType";
+import subjectType from "../actions/types/subjectType";
 
 const initialState = {
   subjects: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 export const subjectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case subjectType.GET_SUBJECTS_DETAIL:
+    case subjectType?.GET_SUBJECTS_DETAIL:
       return { ...state, subjects: action.subjects };
 
     default:

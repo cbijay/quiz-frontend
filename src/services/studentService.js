@@ -18,8 +18,9 @@ const createStudent = async (request) => {
   return await axios.post(`${apiUrl}/v1/admin/students`, request);
 };
 
-const updateStudent = async (studentId, request) => {
-  return await axios.put(`${apiUrl}/v1/admin/students/${studentId}`, request);
+const updateStudent = async (request, studentId) => {
+  console.log(request);
+  return await axios.post(`${apiUrl}/v1/admin/students/${studentId}`, request);
 };
 
 const deleteStudent = async (studentId) => {
@@ -27,7 +28,7 @@ const deleteStudent = async (studentId) => {
 };
 
 const updateStatus = async (studentId, status) => {
-  return await axios.post(`${apiUrl}/v1/admin/students/${studentId}/${status}`);
+  return await axios.put(`${apiUrl}/v1/admin/students/${studentId}/${status}`);
 };
 
 const participants = async () => {

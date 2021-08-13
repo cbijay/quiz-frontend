@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { importQuestion } from "../../store/actions/questionAction";
 import usePreviousLocation from "../../hooks/usePreviousLocation";
 import { useDispatch } from "react-redux";
-import { Backup as BackupIcon } from "@material-ui/icons";
 
 function QuestionImportForm({ topicId }) {
   const [questionFile, setQuestionFile] = useState();
@@ -29,8 +28,8 @@ function QuestionImportForm({ topicId }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="question_file">
+        Import Question Via Excel File
         <Input
-          style={{ display: "none" }}
           id="question_file"
           name="question_file"
           type="file"
@@ -41,11 +40,8 @@ function QuestionImportForm({ topicId }) {
           helpertext={
             !!errors.question_file ? errors.question_file.message : ""
           }
+          style={{ marginBottom: 20 }}
         />
-        <Button color="primary" variant="contained" component="span">
-          <BackupIcon />
-          &nbsp; Import Question Via Excel File
-        </Button>{" "}
       </label>
 
       <Grid container spacing={2}>

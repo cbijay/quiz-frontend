@@ -19,6 +19,10 @@ const styles = {
   newsTicker: {
     backgroundColor: "transparent !important",
   },
+  messageText: {
+    lineHeight: 1.8,
+    marginRight: 150,
+  },
 };
 
 function AdminMessage({ messages, classes }) {
@@ -27,10 +31,19 @@ function AdminMessage({ messages, classes }) {
       <CardContent className={classes.cardBody}>
         {messages.length > 0 ? (
           <Grid container spacing={1}>
-            <Grid zeroMinWidth item>
+            <Grid zeroMinWidth item xs={12} md={2}>
               <Typography>Messages:</Typography>
             </Grid>
-            <Grid item>{messages.map(({ description }) => description)}</Grid>
+            <Grid item xs={12} md={10}>
+              {/*eslint-disable-next-line*/}
+              <marquee behavior="scroll" direction="left">
+                {messages.map(({ description }) => (
+                  <span className={classes.messageText}>
+                    {description + " "}
+                  </span>
+                ))}
+              </marquee>
+            </Grid>
           </Grid>
         ) : (
           <Typography>No message!!</Typography>

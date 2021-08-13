@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import SiteLayout from "../../../layouts/SiteLayout";
 import {
   Grid,
@@ -85,6 +85,19 @@ function AdminHome({ classes }) {
     dispatch(getMessages());
     dispatch(getParticipants());
   }, [dispatch]);
+
+  const listen = useCallback(() => {
+    window.Echo.channel(`participants`).listen(
+      ".App\\Events\\ParticipantScore",
+      () => {
+        dispatch(getParticipants());
+      }
+    );
+  }, [dispatch]);
+
+  useEffect(() => {
+    listen();
+  }, [listen]);
 
   return (
     <SiteLayout>

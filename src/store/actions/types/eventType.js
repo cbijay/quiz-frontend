@@ -1,6 +1,8 @@
-export const eventType = {
+const eventType = {
   GET_EVENTS_DETAIL: "GET_EVENTS_DETAIL",
   GET_EVENT_DETAIL: "GET_EVENT_DETAIL",
   REMOVE_EVENT: "REMOVE_EVENT",
   GET_SITE_EVENTS_DETAIL: "GET_SITE_EVENTS_DETAIL",
 };
+
+export default eventType;

@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../../store/actions/authAction";
 import DropDownMenu from "../menus/DropDownMenu";
 import clsx from "clsx";
@@ -51,12 +51,10 @@ const NavButtons = () => {
   const { user } = useSelector((state) => state.auth);
   const { user: { role } = {} } = useSelector((state) => state.auth);
   const admin = role === "A" ? true : false;
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
-    history.push("/login");
   };
 
   const userSubMenu = [{ name: "Log out", handleClick: handleLogout }];

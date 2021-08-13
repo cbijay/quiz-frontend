@@ -8,7 +8,6 @@ import {
   Input,
   withStyles,
 } from "@material-ui/core";
-import { Backup as BackupIcon } from "@material-ui/icons";
 import { useForm } from "react-hook-form";
 import usePreviousLocation from "../../hooks/usePreviousLocation";
 import { useDispatch } from "react-redux";
@@ -28,14 +27,8 @@ const styles = {
 };
 
 function StudentForm({ student, mode, classes }) {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    getValues,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, errors, setValue, getValues, reset } =
+    useForm();
   const {
     id,
     name,
@@ -66,9 +59,10 @@ function StudentForm({ student, mode, classes }) {
     formData.append("address", data.address);
     formData.append("role", data.role);
     formData.append("user_img", userImage);
+    formData.append("method_field", "PUT");
 
     if (mode === "edit") {
-      dispatch(updateStudent(id, formData));
+      dispatch(updateStudent(formData, id));
     } else {
       dispatch(createStudent(formData));
       reset();
@@ -107,7 +101,7 @@ function StudentForm({ student, mode, classes }) {
   ]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} method="post">
       <Grid container spacing={1}>
         <Grid item xs={12} lg={6}>
           <TextField
@@ -118,6 +112,7 @@ function StudentForm({ student, mode, classes }) {
             label="Name"
             defaultValue={getValues("name") ? getValues("name") : ""}
             inputRef={register({ required: "Name is required" })}
+            InputLabelProps={mode === "edit" && { shrink: true }}
             error={!!errors.name}
             helperText={!!errors.name ? errors.name.message : ""}
           />
@@ -131,6 +126,7 @@ function StudentForm({ student, mode, classes }) {
             label="Email"
             defaultValue={getValues("email") ? getValues("email") : ""}
             inputRef={register({ required: "Email is required" })}
+            InputLabelProps={mode === "edit" && { shrink: true }}
             error={!!errors.email}
             helperText={!!errors.email ? errors.email.message : ""}
           />
@@ -144,6 +140,7 @@ function StudentForm({ student, mode, classes }) {
             label="Grade"
             defaultValue={getValues("grade") ? getValues("grade") : ""}
             inputRef={register}
+            InputLabelProps={mode === "edit" && { shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -156,6 +153,7 @@ function StudentForm({ student, mode, classes }) {
             label="Age"
             defaultValue={getValues("age") ? getValues("age") : ""}
             inputRef={register}
+            InputLabelProps={mode === "edit" && { shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -169,6 +167,7 @@ function StudentForm({ student, mode, classes }) {
               getValues("phone_number") ? getValues("phone_number") : ""
             }
             inputRef={register}
+            InputLabelProps={mode === "edit" && { shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -182,6 +181,7 @@ function StudentForm({ student, mode, classes }) {
               getValues("parents_name") ? getValues("parents_name") : ""
             }
             inputRef={register}
+            InputLabelProps={mode === "edit" && { shrink: true }}
           />
         </Grid>
         {mode !== "edit" ? (
@@ -210,6 +210,7 @@ function StudentForm({ student, mode, classes }) {
             label="City"
             defaultValue={getValues("city") ? getValues("city") : ""}
             inputRef={register}
+            InputLabelProps={mode === "edit" && { shrink: true }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -223,23 +224,21 @@ function StudentForm({ student, mode, classes }) {
             rows={4}
             defaultValue={getValues("address") ? getValues("address") : ""}
             inputRef={register}
+            InputLabelProps={mode === "edit" && { shrink: true }}
           />
         </Grid>
       </Grid>
 
       <Input type="hidden" name="role" value="S" inputRef={register} />
       <label htmlFor="user_img" className={classes.uploadBtn}>
+        Upload Photo
         <Input
-          style={{ display: "none" }}
           id="user_img"
           name="user_img"
           type="file"
           onChange={handleFileChange}
+          defaultValue={getValues("user_img") ? getValues("user_img") : ""}
         />
-        <Button color="primary" variant="contained" component="span">
-          <BackupIcon />
-          &nbsp;Upload Photo
-        </Button>{" "}
       </label>
       {mode === "edit" ? (
         <FormControlLabel

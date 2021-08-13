@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Grid,
   Card,
@@ -10,8 +10,9 @@ import {
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { participantAnswer } from "../../../store/actions/studentAction";
-import { getActiveQuestion } from "../../../store/actions/questionAction";
 import useTimer from "../../../hooks/useTimer";
+import AppEcho from "../../../config/socketConfig";
+import { getActiveQuestion } from "../../../store/actions/questionAction";
 
 const styles = {
   container: {
@@ -26,9 +27,15 @@ function UserQuestion({ classes }) {
   const [userAnswer, setUserAnswer] = useState();
   let { minutes, seconds } = useTimer(userAnswer);
 
-  useEffect(() => {
-    dispatch(getActiveQuestion());
+  const listen = useCallback(() => {
+    AppEcho.channel(`question`).listen(".App\\Events\\ActiveQuestion", () => {
+      dispatch(getActiveQuestion());
+    });
   }, [dispatch]);
+
+  useEffect(() => {
+    listen();
+  }, [listen]);
 
   useEffect(() => {
     const answer =
@@ -76,17 +83,24 @@ function UserQuestion({ classes }) {
               </Grid>
             </Grid>
 
-            {userAnswer &&
-            Number(userAnswer.user_answer) === 0 &&
-            question.timer > 0 &&
-            minutes === 0 &&
-            seconds === 0 ? (
+            {question?.users.length > 0 &&
+            Number(userAnswer?.user_answer) !== 0 &&
+            userAnswer !== false ? (
+              <Typography component="p">
+                Please wait for another question
+              </Typography>
+            ) : question?.users.length > 0 &&
+              Number(userAnswer?.user_answer) === 0 &&
+              userAnswer !== false &&
+              minutes === 0 &&
+              seconds === 0 ? (
               <Typography component="p">
                 Time up, please wait for another question
               </Typography>
-            ) : userAnswer ? (
+            ) : question?.status === 2 && minutes === 0 && seconds === 0 ? (
               <Typography component="p">
-                Please wait for another question
+                Time Up from admin, You're too late too answer, please wait for
+                another question
               </Typography>
             ) : (
               <>

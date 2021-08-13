@@ -41,9 +41,9 @@ const AppStyle = makeStyles((theme) => ({
     },
   },
   greenButton: {
-    background: "#4caf50",
+    background: "#4caf50 !important",
     "&:hover": {
-      background: "#357a38",
+      background: "#357a38 !important",
     },
   },
   buttonIcon: {

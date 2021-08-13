@@ -40,22 +40,27 @@ function useTimer(userAnswer) {
     if (userAnswer) {
       setMinutes(0);
       setSeconds(0);
-    } else if (oldMinutes) {
-      if (oldSeconds) {
-        if (question) {
-          dispatch(resetTimerStatus(question.id, 0));
-        }
-        if (question && question.reset === 1) {
-          setMinutes(
-            question && question.hasOwnProperty("timer")
-              ? Number(question.timer)
-              : 0
-          );
-          setSeconds(initialSeconds);
-        } else {
-          setMinutes(oldMinutes);
-          setSeconds(oldSeconds);
-        }
+    } else if (question?.status === 2) {
+      setMinutes(0);
+      setSeconds(0);
+    } else if (oldSeconds) {
+      if (question) {
+        dispatch(resetTimerStatus(question.id, 0));
+      }
+
+      if (question && question.reset === 1) {
+        setMinutes(
+          question && question.hasOwnProperty("timer") && Number(question.timer)
+        );
+        /* setMinutes(
+          question && question.hasOwnProperty("timer")
+            ? Number(question.timer)
+            : 0
+        ); */
+        setSeconds(initialSeconds);
+      } else {
+        setMinutes(oldMinutes);
+        setSeconds(oldSeconds);
       }
     } else {
       setMinutes(
@@ -103,7 +108,7 @@ function useTimer(userAnswer) {
 
       localStorage.setItem("minutes", minutes);
       localStorage.setItem("seconds", seconds);
-    }, 1000);
+    }, 2000);
     return () => {
       clearInterval(interval);
     };

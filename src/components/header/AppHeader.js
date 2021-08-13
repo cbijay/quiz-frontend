@@ -14,7 +14,7 @@ import {
   ExitToApp as ExitToAppIcon,
 } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../../store/actions/authAction";
 
 const styles = () => ({
@@ -38,12 +38,10 @@ const styles = () => ({
 
 function AppHeader({ open, handleDrawerOpen, handleDrawerClose, classes }) {
   const { user } = useSelector((state) => state.auth);
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
-    history.push("/login");
   };
 
   return (

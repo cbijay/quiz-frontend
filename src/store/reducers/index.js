@@ -8,6 +8,7 @@ import { reportReducer } from "./reportReducer";
 import { messageReducer } from "./messageReducer";
 import { subjectReducer } from "./subjectReducer";
 import { eventReducer } from "./eventReducer";
+import { paymentReducer } from "./paymentReducer";
 
 export const rootReducer = combineReducers({
   alert: alertReducer,
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
   messages: messageReducer,
   subjects: subjectReducer,
   events: eventReducer,
+  payments: paymentReducer,
 });

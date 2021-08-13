@@ -1,4 +1,4 @@
-import { reportType } from "../actions/types/reportType";
+import reportType from "../actions/types/reportType";
 
 const initialState = {
   reports: [],
@@ -6,10 +6,10 @@ const initialState = {
 
 export const reportReducer = (state = initialState, action) => {
   switch (action.type) {
-    case reportType.GET_REPORTS_DETAIL:
+    case reportType?.GET_REPORTS_DETAIL:
       return { ...state, reports: action.reports };
 
-    case reportType.REMOVE_ANSWER:
+    case reportType?.REMOVE_ANSWER:
       return {
         ...state,
         reports: state.reports.filter((report) => report.id !== action.reports),

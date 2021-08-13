@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Grid,
   Card,
@@ -14,12 +14,23 @@ import {
   openQuestion,
 } from "../../../store/actions/questionAction";
 import useTimer from "../../../hooks/useTimer";
+import AppEcho from "../../../config/socketConfig";
 
 function ActiveQuestion({ classes }) {
   const dispatch = useDispatch();
   const { question } = useSelector((state) => state.questions);
   const [questionOption, setQuestionOption] = useState(false);
   const { minutes, seconds } = useTimer("");
+
+  const listen = useCallback(() => {
+    AppEcho.channel(`question`).listen(".App\\Events\\ActiveQuestion", () => {
+      dispatch(getActiveQuestion());
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    listen();
+  }, [listen]);
 
   useEffect(() => {
     dispatch(getActiveQuestion());
@@ -57,10 +68,7 @@ function ActiveQuestion({ classes }) {
         </Grid>
 
         {question ? (
-          question.status === 2 &&
-          question.timer &&
-          minutes === 0 &&
-          seconds === 0 ? (
+          question.status === 2 && minutes === 0 && seconds === 0 ? (
             <Typography>Time up!! Please pick another question</Typography>
           ) : (
             <>
@@ -82,53 +90,10 @@ function ActiveQuestion({ classes }) {
                     variant="contained"
                     onClick={handleQuestionOption}
                   >
-                    Show Options
+                    {questionOption ? "Hide Options" : "Show Options"}
                   </Button>
                 </Grid>
               </Grid>
-
-              {/* <Grid container spacing={1}>
-                <Grid item xs={12} lg={6}>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    className={question.answer === "A" ? classes.success : ""}
-                  >
-                    {question.a}
-                  </Button>
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    className={question.answer === "B" ? classes.success : ""}
-                  >
-                    {question.b}
-                  </Button>
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    className={question.answer === "C" ? classes.success : ""}
-                  >
-                    {question.c}
-                  </Button>
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    className={question.answer === "D" ? classes.success : ""}
-                  >
-                    {question.d}
-                  </Button>
-                </Grid>
-              </Grid> */}
 
               <Collapse in={questionOption} className={classes.container}>
                 <Grid container spacing={1}>

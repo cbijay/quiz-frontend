@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
 import { useSelector } from "react-redux";
 import { Typography, Card, CardContent, withStyles } from "@material-ui/core";
-import DismissableAlert from "../../components/alert/DismissableAlert";
-import useAlertStatus from "../../hooks/useAlertStatus";
+import AlertMessage from "../../components/alert/AlertMessage";
 import RegisterForm from "../../components/forms/RegisterForm";
 import { useHistory } from "react-router-dom";
 import SiteHeader from "../../components/header/SiteHeader";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 const styles = () => ({
   subTitle: {
@@ -17,6 +18,16 @@ const styles = () => ({
   formLabel: {
     display: "block",
   },
+  cardWrapper: {
+    margin: "15px 0",
+    border: "1px solid #ddd",
+    padding: "16px",
+  },
+  error: {
+    color: "#f44336",
+    fontSize: ".75rem",
+    marginBottom: ".5rem",
+  },
 });
 
 function Register({ classes }) {
@@ -25,7 +36,6 @@ function Register({ classes }) {
   const student = role === "S" ? true : false;
   const history = useHistory();
   const { type, message } = useSelector((state) => state.alert);
-  const { isOpen, closeAlert } = useAlertStatus();
 
   useEffect(() => {
     if (loggedIn && admin) {
@@ -37,6 +47,10 @@ function Register({ classes }) {
     }
   }, [history, admin, student, loggedIn]);
 
+  const stripePromise = loadStripe(
+    process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+  );
+
   return (
     <AuthLayout>
       <SiteHeader />
@@ -45,15 +59,10 @@ function Register({ classes }) {
       </Typography>
       <Card>
         <CardContent>
-          {message && (
-            <DismissableAlert
-              open={isOpen}
-              type={type}
-              message={message}
-              closeAlert={closeAlert}
-            />
-          )}
-          <RegisterForm classes={classes} />
+          {message && <AlertMessage type={type} message={message} />}
+          <Elements stripe={stripePromise}>
+            <RegisterForm classes={classes} />
+          </Elements>
         </CardContent>
       </Card>
     </AuthLayout>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTopics } from "../../../store/actions/topicAction";
 import {
   getQuestion,
-  getQuestions,
+  getTopicQuestions,
 } from "../../../store/actions/questionAction";
 
 const styles = {
@@ -33,17 +33,32 @@ const styles = {
 function PickQuestions({ classes }) {
   const dispatch = useDispatch();
   const { topics } = useSelector((state) => state.topics);
-  const { questions } = useSelector((state) => state.questions);
+  const { topicQuestions } = useSelector((state) => state.questions);
   const [selectedId, setSelectedId] = useState();
   const [search, setSearch] = useState();
+  //const topicId = localStorage.getItem('topicId');
 
   useEffect(() => {
     dispatch(getTopics());
   }, [dispatch]);
 
+  const listen = useCallback(() => {
+    window.Echo.channel(`question`).listen(
+      ".App\\Events\\ActiveQuestion",
+      () => {
+        if (selectedId) dispatch(getTopicQuestions(selectedId));
+      }
+    );
+  }, [dispatch, selectedId]);
+
+  useEffect(() => {
+    listen();
+  }, [listen]);
+
   const handleTopicQuestion = (topicId) => {
     setSelectedId(topicId);
-    dispatch(getQuestions(topicId));
+    dispatch(getTopicQuestions(topicId));
+    //localStorage.setItem("topicId", topicId);
   };
 
   const handleQuestion = (questionId) => {
@@ -56,8 +71,8 @@ function PickQuestions({ classes }) {
   };
 
   const filteredQuestions =
-    questions &&
-    questions.filter(
+    topicQuestions &&
+    topicQuestions.filter(
       (question) =>
         search && question.question_order === search && question.status === 0
     );
@@ -99,7 +114,7 @@ function PickQuestions({ classes }) {
                   onKeyUp={handleSearch}
                 />
 
-                {search &&
+                {search > 0 &&
                   (filteredQuestions.length > 0 ? (
                     filteredQuestions.map(
                       ({ id, question, question_order }, questionIndex) => (

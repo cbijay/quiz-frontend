@@ -32,7 +32,6 @@ function ViewReports({ match }) {
   const columns = [
     { headingName: "#" },
     { headingName: "Student" },
-    { headingName: "Mobile" },
     { headingName: "Marks" },
     { headingName: "Total Marks" },
     { headingName: "Actions" },
@@ -80,7 +79,6 @@ function ViewReports({ match }) {
                     <TableRow key={index}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell> {name} </TableCell>
-                      <TableCell> {mobile} </TableCell>
                       <TableCell>
                         {answers &&
                           answers.filter(

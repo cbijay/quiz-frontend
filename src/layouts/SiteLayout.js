@@ -3,7 +3,7 @@ import { CssBaseline, Box, withStyles, Grid } from "@material-ui/core";
 import theme from "../styles/theme";
 import SiteHeader from "../components/header/SiteHeader";
 import { useSelector } from "react-redux";
-import { Alert } from "@material-ui/lab";
+import AlertMessage from "../components/alert/AlertMessage";
 import SiteFooter from "../components/footer/SiteFooter";
 
 const styles = () => ({
@@ -20,9 +20,6 @@ const styles = () => ({
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(4),
   },
-  alertContainer: {
-    marginBottom: 10,
-  },
 });
 
 function SiteLayout({ children, classes }) {
@@ -36,11 +33,7 @@ function SiteLayout({ children, classes }) {
         <div className={classes.appBarSpacer} />
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {message && (
-              <Alert severity={type} className={classes.alertContainer}>
-                {message}
-              </Alert>
-            )}
+            {message && <AlertMessage type={type} message={message} />}
           </Grid>
         </Grid>
         {children}

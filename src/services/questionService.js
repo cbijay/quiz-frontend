@@ -37,7 +37,10 @@ const importQuestion = async (topicId, request) => {
 };
 
 const updateQuestion = async (questionId, request) => {
-  return await axios.put(`${apiUrl}/v1/admin/questions/${questionId}`, request);
+  return await axios.post(
+    `${apiUrl}/v1/admin/questions/${questionId}`,
+    request
+  );
 };
 
 const openQuestion = async (questionId, status) => {
@@ -45,6 +48,12 @@ const openQuestion = async (questionId, status) => {
     `${apiUrl}/v1/admin/questions/${questionId}/open/${status}`
   );
 };
+
+/* const timeUpQuestion = async (questionId, status) => {
+  return await axios.post(
+    `${apiUrl}/v1/admin/questions/${questionId}/timeUp/${status}`
+  );
+}; */
 
 const updateStatus = async (topicId, questionId, status) => {
   return await axios.post(
@@ -76,6 +85,7 @@ export const questionService = {
   importQuestion,
   updateQuestion,
   openQuestion,
+  //timeUpQuestion,
   updateStatus,
   deleteQuestion,
   getActiveQuestion,

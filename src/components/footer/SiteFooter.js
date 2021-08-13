@@ -97,7 +97,7 @@ const SiteFooter = () => {
                     color="inherit"
                     noWrap
                   >
-                    NST SCHOOL QUIZ
+                    NST SCHOOL
                   </Typography>
                 </Link>
               </Grid>
@@ -148,14 +148,14 @@ const SiteFooter = () => {
               </Grid>
               <Grid item xs={10} md={8}>
                 <Typography className={classes.actionButton} gutterBottom>
-                  2914 Huntington Grove Square Alexandria, VA 22306
+                  2016 W Grauwyler Rd, Irving, TX 75061
                 </Typography>
-                <Typography className={classes.actionButton} gutterBottom>
+                {/* <Typography className={classes.actionButton} gutterBottom>
                   912 Saratoga Way Coppell, TX 75019
                 </Typography>
                 <Typography className={classes.actionButton} gutterBottom>
                   Treasurer Address: 15911 SW 68Th LN Miami, FL 33193-3623
-                </Typography>
+                </Typography> */}
               </Grid>
             </Grid>
           </Grid>

@@ -1,16 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
-  Badge,
+  //Badge,
   Card,
   CardContent,
   Grid,
   Typography,
+  Table,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
   withStyles,
 } from "@material-ui/core";
-import clsx from "clsx";
+//import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import theme from "../../styles/theme";
 import { getAskedQuestion } from "../../store/actions/questionAction";
+import AppEcho from "../../config/socketConfig";
 
 const styles = {
   cardContainer: {
@@ -62,14 +68,19 @@ const styles = {
 function AskedQuestion({ classes }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { totalQuestions } = useSelector((state) => state.questions);
+  const { askedQuestions: { questions, count } = {} } = useSelector(
+    (state) => state.questions
+  );
 
-  const questionColor = [
-    `${classes.success}`,
-    `${classes.primary}`,
-    `${classes.dark}`,
-    `${classes.secondary}`,
-  ];
+  const listen = useCallback(() => {
+    AppEcho.channel(`question`).listen(".App\\Events\\ActiveQuestion", () => {
+      dispatch(getAskedQuestion());
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    listen();
+  }, [listen]);
 
   useEffect(() => {
     dispatch(getAskedQuestion());
@@ -84,7 +95,7 @@ function AskedQuestion({ classes }) {
               <Typography>Total Number of Question Asked:</Typography>
             </Grid>
             <Grid item>
-              <Typography>{totalQuestions && totalQuestions.length}</Typography>
+              <Typography>{count && count}</Typography>
             </Grid>
           </Grid>
         )}
@@ -94,22 +105,41 @@ function AskedQuestion({ classes }) {
             <Typography component="h2" variant="h6" gutterBottom>
               Questions Asked
             </Typography>
-            {totalQuestions &&
-              totalQuestions.map(({ question_order }, index) => (
-                <Badge
-                  key={index}
-                  content={question_order}
-                  color="primary"
-                  className={clsx(
-                    classes.badge,
-                    questionColor[
-                      Math.floor(Math.random() * questionColor.length)
-                    ]
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell className={classes.tableCell}>Topic</TableCell>
+                  <TableCell className={classes.tableCell}>
+                    Question Number
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {questions &&
+                  questions.map(
+                    ({ title, question }, index) =>
+                      question.length > 0 && (
+                        <TableRow key={index}>
+                          <TableCell className={classes.tableCell}>
+                            {title}
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            className={classes.tableCell}
+                          >
+                            {question.map(
+                              ({ question_order }, questionIndex) => (
+                                <span key={questionIndex}>
+                                  {(questionIndex ? ", " : "") + question_order}
+                                </span>
+                              )
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      )
                   )}
-                >
-                  {question_order}
-                </Badge>
-              ))}
+              </TableBody>
+            </Table>
           </>
         )}
       </CardContent>

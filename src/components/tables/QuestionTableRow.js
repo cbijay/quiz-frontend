@@ -29,14 +29,6 @@ import {
 } from "../../store/actions/questionAction";
 import AppStyle from "../../styles/AppStyle";
 
-/* const useRowStyles = makeStyles({
-  root: {
-    "& > *": {
-      borderBottom: "unset",
-    },
-  },
-}); */
-
 function QuestionTableRow(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -73,10 +65,11 @@ function QuestionTableRow(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.question}
+          {row?.question}
         </TableCell>
+        <TableCell align="center">{row?.question_order}</TableCell>
         <TableCell align="center">
-          {row.status === 1 ? "Active" : "Inactive"}
+          {row.status === 0 ? "Inactive" : "Active"}
         </TableCell>
         <TableCell>
           <Grid container spacing={1}>
@@ -117,7 +110,7 @@ function QuestionTableRow(props) {
                 ) : (
                   <CloseIcon className={classes.buttonIcon} />
                 )}
-                {row.status === 0 ? "Active" : "Inactive"}{" "}
+                {row.status === 0 ? "Active" : "Inactive"}
               </Button>
             </Grid>
           </Grid>
@@ -142,11 +135,11 @@ function QuestionTableRow(props) {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell>{row.a}</TableCell>
-                    <TableCell>{row.b}</TableCell>
-                    <TableCell>{row.c}</TableCell>
-                    <TableCell>{row.d}</TableCell>
-                    <TableCell>{row.answer}</TableCell>
+                    <TableCell>{row?.a}</TableCell>
+                    <TableCell>{row?.b}</TableCell>
+                    <TableCell>{row?.c}</TableCell>
+                    <TableCell>{row?.d}</TableCell>
+                    <TableCell>{row?.answer}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

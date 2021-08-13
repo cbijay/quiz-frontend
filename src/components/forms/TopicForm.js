@@ -14,14 +14,8 @@ import { useDispatch } from "react-redux";
 import { createTopic, updateTopic } from "../../store/actions/topicAction";
 
 function TopicForm({ topic, mode }) {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    getValues,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, errors, setValue, getValues, reset } =
+    useForm();
   const { id, title, description, per_q_mark, timer, show_ans, amount } =
     topic || "";
   const { backToLocation } = usePreviousLocation();
@@ -68,6 +62,7 @@ function TopicForm({ topic, mode }) {
         label="Topic Title"
         defaultValue={getValues("title") ? getValues("title") : ""}
         inputRef={register({ required: "Topic Title is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.title}
         helperText={!!errors.title ? errors.title.message : ""}
       />
@@ -81,6 +76,7 @@ function TopicForm({ topic, mode }) {
         label="Per Question Mark"
         defaultValue={getValues("per_q_mark") ? getValues("per_q_mark") : ""}
         inputRef={register({ required: "Per Question Mark is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.per_q_mark}
         helperText={!!errors.per_q_mark ? errors.per_q_mark.message : ""}
       />
@@ -93,6 +89,7 @@ function TopicForm({ topic, mode }) {
         label="Quiz Time (in minutes)"
         defaultValue={getValues("timer") ? getValues("timer") : ""}
         inputRef={register}
+        InputLabelProps={mode === "edit" && { shrink: true }}
       />
 
       <FormGroup row>
@@ -131,6 +128,7 @@ function TopicForm({ topic, mode }) {
           label="Choose Quiz Price"
           defaultValue={amount || ""}
           inputRef={register}
+          InputLabelProps={mode === "edit" && { shrink: true }}
         />
       ) : (
         ""
@@ -147,6 +145,7 @@ function TopicForm({ topic, mode }) {
         label="Description"
         rows={4}
         defaultValue={getValues("description") ? getValues("description") : ""}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         inputRef={register}
       />
 

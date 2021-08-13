@@ -12,20 +12,28 @@ import {
   Typography,
   useMediaQuery,
   Input,
+  FormHelperText,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { getSubjects } from "../../store/actions/subjectAction";
 import { registerUser } from "../../store/actions/authAction";
-//import PayPal from "../payment/Paypal";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 function RegisterForm({ classes }) {
   const methods = useForm();
-  const { register, handleSubmit, errors, watch } = methods;
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+    watch,
+    reset,
+  } = methods;
 
   //Redux Hooks
-  const { isLoading } = useSelector((state) => state.auth);
+  const { isLoading, userRegister } = useSelector((state) => state.auth);
   const { subjects } = useSelector((state) => state.subjects);
   const dispatch = useDispatch();
 
@@ -38,14 +46,34 @@ function RegisterForm({ classes }) {
   password.current = watch("password", "");
   const [subject, setSubject] = useState([]);
   const [image, setImage] = useState();
-  //const [checkout, setCheckout] = useState(false);
-  //const [userData, setUserData] = useState();
+  const [payment, setPayment] = useState(false);
+
+  const stripe = useStripe();
+  const elements = useElements();
 
   useEffect(() => {
     dispatch(getSubjects());
-  }, [dispatch]);
 
-  const onSubmit = (data) => {
+    const handlePayment = async () => {
+      if (userRegister === true) {
+        const payload = await stripe.createPaymentMethod({
+          type: "card",
+          card: elements.getElement(CardElement),
+        });
+
+        if (payload.error) {
+          setError("card", {
+            type: "manual",
+            message: payload?.error.message,
+          });
+        }
+      }
+    };
+
+    handlePayment();
+  }, [dispatch, stripe, elements, setError, userRegister]);
+
+  const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
@@ -61,16 +89,34 @@ function RegisterForm({ classes }) {
     formData.append("terms", data.terms);
     formData.append("user_img", image);
 
-    dispatch(registerUser(formData));
-    /* const user = {
-      ...data,
-      user_img: image,
-    };
+    if (errors.payment) {
+      elements.getElement("card").focus();
+      return;
+    }
 
-    setCheckout(true);
-    setUserData(user); */
-    //reset();
-    //setPrice(0);
+    /* formData.append("card_id", id);
+    formData.append("card_brand", brand); */
+
+    dispatch(registerUser(formData));
+
+    /* const payload = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    }); */
+
+    /* if (payload.error) {
+      setError("card", {
+        type: "manual",
+        message: payload?.error.message,
+      });
+    } else {
+      const { id, card: { brand } = {} } = payload?.paymentMethod;
+
+      formData.append("card_id", id);
+      formData.append("card_brand", brand);
+
+      dispatch(registerUser(formData));
+    } */
   };
 
   const calculatePrice = (e, perCost) => {
@@ -82,6 +128,10 @@ function RegisterForm({ classes }) {
     if (e.target.name === "user_img") {
       setImage(e.target.files[0]);
     }
+  };
+
+  const handlePayment = (e) => {
+    setPayment(e.target.checked);
   };
 
   return (
@@ -212,7 +262,11 @@ function RegisterForm({ classes }) {
                   required: "Phone number is required",
                   minLength: {
                     value: 10,
-                    message: "Phone number must be of 10 digit",
+                    message: "Phone number should be no less than 10 digit",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "Phone number must be no more than 15 digit",
                   },
                 })}
                 error={!!errors.phone_number}
@@ -283,7 +337,7 @@ function RegisterForm({ classes }) {
                             onChange={(e) => calculatePrice(e, price)}
                             name="subjects"
                             inputRef={register({
-                              required: "Subject is required",
+                              required: "Please pick atleast one subject",
                             })}
                           />
                         }
@@ -292,24 +346,18 @@ function RegisterForm({ classes }) {
                       />
                     ))}
                 </FormGroup>
-                {/* <FormHelperText>
-                  Each Subject cost $20.00 except Quiz for $50.00
-                </FormHelperText> */}
               </FormControl>
+              <FormHelperText className={classes.error}>
+                {errors.subjects && errors.subjects.message}
+              </FormHelperText>
             </Grid>
 
             <Grid container item xs={12} md={6} justify="space-evenly">
               <Grid item xs={12}>
                 <FormLabel htmlFor="user_img" className={classes.formLabel}>
                   Upload Photo
-                  {/* <Button
-                      color="primary"
-                      variant="contained"
-                      component="span"
-                    >
-                      &nbsp; Upload Photo
-                    </Button>{" "} */}
                 </FormLabel>
+
                 <Input
                   id="user_img"
                   name="user_img"
@@ -326,23 +374,83 @@ function RegisterForm({ classes }) {
               </Grid>
 
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  name="terms"
-                  label="I accept terms and conditions"
-                  inputRef={register({
-                    required: "Please accept terms and conditions",
-                  })}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                >
-                  {isLoading && <CircularProgress color="secondary" />}
-                  Register
-                </Button>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      name="terms"
+                      label="I accept terms and conditions"
+                      inputRef={register({
+                        required: "Please accept terms and conditions",
+                      })}
+                    />
+                    <FormHelperText className={classes.error}>
+                      {errors.terms && errors.terms.message}
+                    </FormHelperText>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={payment} onChange={handlePayment} />
+                      }
+                      name="payment_method"
+                      label="Pay via card"
+                      inputRef={register({
+                        required:
+                          "Please choose pay via card inorder to process payment! ",
+                      })}
+                    />
+                    <FormHelperText className={classes.error}>
+                      {errors.payment_method && errors.payment_method.message}
+                    </FormHelperText>
+                  </Grid>
+                  <Grid item xs={12}>
+                    {payment && (
+                      <fieldset>
+                        <legend>Payment</legend>
+
+                        <CardElement
+                          name="card"
+                          hidePostalCode={true}
+                          className={classes.cardWrapper}
+                          inputRef={register({ required: true })}
+                        />
+                      </fieldset>
+                    )}
+                    <FormHelperText className={classes.error}>
+                      {errors.card && errors.card.message}
+                    </FormHelperText>
+                    {/*    <FormHelperText className={classes.cardError}>
+                      {paymentError}
+                    </FormHelperText> */}
+                  </Grid>
+                </Grid>
+
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={6}>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                    >
+                      {isLoading && <CircularProgress color="secondary" />}
+                      Register
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="default"
+                      onClick={reset}
+                    >
+                      Reset
+                    </Button>
+                  </Grid>
+                </Grid>
+
                 <Grid container justify="space-between">
                   <Grid item>
                     <Button component={Link} to="login" color="inherit">

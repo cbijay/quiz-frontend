@@ -5,6 +5,7 @@ import questionRoutes from "./question";
 import reportRoutes from "./report";
 import messageRoutes from "./message";
 import eventRoutes from "./event";
+import paymentRoutes from "./payment";
 
 const adminRoutes = [
   {
@@ -19,6 +20,7 @@ const adminRoutes = [
       reportRoutes,
       messageRoutes,
       eventRoutes,
+      paymentRoutes,
     ],
   },
 ];

@@ -1,29 +1,16 @@
-import { useCallback, useEffect } from "react";
-import Echo from "laravel-echo";
+import { useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { clear } from "./store/actions/alertAction";
 import theme from "./styles/theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes";
-import {
+/* import {
   getActiveQuestion,
-  getAllQuestions,
+  getAskedQuestion,
+  getTopicQuestions,
 } from "./store/actions/questionAction";
-import { getParticipants } from "./store/actions/studentAction";
-
-//Import Pusher
-window.Pusher = require("pusher-js");
-
-//Laravel Echo config
-window.Echo = new Echo({
-  broadcaster: "pusher",
-  key: "myKey",
-  wsHost: process.env.REACT_APP_LARAVEL_ECHO_HOST,
-  wsPort: process.env.REACT_APP_LARAVEL_ECHO_PORT,
-  forceTLS: false,
-  disableStats: true,
-});
+import { getParticipants } from "./store/actions/studentAction"; */
 
 function App() {
   const dispatch = useDispatch();
@@ -32,12 +19,13 @@ function App() {
     dispatch(clear());
   }, [dispatch]);
 
-  const listen = useCallback(() => {
+  /* const listen = useCallback(() => {
     window.Echo.channel(`question`).listen(
       ".App\\Events\\ActiveQuestion",
       () => {
         dispatch(getActiveQuestion());
-        dispatch(getAllQuestions());
+        dispatch(getTopicQuestions(topicId));
+        dispatch(getAskedQuestion());
       }
     );
 
@@ -47,11 +35,11 @@ function App() {
         dispatch(getParticipants());
       }
     );
-  }, [dispatch]);
+  }, [dispatch, topicId]);
 
   useEffect(() => {
     listen();
-  }, [listen]);
+  }, [listen]); */
 
   return (
     <ThemeProvider theme={theme}>

@@ -15,13 +15,16 @@ import theme from "../../../styles/theme";
 
 const styles = {
   cardContainer: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.primary.main,
     color: "#fff !important",
   },
   cardContent: {
     "&:last-child": {
       paddingBottom: 16,
     },
+  },
+  tableCell: {
+    color: "#fff",
   },
 };
 
@@ -31,7 +34,6 @@ function UserHome({ classes }) {
 
   return (
     <SiteLayout>
-      UserHome
       <Container>
         <Grid container spacing={1} justify="space-between">
           <Grid item xs={12} lg={12}>
@@ -44,7 +46,7 @@ function UserHome({ classes }) {
             </Card>
           </Grid>
           <Grid item xs={12} lg={3}>
-            <AskedQuestion />
+            <AskedQuestion classes={classes} />
           </Grid>
           <Grid item xs={12} lg={9}>
             {student && status === 1 && <UserQuestion />}

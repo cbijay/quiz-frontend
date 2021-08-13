@@ -61,7 +61,7 @@ function Participants({ participants, classes }) {
             </TableHead>
             <TableBody>
               {participants.map(
-                ({ id, name, per_q_mark, answers, image }, index) => (
+                ({ id, name, answers, image, score }, index) => (
                   <TableRow key={index}>
                     <TableCell className={classes.tableCell}>
                       <Grid container spacing={1}>
@@ -90,9 +90,7 @@ function Participants({ participants, classes }) {
                     </TableCell>
 
                     <TableCell align="center" className={classes.tableCell}>
-                      {answers.filter(
-                        (answer) => answer.answer === answer.user_answer
-                      ).length * per_q_mark}
+                      {score}
                     </TableCell>
                     <TableCell align="center" className={classes.tableCell}>
                       <Button

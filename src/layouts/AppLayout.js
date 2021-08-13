@@ -8,8 +8,7 @@ import {
 } from "@material-ui/core";
 import AppHeader from "../components/header/AppHeader";
 import AppSidebar from "../components/sidebar/AppSidebar";
-import DismissableAlert from "../components/alert/DismissableAlert";
-import useAlertStatus from "../hooks/useAlertStatus";
+import AlertMessage from "../components/alert/AlertMessage";
 import { useSelector } from "react-redux";
 import theme from "../styles/theme";
 import Footer from "../components/footer/Footer";
@@ -33,7 +32,6 @@ const styles = () => ({
 function AppLayout({ children, classes }) {
   const [open, setOpen] = useState(true);
   const { type, message } = useSelector((state) => state.alert);
-  const { isOpen, closeAlert } = useAlertStatus();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -57,14 +55,7 @@ function AppLayout({ children, classes }) {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              {message && (
-                <DismissableAlert
-                  open={isOpen}
-                  type={type}
-                  message={message}
-                  closeAlert={closeAlert}
-                />
-              )}
+              {message && <AlertMessage type={type} message={message} />}
             </Grid>
           </Grid>
           {children}

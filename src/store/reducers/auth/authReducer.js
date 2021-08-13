@@ -1,4 +1,4 @@
-import { authType } from "../../actions/types/authType";
+import authType from "../../actions/types/authType";
 
 let user = JSON.parse(localStorage.getItem("user"));
 const initialState = user
@@ -7,39 +7,41 @@ const initialState = user
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case authType.LOGIN_REQUEST:
+    case authType?.LOGIN_REQUEST:
       return {
         isLoading: true,
       };
-    case authType.LOGIN_SUCCESS:
+    case authType?.LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
         loggedIn: true,
         user: action.user,
       };
-    case authType.LOGIN_FAILURE:
+    case authType?.LOGIN_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.error,
       };
-    case authType.REGISTER_REQUEST:
+    case authType?.REGISTER_REQUEST:
       return {
         isLoading: true,
       };
-    case authType.REGISTER_SUCCESS:
+    case authType?.REGISTER_SUCCESS:
       return {
         ...state,
         isLoading: false,
+        userRegister: action.userRegister,
       };
-    case authType.REGISTER_FAILURE:
+    case authType?.REGISTER_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.error,
+        userRegister: action.userRegister,
       };
-    case authType.LOGOUT:
+    case authType?.LOGOUT:
       return { isLoading: false, loggedIn: false };
     default:
       return state;

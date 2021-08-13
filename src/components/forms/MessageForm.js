@@ -9,14 +9,8 @@ import {
 } from "../../store/actions/messageAction";
 
 function MessageForm({ message, mode }) {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    getValues,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, errors, setValue, getValues, reset } =
+    useForm();
   const { id, description } = message || "";
   const { backToLocation } = usePreviousLocation();
   const dispatch = useDispatch();
@@ -46,6 +40,7 @@ function MessageForm({ message, mode }) {
         rows={4}
         defaultValue={getValues("description") ? getValues("description") : ""}
         inputRef={register({ required: "Description is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.description}
         helperText={!!errors.description ? errors.description.message : ""}
       />

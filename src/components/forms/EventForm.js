@@ -6,15 +6,9 @@ import { useDispatch } from "react-redux";
 import { createEvent, updateEvent } from "../../store/actions/eventAction";
 
 function EventForm({ event, mode }) {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    getValues,
-    reset,
-  } = useForm();
-  const { id, video } = event || "";
+  const { register, handleSubmit, errors, setValue, getValues, reset } =
+    useForm();
+  const { id, title, video } = event || "";
   const { backToLocation } = usePreviousLocation();
   const dispatch = useDispatch();
 
@@ -28,8 +22,9 @@ function EventForm({ event, mode }) {
   };
 
   useEffect(() => {
+    setValue("title", title, { shouldDirty: true });
     setValue("video", video, { shouldDirty: true });
-  }, [video, setValue]);
+  }, [title, video, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} encType="">
@@ -41,6 +36,7 @@ function EventForm({ event, mode }) {
         label="Title"
         defaultValue={getValues("title") ? getValues("title") : ""}
         inputRef={register({ required: "Title is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.title}
         helperText={!!errors.title ? errors.title.message : ""}
       />
@@ -55,6 +51,7 @@ function EventForm({ event, mode }) {
         rows={4}
         defaultValue={getValues("video") ? getValues("video") : ""}
         inputRef={register({ required: "Video is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.video}
         helperText={!!errors.video ? errors.video.message : ""}
       />

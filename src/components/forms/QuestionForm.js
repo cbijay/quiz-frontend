@@ -10,22 +10,15 @@ import {
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import usePreviousLocation from "../../hooks/usePreviousLocation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createQuestion,
   updateQuestion,
 } from "../../store/actions/questionAction";
-import { Backup as BackupIcon } from "@material-ui/icons";
 
 function QuestionForm({ topicId, formQuestion, mode }) {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    getValues,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, errors, setValue, getValues, reset } =
+    useForm();
   const {
     id,
     question,
@@ -44,6 +37,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
   const { backToLocation } = usePreviousLocation();
   const [changeOption, setChangeOption] = useState({ answer: "", status: "" });
   const dispatch = useDispatch();
+  const alert = useSelector((state) => state.alert);
 
   const questionStatus = [
     { status_name: "Active", status_value: 1 },
@@ -56,6 +50,8 @@ function QuestionForm({ topicId, formQuestion, mode }) {
     { option_name: "C", option_value: "C" },
     { option_name: "D", option_value: "D" },
   ];
+
+  console.log(alert?.type);
 
   const handleOption = (e) => {
     setChangeOption({ ...changeOption, [e.target.name]: e.target.value });
@@ -76,6 +72,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
     formData.append("question_video_link", data.question_video_link);
     formData.append("status", data.status);
     formData.append("question_img", questionImage);
+    formData.append("method_field", "PUT");
 
     if (mode === "edit") {
       dispatch(updateQuestion(id, formData));
@@ -119,7 +116,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
   ]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} encType="">
+    <form onSubmit={handleSubmit(onSubmit)} method="post">
       <TextField
         variant="standard"
         margin="normal"
@@ -130,6 +127,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
         label="Question Title"
         defaultValue={getValues("question") ? getValues("question") : ""}
         inputRef={register({ required: "Question Title is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.question}
         helperText={!!errors.question ? errors.question.message : ""}
       />
@@ -142,6 +140,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
         label=" A - Option"
         defaultValue={getValues("a") ? getValues("a") : ""}
         inputRef={register({ required: "A - Option is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.a}
         helperText={!!errors.a ? errors.a.message : ""}
       />
@@ -154,6 +153,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
         label="B - Option"
         defaultValue={getValues("b") ? getValues("b") : ""}
         inputRef={register({ required: "B - Option is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.b}
         helperText={!!errors.b ? errors.b.message : ""}
       />
@@ -166,6 +166,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
         label="C - Option"
         defaultValue={getValues("c") ? getValues("c") : ""}
         inputRef={register({ required: "C - Option is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.c}
         helperText={!!errors.c ? errors.c.message : ""}
       />
@@ -178,12 +179,15 @@ function QuestionForm({ topicId, formQuestion, mode }) {
         label="D - Option"
         defaultValue={getValues("d") ? getValues("d") : ""}
         inputRef={register({ required: "D - Option is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
         error={!!errors.d}
         helperText={!!errors.d ? errors.d.message : ""}
       />
 
       <FormControl margin="normal" size="small" variant="standard" fullWidth>
-        <InputLabel htmlFor="answer-label">Correct Answer</InputLabel>
+        <InputLabel htmlFor="answer-label" shrink={mode === "edit"}>
+          Correct Answer
+        </InputLabel>
 
         <NativeSelect
           defaultValue={getValues("answer") || ""}
@@ -193,10 +197,8 @@ function QuestionForm({ topicId, formQuestion, mode }) {
             id: "answer-label",
           }}
           inputRef={register}
+          InputLabelProps={mode === "edit" && { shrink: true }}
         >
-          <option aria-label="None" value="">
-            Select Answer
-          </option>
           {answerOption &&
             answerOption.map(({ option_name, option_value }, index) => (
               <option key={index} aria-label={option_name} value={option_value}>
@@ -217,6 +219,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
           getValues("question_order") ? getValues("question_order") : ""
         }
         inputRef={register({ required: "Question Order is required" })}
+        InputLabelProps={mode === "edit" && { shrink: true }}
       />
 
       <TextField
@@ -231,6 +234,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
           getValues("code_snippet") ? getValues("code_snippet") : ""
         }
         inputRef={register}
+        InputLabelProps={mode === "edit" && { shrink: true }}
       />
 
       <TextField
@@ -243,6 +247,7 @@ function QuestionForm({ topicId, formQuestion, mode }) {
         rows={4}
         defaultValue={getValues("answer_exp") ? getValues("answer_exp") : ""}
         inputRef={register}
+        InputLabelProps={mode === "edit" && { shrink: true }}
       />
 
       <TextField
@@ -257,24 +262,23 @@ function QuestionForm({ topicId, formQuestion, mode }) {
             : ""
         }
         inputRef={register}
+        InputLabelProps={mode === "edit" && { shrink: true }}
       />
 
       <label htmlFor="question_img">
+        Upload Question Image
         <Input
-          style={{ display: "none" }}
           id="question_img"
           name="question_img"
           type="file"
           onChange={handleFileChange}
         />
-        <Button color="primary" variant="contained" component="span">
-          <BackupIcon />
-          &nbsp; Upload Question Image
-        </Button>{" "}
       </label>
 
       <FormControl margin="normal" size="small" variant="standard" fullWidth>
-        <InputLabel htmlFor="status-label">Status</InputLabel>
+        <InputLabel htmlFor="status-label" shrink={mode === "edit"}>
+          Status
+        </InputLabel>
 
         <NativeSelect
           defaultValue={getValues("status") || ""}
@@ -285,9 +289,6 @@ function QuestionForm({ topicId, formQuestion, mode }) {
           }}
           inputRef={register}
         >
-          <option aria-label="None" value="">
-            Select Status
-          </option>
           {questionStatus &&
             questionStatus.map(({ status_name, status_value }, index) => (
               <option key={index} aria-label={status_name} value={status_value}>

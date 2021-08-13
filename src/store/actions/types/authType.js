@@ -1,4 +1,4 @@
-export const authType = {
+const authType = {
   REGISTER_REQUEST: "REGISTER_REQUEST",
   REGISTER_SUCCESS: "REGISTER_SUCCESS",
   REGISTER_FAILURE: "REGISTER_FAILURE",
@@ -8,3 +8,5 @@ export const authType = {
   LOGIN_FAILURE: "LOGIN_FAILURE",
   LOGOUT: "LOGOUT",
 };
+
+export default authType;

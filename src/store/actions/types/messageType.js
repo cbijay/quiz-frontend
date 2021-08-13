@@ -1,5 +1,7 @@
-export const messageType = {
+const messageType = {
   GET_MESSAGES_DETAIL: "GET_MESSAGES_DETAIL",
   GET_MESSAGE_DETAIL: "GET_MESSAGE_DETAIL",
   REMOVE_MESSAGE: "REMOVE_MESSAGE",
 };
+
+export default messageType;

@@ -120,7 +120,7 @@ function SiteHeader({ classes }) {
                       color="inherit"
                       noWrap
                     >
-                      NST SCHOOL QUIZ
+                      NST SCHOOL
                     </Typography>
                   </Link>
                 </Grid>

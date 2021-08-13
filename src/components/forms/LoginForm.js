@@ -43,11 +43,6 @@ function LoginForm() {
           Sign In
         </Button>
       <Grid container>
-        <Grid item xs>
-          <Button href="#" color="inherit">
-            Forgot password?
-            </Button>
-        </Grid>
         <Grid item>
           <Button
             component={Link}
